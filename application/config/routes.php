@@ -178,6 +178,7 @@ $route['admin/productStatusChange'] = "admin/ecommerce/products/productStatusCha
 $route['admin/shopcategories'] = "admin/ecommerce/ShopCategories";
 $route['admin/shopcategories/(:num)'] = "admin/ecommerce/ShopCategories/index/$1";
 $route['admin/editshopcategorie'] = "admin/ecommerce/ShopCategories/editShopCategorie";
+$route['admin/editShopCategorieImage'] = "admin/ecommerce/ShopCategories/editShopCategorieImage";
 $route['admin/orders'] = "admin/ecommerce/orders";
 $route['admin/orders/(:num)'] = "admin/ecommerce/orders/index/$1";
 $route['admin/changeOrdersOrderStatus'] = "admin/ecommerce/orders/changeOrdersOrderStatus";
@@ -224,9 +225,9 @@ $route['api/product/(\w{2})/(:num)/get'] = 'Api/Products/one/$1/$2';
 $route['api/product/set'] = 'Api/Products/set';
 $route['api/product/(\w{2})/delete'] = 'Api/Products/productDel/$1';
 
-$route['api/productbycategory/(\w{2})/(:num)/get'] = 'Api/Products/categorywiseproduct/$1/$2'; 
+$route['api/productbycategory/(\w{2})/(:num)/get'] = 'Api/Products/categorywiseproduct/$1/$2';
 
-//$route['abc'] = 'Api/Products/categorywiseproduct'; 
+//$route['abc'] = 'Api/Products/categorywiseproduct';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -15,12 +15,14 @@ class ShopCategories extends ADMIN_Controller
 
     public function __construct()
     {
+    //  echo "hold";die;
         parent::__construct();
         $this->load->model(array('Categories_model', 'Languages_model'));
     }
 
     public function index($page = 0)
     {
+
         $this->login_check();
         $data = array();
         $head = array();
@@ -38,7 +40,9 @@ class ShopCategories extends ADMIN_Controller
             redirect('admin/shopcategories');
         }
         if (isset($_POST['submit'])) {
+            $_POST['image'] = $this->uploadImage();
             $this->Categories_model->setShopCategorie($_POST);
+
             $this->session->set_flashdata('result_add', 'Shop categorie is added!');
             redirect('admin/shopcategories');
         }
@@ -69,6 +73,15 @@ class ShopCategories extends ADMIN_Controller
         $this->saveHistory('Edit shop categorie to ' . $_POST['name']);
     }
 
+    public function editShopCategorieImage()
+    {
+        $this->login_check();
+        $_POST['newImage'] = $this->edituploadImage();
+        $this->Categories_model->editShopCategorieImage($_POST);
+        $this->session->set_flashdata('result_add', 'Shop categorie is updated!');
+        redirect('admin/shopcategories');
+    }
+
     /*
      * Called from ajax
      */
@@ -78,6 +91,31 @@ class ShopCategories extends ADMIN_Controller
         $this->login_check();
         $result = $this->Categories_model->editShopCategoriePosition($_POST);
         $this->saveHistory('Edit shop categorie position ' . $_POST['name']);
+    }
+
+    private function uploadImage()
+    {
+        $config['upload_path'] = './attachments/cat_images/';
+        $config['allowed_types'] = $this->allowed_img_types;
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+        if (!$this->upload->do_upload('categorie_image')) {
+            log_message('error', 'Image Upload Error: ' . $this->upload->display_errors());
+        }
+        $img = $this->upload->data();
+        return $img['file_name'];
+    }
+    private function edituploadImage()
+    {
+        $config['upload_path'] = './attachments/cat_images/';
+        $config['allowed_types'] = $this->allowed_img_types;
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+        if (!$this->upload->do_upload('edit_categorie_image')) {
+            log_message('error', 'Image Upload Error: ' . $this->upload->display_errors());
+        }
+        $img = $this->upload->data();
+        return $img['file_name'];
     }
 
 }
