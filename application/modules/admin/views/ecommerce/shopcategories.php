@@ -1,5 +1,5 @@
 <div id="languages">
-    <h1><img src="<?= base_url('assets/imgs/categories.jpg') ?>" class="header-img" style="margin-top:-2px;"> Shop Categories</h1> 
+    <h1><img src="<?= base_url('assets/imgs/categories.jpg') ?>" class="header-img" style="margin-top:-2px;"> Shop Categories</h1>
     <hr>
     <?php if (validation_errors()) { ?>
         <div class="alert alert-danger"><?= validation_errors() ?></div>
@@ -32,6 +32,7 @@
                         <th>Name</th>
                         <th>Subcategory for</th>
                         <th>Position</th>
+                        <th>Image</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -52,7 +53,7 @@
                     <tr>
                         <td><?= $key_cat ?></td>
                         <td><?= $catName ?></td>
-                        <td> 
+                        <td>
                             <a href="javascript:void(0);" class="editCategorieSub" data-sub-for-id="<?= $key_cat ?>">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a>
@@ -65,6 +66,21 @@
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a>
                             <span id="position-<?= $key_cat ?>"><?= $shop_categorie['position'] ?></span>
+                        </td>
+                        <td width="150px">
+                            <?php
+                            if (isset($shop_categorie['categorie_image']) && $shop_categorie['categorie_image'] != null) {
+                                $image = 'attachments/cat_images/' . $shop_categorie['categorie_image'];
+                                if (!file_exists($image)) {
+                                    $image = 'attachments/no-image.png';
+                                }
+                                ?>
+                            <span id="image-<?= $key_cat ?>"><img id="image-path-<?= $key_cat ?>" height="80px" width="80px" src="<?= base_url($image) ?>"/></span>
+                          <?php }
+                          ?>
+                          <a href="javascript:void(0);" class="editImage" data-image-for-id="<?= $key_cat ?>" data-my-image="<?= $shop_categorie['categorie_image'] ?>">
+                              <i class="fa fa-pencil" aria-hidden="true"></i>
+                          </a>
                         </td>
                         <td class="text-center">
                             <a href="<?= base_url('admin/shopcategories/?delete=' . $key_cat) ?>" class="btn btn-danger btn-xs confirm-delete"><span class="glyphicon glyphicon-remove"></span> Del</a>
@@ -87,7 +103,7 @@
     <div class="modal fade" id="add_edit_articles" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form action="" method="POST">
+                <form action="" method="POST" enctype="multipart/form-data">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel">Add Category</h4>
@@ -115,6 +131,28 @@
                                     <option value="<?= $key_cat ?>"><?= $aa ?></option>
                                 <?php } ?>
                             </select>
+                        </div>
+                        <div class="form-group bordered-group">
+                            <?php
+                            if (isset($_POST['image']) && $_POST['image'] != null) {
+                                $image = 'attachments/cat_images/' . $_POST['image'];
+                                if (!file_exists($image)) {
+                                    $image = 'attachments/no-image.png';
+                                }
+                                ?>
+                                <p>Current image:</p>
+                                <div>
+                                    <img src="<?= base_url($image) ?>" class="img-responsive img-thumbnail" style="max-width:300px; margin-bottom: 5px;">
+                                </div>
+                                <input type="hidden" name="old_image" value="<?= $_POST['categorie_image'] ?>">
+                                <?php if (isset($_GET['to_lang'])) { ?>
+                                    <input type="hidden" name="image" value="<?= $_POST['categorie_image'] ?>">
+                                    <?php
+                                }
+                            }
+                            ?>
+                            <label for="categorie_image">Categorie Image</label>
+                            <input type="file" id="categorie_image" name="categorie_image">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -161,3 +199,34 @@
     </button>
     <button type="button" class="btn btn-default closePositionCategorie"><i class="fa fa-times" aria-hidden="true"></i></button>
 </div>
+<div id="categorieImageEdit" class="modal fade" id="add_edit_articles" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Change Image</h4>
+        </div>
+        <div class="modal-body">
+        <form method="POST" action="<?= base_url('admin/editShopCategorieImage')?>" enctype="multipart/form-data" id="categorieEditImageChanger">
+            <input type="hidden" name="imageEditId" value="">
+            <input type="hidden" name="newImage" value="">
+            <img id="newImage_src" src="" height="80px" width="80px"><br/><br/>
+            <input type="file" name="edit_categorie_image" id="edit_categorie_image" class="form-control" value=""><br/>
+            <input type="submit" class="btn btn-default">
+            <button type="button" class="btn btn-default closePositionCategorie" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </form>
+      </div>
+    </div>
+</div>
+<style>
+#categorieImageEdit {
+  padding-right: 17px;
+  width: 400px;
+  top: 15%;
+  left: 40%;
+  height: 400px;
+}
+#categorieImageEdit .modal-dialog{
+  width: 380px;
+}
+</style>

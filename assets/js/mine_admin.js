@@ -223,7 +223,7 @@ $(document).ready(function () {
 
 // Password strenght starts here
 $(document).ready(function () {
-    //PassStrength 
+    //PassStrength
     checkPass();
     $(".new-pass-field").on('keyup', function () {
         checkPass();
@@ -416,6 +416,7 @@ $('.editPosition').click(function () {
     $('[name="positionEditId"]').val(editId);
     var myPosition = $(this).data('my-position');
     var position = $(this).position();
+
     $('#positionEditor').css({top: position.top, left: position.left, display: 'block'});
     $('[name="new_position"]').val(myPosition);
 });
@@ -433,6 +434,38 @@ $('.savePositionCategorie').click(function () {
         data: {editid: editId, new_pos: new_val}
     }).done(function (data) {
         $('#positionEditor').hide();
+        $('#position-' + editPositionField).text(new_val);
+    });
+});
+// Edit categories Images
+var editImageField;
+$('.editImage').click(function () {
+    var editId = $(this).data('image-for-id');
+    editImageField = editId;
+    $('[name="imageEditId"]').val(editId);
+    var myImage = $(this).data('my-image');
+    var myImagePath = $('#image-path-'+editId).attr('src');
+    var position = $(this).position();
+
+    $('#newImage_src').attr('src', myImagePath);
+    $('#categorieImageEdit').modal('show');
+  //  $('#categorieImageEdit').css({top: position.top, left: position.left, display: 'block'});
+
+});
+
+$('.closePositionCategorie').click(function () {
+    $('#categorieImageEdit').hide();
+});
+
+$('.saveImageCategorie').click(function () {
+  //  var new_val = $('[name="new_position"]').val();
+//    var editId = $('[name="positionEditId"]').val();
+    $.ajax({
+        type: "POST",
+        url: urls.editPositionCategorie,
+        data: {editid: editId, new_pos: new_val}
+    }).done(function (data) {
+        $('#categorieImageEdit').hide();
         $('#position-' + editPositionField).text(new_val);
     });
 });
