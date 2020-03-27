@@ -217,6 +217,7 @@ $route['admin/loadOthersImages'] = "admin/ecommerce/publish/loadOthersImages";
 
 //Review
 $route['admin/reviewpublish'] = "admin/review/ReviewPublish";
+$route['admin/reviews'] = "admin/review/Review";
 
 
 
