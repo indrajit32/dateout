@@ -131,4 +131,10 @@ class Review_model extends CI_Model
         return $query->result_array();
     }
 
+    public function deleteReview($id)
+    {
+        $this->db->where('id', $id);
+        return $this->db->delete('product_reviews');
+    }
+
 }

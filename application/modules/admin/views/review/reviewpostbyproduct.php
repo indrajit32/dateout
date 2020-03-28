@@ -57,7 +57,7 @@
                                     <td>
                                         <div class="pull-right">
                                             <a href="<?= base_url('admin/review/review/edit/' . $row['id']) ?>" class="btn btn-info">Edit</a>
-                                            <a href="<?= base_url('admin/review/review?delete=' . $row['id']) ?>"  class="btn btn-danger confirm-delete">Delete</a>
+                                            <a href="<?= base_url('admin/review/review/delete/' . $row['id']) ?>"  class="btn btn-danger confirm-delete">Delete</a>
                                         </div>
                                     </td>
                                 </tr>
