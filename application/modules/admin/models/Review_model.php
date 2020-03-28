@@ -111,26 +111,24 @@ class Review_model extends CI_Model
         }
     }
 
-    public function getOnePost($id)
+    public function get_all_review_by_product($product_id)
     {
-        $query = $this->db->where('id', $id)->get('blog_posts');
-        if ($query->num_rows() > 0) {
-            return $query->row_array();
-        } else {
-            return false;
-        }
+        $this->db->where('product_id', $product_id);
+        $query = $this->db->get('product_reviews');
+        return $query->result_array();
     }
 
-    public function getTranslations($id)
+    public function reviewCountByProduct($product_id)
     {
-        $this->db->where('for_id', $id);
-        $query = $this->db->get('blog_translations');
-        $arr = array();
-        foreach ($query->result() as $row) {
-            $arr[$row->abbr]['title'] = $row->title;
-            $arr[$row->abbr]['description'] = $row->description;
-        }
-        return $arr;
+        $this->db->where('product_id', $product_id);
+        return $this->db->count_all_results('product_reviews');
+    }
+
+    public function getSingleReview($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('product_reviews');
+        return $query->result_array();
     }
 
 }
