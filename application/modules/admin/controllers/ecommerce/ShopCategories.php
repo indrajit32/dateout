@@ -2,7 +2,7 @@
 
 /*
  * @Author:    Kiril Kirkov
- *  Gitgub:    https://github.com/kirilkirkov
+ *  Gitgub:    https://github.com/kirilkirkovV
  */
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');

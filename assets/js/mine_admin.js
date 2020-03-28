@@ -548,4 +548,5 @@ function changePass() {
     } else {
         alert('Too short pass!');
     }
+    
 }
