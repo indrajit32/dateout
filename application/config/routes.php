@@ -216,6 +216,12 @@ $route['admin/changePass'] = "admin/home/home/changePass";
 $route['admin/uploadOthersImages'] = "admin/ecommerce/publish/do_upload_others_images";
 $route['admin/loadOthersImages'] = "admin/ecommerce/publish/loadOthersImages";
 
+//Review
+$route['admin/reviewpublish'] = "admin/review/ReviewPublish";
+$route['admin/reviews'] = "admin/review/Review";
+
+
+
 /*
   | -------------------------------------------------------------------------
   | Sample REST API Routes
