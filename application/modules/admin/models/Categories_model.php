@@ -135,5 +135,6 @@ class Categories_model extends CI_Model
             show_error(lang('database_error'));
         }
     }
+    
 
 }

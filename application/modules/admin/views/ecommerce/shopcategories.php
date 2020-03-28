@@ -228,5 +228,6 @@
 }
 #categorieImageEdit .modal-dialog{
   width: 380px;
+  
 }
 </style>
