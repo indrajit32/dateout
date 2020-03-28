@@ -24,31 +24,19 @@ class Review_model extends CI_Model
     public function postsCount($search = null)
     {
         if ($search !== null) {
-            $this->db->like('blog_translations.title', $search);
+            $this->db->like('product_id', $search);
         }
-        $this->db->join('blog_translations', 'blog_translations.for_id = blog_posts.id', 'left');
-        $this->db->where('blog_translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);
-        return $this->db->count_all_results('blog_posts');
+        //$this->db->join('blog_translations', 'blog_translations.for_id = blog_posts.id', 'left');
+        //$this->db->where('product_reviews', MY_DEFAULT_LANGUAGE_ABBR);
+        $this->db->group_by("product_id");
+        return $this->db->count_all_results('product_reviews');
     }
 
     public function getPosts($lang = null, $limit, $page, $search = null, $month = null)
     {
-        if ($search !== null) {
-            $search = $this->db->escape_like_str($search);
-            $this->db->where("(blog_translations.title LIKE '%$search%' OR blog_translations.description LIKE '%$search%')");
-        }
-        if ($month !== null) {
-            $from = $month['from'];
-            $to = $month['to'];
-            $this->db->where("time BETWEEN $from AND $to");
-        }
-        $this->db->join('blog_translations', 'blog_translations.for_id = blog_posts.id', 'left');
-        if ($lang == null) {
-            $this->db->where('blog_translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);
-        } else {
-            $this->db->where('blog_translations.abbr', $lang);
-        }
-        $query = $this->db->select('blog_posts.id, blog_translations.title, blog_translations.description, blog_posts.url, blog_posts.time, blog_posts.image')->get('blog_posts', $limit, $page);
+        $this->db->select('product_reviews.title, product_reviews.comment, product_reviews.rating, product_reviews.product_id, product_reviews.customer_id');
+        $this->db->group_by("product_id");
+        $query = $this->db->get('product_reviews', $limit, $page);
         return $query->result_array();
     }
 
@@ -123,26 +111,24 @@ class Review_model extends CI_Model
         }
     }
 
-    public function getOnePost($id)
+    public function get_all_review_by_product($product_id)
     {
-        $query = $this->db->where('id', $id)->get('blog_posts');
-        if ($query->num_rows() > 0) {
-            return $query->row_array();
-        } else {
-            return false;
-        }
+        $this->db->where('product_id', $product_id);
+        $query = $this->db->get('product_reviews');
+        return $query->result_array();
     }
 
-    public function getTranslations($id)
+    public function reviewCountByProduct($product_id)
     {
-        $this->db->where('for_id', $id);
-        $query = $this->db->get('blog_translations');
-        $arr = array();
-        foreach ($query->result() as $row) {
-            $arr[$row->abbr]['title'] = $row->title;
-            $arr[$row->abbr]['description'] = $row->description;
-        }
-        return $arr;
+        $this->db->where('product_id', $product_id);
+        return $this->db->count_all_results('product_reviews');
+    }
+
+    public function getSingleReview($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('product_reviews');
+        return $query->result_array();
     }
 
 }

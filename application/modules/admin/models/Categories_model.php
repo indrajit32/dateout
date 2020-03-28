@@ -20,7 +20,7 @@ class Categories_model extends CI_Model
             $limit_sql = ' LIMIT ' . $start . ',' . $limit;
         }
 
-        $query = $this->db->query('SELECT translations_first.*, (SELECT name FROM shop_categories_translations WHERE for_id = sub_for AND abbr = translations_first.abbr) as sub_is, shop_categories.position FROM shop_categories_translations as translations_first INNER JOIN shop_categories ON shop_categories.id = translations_first.for_id ORDER BY position ASC ' . $limit_sql);
+        $query = $this->db->query('SELECT translations_first.*, (SELECT name FROM shop_categories_translations WHERE for_id = sub_for AND abbr = translations_first.abbr) as sub_is, shop_categories.position, shop_categories.categorie_image FROM shop_categories_translations as translations_first INNER JOIN shop_categories ON shop_categories.id = translations_first.for_id ORDER BY position ASC ' . $limit_sql);
         $arr = array();
         foreach ($query->result() as $shop_categorie) {
             $arr[$shop_categorie->for_id]['info'][] = array(
@@ -29,6 +29,7 @@ class Categories_model extends CI_Model
             );
             $arr[$shop_categorie->for_id]['sub'][] = $shop_categorie->sub_is;
             $arr[$shop_categorie->for_id]['position'] = $shop_categorie->position;
+            $arr[$shop_categorie->for_id]['categorie_image'] = $shop_categorie->categorie_image;
         }
         return $arr;
     }
@@ -58,7 +59,9 @@ class Categories_model extends CI_Model
     public function setShopCategorie($post)
     {
         $this->db->trans_begin();
-        if (!$this->db->insert('shop_categories', array('sub_for' => $post['sub_for']))) {
+        if (!$this->db->insert('shop_categories', array('sub_for' => $post['sub_for'],
+            'categorie_image' => $post['image'] != null ? $_POST['image'] : $_POST['old_image'],
+      ))) {
             log_message('error', print_r($this->db->error(), true));
         }
         $id = $this->db->insert_id();
@@ -105,6 +108,17 @@ class Categories_model extends CI_Model
         $this->db->where('for_id', $post['for_id']);
         if (!$this->db->update('shop_categories_translations', array(
                     'name' => $post['name']
+                ))) {
+            log_message('error', print_r($this->db->error(), true));
+            show_error(lang('database_error'));
+        }
+    }
+
+    public function editShopCategorieImage($post)
+    {
+        $this->db->where('id', $post['imageEditId']);
+        if (!$this->db->update('shop_categories', array(
+                    'categorie_image' => $post['newImage']
                 ))) {
             log_message('error', print_r($this->db->error(), true));
             show_error(lang('database_error'));
