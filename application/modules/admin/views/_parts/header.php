@@ -136,6 +136,7 @@
                                     ?>
                                     <li class="header">REVIEW</li>
                                     <li><a href="<?= base_url('admin/reviewpublish') ?>" <?= urldecode(uri_string()) == 'admin/reviewpublish' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i>Publish Review</a></li>
+                                    <li><a href="<?= base_url('admin/reviews') ?>" <?= urldecode(uri_string()) == 'admin/reviews' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i>Reviews</a></li>
                                     <li class="header">SETTINGS</li>
                                     <li><a href="<?= base_url('admin/settings') ?>" <?= urldecode(uri_string()) == 'admin/settings' ? 'class="active"' : '' ?>><i class="fa fa-wrench" aria-hidden="true"></i> Settings</a></li>
                                     <li><a href="<?= base_url('admin/styling') ?>" <?= urldecode(uri_string()) == 'admin/styling' ? 'class="active"' : '' ?>><i class="fa fa-laptop" aria-hidden="true"></i> Styling</a></li>

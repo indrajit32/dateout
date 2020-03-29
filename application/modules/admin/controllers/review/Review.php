@@ -100,4 +100,10 @@ class Review extends ADMIN_Controller
         $this->load->view('_parts/footer');
     }
 
+    public function delete($id)
+    {
+        $this->Review_model->deleteReview($id);
+        redirect('admin/reviews');
+    }
+
 }
