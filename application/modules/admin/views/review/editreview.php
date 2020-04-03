@@ -1,4 +1,8 @@
 <script src="<?= base_url('assets/ckeditor/ckeditor.js') ?>"></script>
+<script src="<?= base_url('assets/js/rating.js') ?>"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
 <h1><img src="<?= base_url('assets/imgs/blogger.png') ?>" class="header-img" style="margin-top:-2px;"> Publish review</h1>
 <hr>
 <div class="row">
@@ -18,16 +22,53 @@
         ?>
         <form method="POST" action="review/edit" enctype="multipart/form-data">
 
-                <div class="form-group"> 
-                    <label for="product_id">Product id</label>
-                    <input type="text" value="<?php echo $review[0]['product_id'] ?>" name="product_id" placeholder= "Product Id" class="form-control">
 
-                    <input type="hidden" value="<?php echo $review[0]['id'] ?>" name="id">
+                <div class="form-group"> 
+                    <label for="product_id">Product</label>
+                        <input type="hidden" value="<?php echo $review[0]['id'] ?>" name="id">
+                      <select class="form-control" name="product_id">
+
+                        <?php $deal_details = get_all_deals(); 
+                            foreach ($deal_details as $value) {
+                        ?>
+                            
+
+                        <option value="<?php echo $value['for_id']; ?>" 
+                            <?php echo ( $review[0]['product_id'] == $value['for_id'] ) ? 'selected' : '' ; ?> >
+                        
+                        <?php echo $value['title']; ?>
+
+                        </option>
+                        <?php
+                            }
+                        ?>
+                        
+
+                      </select>
                 </div>
 
                 <div class="form-group"> 
-                    <label for="user_id">User id</label>
-                    <input type="text" value="<?php echo $review[0]['customer_id'] ?>" name="user_id" placeholder= "User Id" class="form-control">
+                    <label for="user_id">Customer</label>
+
+                      <select class="form-control" name="user_id">
+
+                        <?php $user_details = get_all_user(); 
+                            foreach ($user_details as $value) {
+                        ?>
+                            
+
+                        <option value="<?php echo $value['id']; ?>" 
+                            <?php echo ( $review[0]['customer_id'] == $value['id'] ) ? 'selected' : '' ; ?> >
+                        
+                        <?php echo $value['username']; ?>
+
+                        </option>
+                        <?php
+                            }
+                        ?>
+                        
+
+                      </select>
                 </div>
 
                 <div class="form-group"> 
@@ -38,16 +79,39 @@
                 <div class="form-group">
                     <label for="comment">Comments</label>
                     <textarea name="comment" placeholder= "comment"  rows="5" class="form-control">
-                        <?php echo $review[0]['comment'] ?>
+                        <?php echo trim($review[0]['comment']) ?>
                     </textarea>
                 </div>
 
                 <div class="form-group"> 
                     <label for="rating">Rating</label>
-                    <input type="text" value="<?php echo $review[0]['rating'] ?>"  name="rating" placeholder= "Rating" class="form-control">
+                    <input type="hidden" name="rating" id="halfstarsInput" placeholder= "Rating" class="form-control" value="<?php echo $review[0]['rating'] ?>">
+                    
+
+                <div  style="font-size: 2em;">
+                    <div id="halfstarsReview"></div>
+                </div>
+
                 </div>
             <button type="submit" name="submit" class="btn btn-default">Edit</button>
 
         </form>
     </div>
 </div>
+
+<script type="text/javascript">
+        $("#halfstarsReview").rating({
+        "half": true,
+        "click": function (e) {
+            console.log(e);
+            $("#halfstarsInput").val(e.stars);
+        }
+        });
+
+        $(document).ready(function(){
+            $("#halfstarsReview").rating({
+                "half": true,
+                "value": '<?php echo $review[0]['rating'] ?>'
+            });
+        });
+</script>

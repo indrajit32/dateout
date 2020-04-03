@@ -13,7 +13,7 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Product Id</th>
+                                <th>Deal</th>
                                 <th>Title</th>
                                 <th>Comments</th>
                                 <th>Rating</th>
@@ -40,7 +40,7 @@
                                         <img src="<?= $image ?>" alt="No Image" class="img-thumbnail" style="height:100px;">
                                     </td> -->
                                     <td>
-                                        <?= $row['product_id'] ?>
+                                        <?= get_deal_by_id($row['product_id'])[0]['title']; ?>
                                     </td>
                                     <td>
                                         <?= $row['title'] ?>
@@ -49,13 +49,13 @@
                                         <?= $row['comment'] ?>
                                     </td>
                                     <td>
-                                        <?= $row['rating'] ?>
+                                        <?= $row['rating'] ?> 
                                     </td>
                                     <td>
-                                        <?= $row['customer_id'] ?>
+                                        <?= get_user_by_id($row['customer_id'])[0]['username']; ?>
                                     </td>
                                     <td>
-                                        <div class="pull-right">
+                                        <div>
                                             <a href="<?= base_url('admin/review/review/edit/' . $row['id']) ?>" class="btn btn-info">Edit</a>
                                             <a href="<?= base_url('admin/review/review/delete/' . $row['id']) ?>"  class="btn btn-danger confirm-delete">Delete</a>
                                         </div>

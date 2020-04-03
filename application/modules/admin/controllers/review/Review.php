@@ -17,6 +17,8 @@ class Review extends ADMIN_Controller
     {
         parent::__construct();
         $this->load->model('Review_model');
+
+        $this->load->helper('common');
     }
 
     public function index($page = 0)
@@ -79,12 +81,15 @@ class Review extends ADMIN_Controller
         $head['description'] = '!';
         $head['keywords'] = '';
 
+
         if(count($_POST) > 0 && isset($_POST))
         {
             $update = array(
             'title' => $this->input->post('title'),
             'comment' => $this->input->post('comment'),
-            'rating' => $this->input->post('rating')
+            'rating' => $this->input->post('rating'),
+            'customer_id' =>$this->input->post('user_id'),   
+            'product_id' =>$this->input->post('product_id')
             );
             $this->db->set($update);
             $this->db->where('id',$this->input->post('id'));

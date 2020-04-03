@@ -29,11 +29,11 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Product Id</th>
+                                <th>Product</th>
                                 <th>Title</th>
                                 <th>Comments</th>
                                 <th>Rating</th>
-                                <th>Customer Id</th>
+                                <th>Customer</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -52,11 +52,9 @@
                                 ?>
 
                                 <tr>
-                                    <!--<td>
-                                        <img src="<?= $image ?>" alt="No Image" class="img-thumbnail" style="height:100px;">
-                                    </td> -->
+
                                     <td>
-                                        <?= $row['product_id'] ?>
+                                        <?= get_deal_by_id($row['product_id'])[0]['title']; ?>
                                     </td>
                                     <td>
                                         <?= $row['title'] ?>
@@ -68,7 +66,7 @@
                                         <?= $row['rating'] ?>
                                     </td>
                                     <td>
-                                        <?= $row['customer_id'] ?>
+                                        <?= get_user_by_id($row['customer_id'])[0]['username']; ?>
                                     </td>
                                     <td>
                                         <div>
