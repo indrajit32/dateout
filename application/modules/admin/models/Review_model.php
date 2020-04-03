@@ -137,4 +137,16 @@ class Review_model extends CI_Model
         return $this->db->delete('product_reviews');
     }
 
+    public function deleteReviewImage($id)
+    {
+        $this->db->where('id', $id);
+        return $this->db->delete('product_review_images');
+    }
+
+    public function deleteReviewImageByProductId($id)
+    {
+        $this->db->where('product_review_id', $id);
+        return $this->db->delete('product_review_images');
+    }
+
 }

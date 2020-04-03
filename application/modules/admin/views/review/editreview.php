@@ -93,6 +93,47 @@
                 </div>
 
                 </div>
+                <?php
+                $images = get_review_images_by_id($review[0]['id']);
+                $img = [];
+                foreach ($images as $key => $value) {
+                    $u_path = 'attachments/review_images/';
+                    if ($value['image'] != null && file_exists($u_path . $value['image'])) {
+                        $img[$key]['img'] = base_url($u_path . $value['image']);
+                        $img[$key]['img_id'] = $value['id'];
+                        $img[$key]['img_name'] = $value['image'];
+                    } else {
+                        $img[$key]['img'] = base_url('attachments/no-image.png');
+                        $img[$key]['img_id'] = $value['id'];
+                        $img[$key]['img_name'] = $value['image'];
+                    }
+                }
+                
+                ?>
+
+                <?php  if( count($img) > 0 ){ ?>
+                <div class="form-group"> 
+                    <label for="rating">Images</label>
+                    <div>
+                    <?php  foreach ($img as $value) { ?>
+                        <div class="other-img" id="image-container-<?php echo $value['img_id']; ?>">
+                            <img src="<?php echo $value['img']; ?>" style="width: 100px;height: 100px">
+                            <a href="javascript:void(0);" onclick="removeDealImage('<?php echo $value['img_name']; ?>', '<?php echo $value['img_id']; ?>')">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </div>
+                    
+                    <?php } ?>
+                    </div>
+
+                </div>
+            <?php } ?>
+
+
+            <div class="form-group">
+                <label for="userfile">Upload image:</label>
+                <input type="file" id="userfile" name="userfile[]" multiple>
+            </div>
             <button type="submit" name="submit" class="btn btn-default">Edit</button>
 
         </form>
@@ -114,4 +155,17 @@
                 "value": '<?php echo $review[0]['rating'] ?>'
             });
         });
+
+        //products publish
+        function removeDealImage(image, img_id) {
+
+            var url = '<?php echo base_url(); ?>'+'admin/review/review/deleteImages';
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {image: image, img_id: img_id}
+            }).done(function (data) {
+                $('#image-container-' + img_id).remove();
+            });
+        } 
 </script>

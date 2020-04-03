@@ -59,3 +59,16 @@ if (!defined('BASEPATH')) {
 
       return $query->result_array();
   }
+
+    function get_review_images_by_id($id){
+
+      $ci =& get_instance();
+      $ci->load->database();
+
+      $ci->db->select("*");
+      $ci->db->from("product_review_images");
+      $ci->db->where(array('product_review_id'=>$id));
+      $query = $ci->db->get();
+
+      return $query->result_array();
+  }

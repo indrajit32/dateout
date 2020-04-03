@@ -95,6 +95,22 @@ class Review extends ADMIN_Controller
             $this->db->where('id',$this->input->post('id'));
             $this->db->update('product_reviews');
 
+            if(isset($_FILES['userfile']))
+            {
+                $_POST['image'] = $this->uploadImage();
+
+                //Insert Images
+                foreach ($_POST['image'] as $key => $img) {
+
+                    if($img['file_name'] != null){
+                        $this->db->insert('product_review_images',array(
+                            'product_review_id' => $this->input->post('id'),
+                            'image' => $img['file_name']
+                        ));
+                    }
+                }
+            }
+
             redirect('admin/review/review/edit/'.$this->input->post('id'));
         }
 
@@ -108,7 +124,50 @@ class Review extends ADMIN_Controller
     public function delete($id)
     {
         $this->Review_model->deleteReview($id);
+        $this->Review_model->deleteReviewImageByProductId($id);
         redirect('admin/reviews');
+    }
+
+    public function deleteImages()
+    {
+        $u_path = 'attachments/review_images/';
+        unlink($u_path.$this->input->post('image'));
+        echo $this->Review_model->deleteReviewImage($this->input->post('img_id'));
+        die;
+    }
+
+    private function uploadImage()
+    {
+            $this->load->library('upload');
+            $dataInfo = array();
+            $files = $_FILES;
+            $cpt = count($_FILES['userfile']['name']);
+            for($i=0; $i<$cpt; $i++)
+            {           
+                $_FILES['userfile']['name']= $files['userfile']['name'][$i];
+                $_FILES['userfile']['type']= $files['userfile']['type'][$i];
+                $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
+                $_FILES['userfile']['error']= $files['userfile']['error'][$i];
+                $_FILES['userfile']['size']= $files['userfile']['size'][$i];    
+
+                $this->upload->initialize($this->set_upload_options());
+                $this->upload->do_upload();
+                $dataInfo[] = $this->upload->data();
+            }
+
+            return $dataInfo;
+    }
+
+    private function set_upload_options()
+    {   
+        //upload an image options
+        $config = array();
+        $config['upload_path'] = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'review_images' . DIRECTORY_SEPARATOR;
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size']      = '0';
+        $config['overwrite']     = FALSE;
+
+        return $config;
     }
 
 }
