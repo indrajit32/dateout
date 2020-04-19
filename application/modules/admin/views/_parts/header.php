@@ -134,9 +134,18 @@
                                         }
                                     }
                                     ?>
+
                                     <li class="header">REVIEW</li>
                                     <li><a href="<?= base_url('admin/reviewpublish') ?>" <?= urldecode(uri_string()) == 'admin/reviewpublish' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i>Publish Review</a></li>
-                                    <li><a href="<?= base_url('admin/reviews') ?>" <?= urldecode(uri_string()) == 'admin/reviews' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i>Reviews</a></li>
+                                    <li><a href="<?= base_url('admin/reviews') ?>" <?= urldecode(uri_string()) == 'admin/reviews' ? 'class="active"' : '' ?>><i class="fa fa-th" aria-hidden="true"></i>Reviews</a></li>
+
+
+                                    <li class="header">EXPLORE</li>
+                                    <li><a href="<?= base_url('admin/explore/ExplorePublish') ?>" <?= urldecode(uri_string()) == 'admin/explore/ExplorePublish' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i>Publish Explore</a></li>
+                                    <li><a href="<?= base_url('admin/explore/explore') ?>" <?= urldecode(uri_string()) == 'admin/reviews' ? 'class="active"' : '' ?>><i class="fa fa-th" aria-hidden="true"></i>Explore List</a></li>
+
+
+
                                     <li class="header">SETTINGS</li>
                                     <li><a href="<?= base_url('admin/settings') ?>" <?= urldecode(uri_string()) == 'admin/settings' ? 'class="active"' : '' ?>><i class="fa fa-wrench" aria-hidden="true"></i> Settings</a></li>
                                     <li><a href="<?= base_url('admin/styling') ?>" <?= urldecode(uri_string()) == 'admin/styling' ? 'class="active"' : '' ?>><i class="fa fa-laptop" aria-hidden="true"></i> Styling</a></li>
@@ -149,6 +158,7 @@
                                     <li><a href="<?= base_url('admin/languages') ?>" <?= urldecode(uri_string()) == 'admin/languages' ? 'class="active"' : '' ?>><i class="fa fa-globe" aria-hidden="true"></i> Languages</a></li>
                                     <li><a href="<?= base_url('admin/filemanager') ?>" <?= urldecode(uri_string()) == 'admin/filemanager' ? 'class="active"' : '' ?>><i class="fa fa-file-code-o" aria-hidden="true"></i> File Manager</a></li>
                                     <li><a href="<?= base_url('admin/adminusers') ?>" <?= urldecode(uri_string()) == 'admin/adminusers' ? 'class="active"' : '' ?>><i class="fa fa-user" aria-hidden="true"></i> Admin Users</a></li>
+                                    <li><a href="<?= base_url('admin/advanced_settings/config/index') ?>" <?= urldecode(uri_string()) == 'admin/advanced_settings/config/index' ? 'class="active"' : '' ?>><i class="fa fa-user" aria-hidden="true"></i>Config</a></li>
                                 </ul>
                             </div>
                             <div class="col-sm-9 col-md-9 col-lg-10 col-sm-offset-3 col-md-offset-3 col-lg-offset-2">

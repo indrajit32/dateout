@@ -8,10 +8,13 @@ class Config_model extends CI_Model
         parent::__construct();
     }
 
-    public function getSiteConfigData( $abbr = 'en' )
+    public function getSiteConfigData( $abbr = 'en', $page = null )
     {
         $this->db->select('*');
         $this->db->where('abbr',$abbr);
+        if($page != null){
+            $this->db->where('type',$page);
+        }
         $query = $this->db->get('config');
         return $query->result_array();
     }

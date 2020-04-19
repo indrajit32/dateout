@@ -72,3 +72,16 @@ if (!defined('BASEPATH')) {
 
       return $query->result_array();
   }
+
+    function get_explore_images_by_id($id){
+
+      $ci =& get_instance();
+      $ci->load->database();
+
+      $ci->db->select("*");
+      $ci->db->from("explore_image");
+      $ci->db->where(array('explore_id'=>$id));
+      $query = $ci->db->get();
+
+      return $query->result_array();
+  }

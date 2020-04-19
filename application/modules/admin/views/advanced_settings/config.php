@@ -5,15 +5,15 @@
     <hr>
     <div class="clearfix"></div>
 
-            <div class="form-group available-translations">
-                <b>Languages</b>
-                <?php foreach ($languages as $language) { ?>
-                    <button type="button" data-locale-change="<?= $language->abbr ?>" class="btn btn-default locale-change text-uppercase <?= $language->abbr == $lang ? 'active' : '' ?>" onclick="myFunction('<?= $language->abbr ?>')">
-                        <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">
-                        <?= $language->abbr ?>
-                    </button>
-                <?php } ?>
-            </div>
+    <div class="form-group available-translations">
+        <b>Languages</b>
+        <?php foreach ($languages as $language) { ?>
+            <button type="button" data-locale-change="<?= $language->abbr ?>" class="btn btn-default locale-change text-uppercase <?= $language->abbr == $lang ? 'active' : '' ?>" onclick="myFunction('<?= $language->abbr ?>')">
+                <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">
+                <?= $language->abbr ?>
+            </button>
+        <?php } ?>
+    </div>
     <?php
     if ($data) {
         ?>
