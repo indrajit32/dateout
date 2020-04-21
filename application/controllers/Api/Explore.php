@@ -22,11 +22,32 @@ class Explore extends REST_Controller
 
     public function all_get($lang = 'en')
     {
-        $data['explore'] = $this->Explore_model->getExploreDetails($lang);
-        $data['explore']['images'] = $this->Explore_model->getAllImages($data['explore'][0]['id']);
-        $data['explore']['config'] = $this->Config_model->getSiteConfigData($lang,'explore');
 
-        $data['explore']['experience'] = [];
+        $data['explor_header'] = $this->Explore_model->getExploreDetails($lang);
+        $data['explor_header']['images'] = $this->Explore_model->getAllImages($data['explor_header'][0]['id']);
+
+        //============================================================
+        
+        $config_data = $this->Config_model->getSiteConfigData($lang,'explore');
+        foreach($config_data as $key => $c)
+        {
+            if($c['key_name'] == 'credit')
+            {
+                $config_data[$key]['group_list_data'] = ['credit_url'=> $data['explor_header'][0]['credit_url'], 'credit_image' => $data['explor_header'][0]['credit_image']];
+            }
+            else
+            {
+                $config_data[$key]['group_list_data'] = [];
+            }
+        }
+        
+        //================================================================
+
+        $data['explor_list'] = $config_data;
+
+        $data['explor_list']['experience'] = [];
+        $data['explor_list']['article'] = [];
+        $data['explor_list']['popular_destination'] = [];
 
         $this->response($data, REST_Controller::HTTP_OK);
     }
