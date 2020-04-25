@@ -134,7 +134,7 @@
                 <label for="userfile">Upload image:</label>
                 <input type="file" id="userfile" name="userfile[]" multiple>
             </div>
-            <button type="submit" name="submit" class="btn btn-default">Edit</button>
+            <button type="submit" name="submit" class="btn btn-default">Update</button>
 
         </form>
     </div>

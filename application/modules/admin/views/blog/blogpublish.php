@@ -1,5 +1,5 @@
 <script src="<?= base_url('assets/ckeditor/ckeditor.js') ?>"></script>
-<h1><img src="<?= base_url('assets/imgs/blogger.png') ?>" class="header-img" style="margin-top:-2px;"> Publish post</h1>
+<h1><img src="<?= base_url('assets/imgs/blogger.png') ?>" class="header-img" style="margin-top:-2px;"> Publish article</h1>
 <hr>
 <div class="row">
     <div class="col-sm-8 col-md-7">
@@ -39,6 +39,15 @@
                 $i++;
             }
             ?>
+            <div class="form-group"> 
+                <label for="priority">Priority</label>
+                <?php if (isset($_POST['image'])) { ?>
+                    <input type="text" name="priority" value="<?= $_POST['priority'] ?>" placeholder= "Enter Priority" class="form-control">
+                <?php } else{ ?>
+                    <input type="text" name="priority" placeholder= "Enter Priority" class="form-control">
+                <?php } ?>
+            </div>
+
             <div class="form-group">
                 <?php if (isset($_POST['image'])) { ?>
                     <input type="hidden" name="old_image" value="<?= $_POST['image'] ?>">

@@ -85,3 +85,13 @@ if (!defined('BASEPATH')) {
 
       return $query->result_array();
   }
+
+    function count_explore_list($abbr){
+
+      $ci =& get_instance();
+      $ci->load->database();
+
+      $ci->db->where('abbr', $abbr);
+      $query = $ci->db->get('explore');
+      return $query->num_rows();
+    }

@@ -1,4 +1,4 @@
-<h1><img src="<?= base_url('assets/imgs/blogger.png') ?>" class="header-img" style="margin-top:-2px;"> Blog Posts</h1>
+<h1><img src="<?= base_url('assets/imgs/blogger.png') ?>" class="header-img" style="margin-top:-2px;"> Article Posts</h1>
 <hr>
 <?php if ($this->session->flashdata('result_publish')) { ?>
     <hr>
@@ -43,6 +43,6 @@ if (!empty($posts)) {
         <?php } ?>
     </div>
 <?php } else { ?>
-    <div class="alert alert-danger" role="alert">No Posts</div>
+    <div class="alert alert-danger" role="alert">No Article</div>
 <?php } ?>
 <?= $links_pagination ?>

@@ -23,10 +23,16 @@ class ExplorePublish extends ADMIN_Controller
         $this->login_check();
         $trans_load = null;
         if (isset($_POST['submit'])) {
-            $_POST['image'] = $this->uploadImage();
-            $this->Explore_model->setPost($_POST);
-            $this->session->set_flashdata('result_publish', 'Successful published!');
-            //redirect('admin/reviewpublish');
+            if( count_explore_list($_POST['lang']) == 0 ){
+
+                $_POST['image'] = $this->uploadImage();
+                $this->Explore_model->setPost($_POST);
+                $this->session->set_flashdata('result_publish', 'Successful published!');
+                //redirect('admin/reviewpublish');
+            }
+            else{
+                $this->session->set_flashdata('result_publish', 'Duplicate Language Entry');
+            }
         }
         $data = array();
         $head = array();

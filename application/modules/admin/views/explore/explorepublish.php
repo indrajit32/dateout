@@ -21,16 +21,14 @@
         ?>
         <form method="POST" enctype="multipart/form-data">
 
-            <div class="form-group"> 
-                <div class="form-group available-translations">
-                    <b>Languages</b>
-                    <?php foreach ($languages as $language) { ?>
-                        <button type="button" data-locale-change="<?= $language->abbr ?>" onclick="myFunction('<?= $language->abbr ?>')">
-                            <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">
-                            <?= $language->abbr ?>
-                        </button>
-                    <?php } ?>
-                </div>
+            <div class="form-group available-translations">
+                <b>Languages</b>
+                <?php foreach ($languages as $language) { ?>
+                    <button type="button" onclick="myFunction('<?= $language->abbr ?>')" data-locale-change="<?= $language->abbr ?>" class="btn btn-default locale-change text-uppercase <?= $language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'active' : '' ?>">
+                        <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">
+                        <?= $language->abbr ?>
+                    </button>
+                <?php } ?>
             </div>
 
                 <div class="form-group"> 

@@ -60,7 +60,8 @@ class Blog_model extends CI_Model
             $is_update = true;
             $this->db->where('id', $id);
             if (!$this->db->update('blog_posts', array(
-                        'image' => $post['image'] != null ? $_POST['image'] : $_POST['old_image']
+                        'image' => $post['image'] != null ? $_POST['image'] : $_POST['old_image'],
+                        'priority' => $post['priority']
                     ))) {
                 log_message('error', print_r($this->db->error(), true));
             }
@@ -80,6 +81,7 @@ class Blog_model extends CI_Model
             }
             if (!$this->db->insert('blog_posts', array(
                         'image' => $post['image'],
+                        'priority' => $post['priority'],
                         'time' => time()
                     ))) {
                 log_message('error', print_r($this->db->error(), true));
