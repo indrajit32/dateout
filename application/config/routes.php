@@ -1,6 +1,5 @@
 <?php
 
-
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
@@ -138,6 +137,16 @@ $route['vendor/me'] = "vendor/VendorProfile";
 $route['(\w{2})/vendor/me'] = "vendor/VendorProfile";
 $route['vendor/logout'] = "vendor/VendorProfile/logout";
 $route['(\w{2})/vendor/logout'] = "vendor/VendorProfile/logout";
+
+$route['vendor/package_list'] = "vendor/Package_list";
+$route['(\w{2})/vendor/package_list'] = "vendor/Package_list";
+$route['vendor/package_list/(:num)'] = "vendor/Package_list/index/$1";
+$route['(\w{2})/vendor/package_list/(:num)'] = "vendor/Package_list/index/$2";
+$route['vendor/add/package'] = "vendor/AddPackage";
+$route['(\w{2})/vendor/add/package'] = "vendor/AddPackage";
+$route['vendor/edit/package/(:num)'] = "vendor/AddPackage/index/$1";
+$route['(\w{2})/vendor/edit/package/(:num)'] = "vendor/AddPackage/index/$1";
+
 $route['vendor/products'] = "vendor/Products";
 $route['(\w{2})/vendor/products'] = "vendor/Products";
 $route['vendor/products/(:num)'] = "vendor/Products/index/$1";
@@ -150,6 +159,9 @@ $route['vendor/orders'] = "vendor/Orders";
 $route['(\w{2})/vendor/orders'] = "vendor/Orders";
 $route['vendor/uploadOthersImages'] = "vendor/AddProduct/do_upload_others_images";
 $route['vendor/loadOthersImages'] = "vendor/AddProduct/loadOthersImages";
+$route['vendor/uploadExpectationImages'] = "vendor/AddProduct/do_upload_expectations_images";
+$route['vendor/loadExpectationsImages'] = "vendor/AddProduct/loadExpectationsImages";
+$route['vendor/removeSecondaryExpectationsImage'] = "vendor/AddProduct/removeSecondaryExpectationsImage";
 $route['vendor/removeSecondaryImage'] = "vendor/AddProduct/removeSecondaryImage";
 $route['vendor/delete/product/(:num)'] = "vendor/products/deleteProduct/$1";
 $route['(\w{2})/vendor/delete/product/(:num)'] = "vendor/products/deleteProduct/$1";
@@ -170,9 +182,15 @@ $route['^(\w{2})/(.*)$'] = '$2';
 // HOME / LOGIN
 $route['admin'] = "admin/home/login";
 // ECOMMERCE GROUP
+$route['admin/package'] = "admin/ecommerce/package";
+$route['admin/package/(:num)'] = "admin/ecommerce/package/index/$1";
+$route['admin/package_list'] = "admin/ecommerce/package_list";
+$route['admin/package_list/(:num)'] = "admin/ecommerce/package_list/index/$1";
+
 $route['admin/publish'] = "admin/ecommerce/publish";
 $route['admin/publish/(:num)'] = "admin/ecommerce/publish/index/$1";
 $route['admin/removeSecondaryImage'] = "admin/ecommerce/publish/removeSecondaryImage";
+$route['admin/removeSecondaryExpectationsImage'] = "admin/ecommerce/publish/removeSecondaryExpectationsImage";
 $route['admin/products'] = "admin/ecommerce/products";
 $route['admin/products/(:num)'] = "admin/ecommerce/products/index/$1";
 $route['admin/productStatusChange'] = "admin/ecommerce/products/productStatusChange";
@@ -215,12 +233,8 @@ $route['admin/logout'] = "admin/home/home/logout";
 $route['admin/changePass'] = "admin/home/home/changePass";
 $route['admin/uploadOthersImages'] = "admin/ecommerce/publish/do_upload_others_images";
 $route['admin/loadOthersImages'] = "admin/ecommerce/publish/loadOthersImages";
-
-//Review
-$route['admin/reviewpublish'] = "admin/review/ReviewPublish";
-$route['admin/reviews'] = "admin/review/Review";
-
-
+$route['admin/uploadExpectationImages'] = "admin/ecommerce/publish/do_upload_expectations_images";
+$route['admin/loadExpectationsImages'] = "admin/ecommerce/publish/loadExpectationsImages";
 
 /*
   | -------------------------------------------------------------------------

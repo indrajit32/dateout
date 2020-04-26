@@ -69,6 +69,16 @@ class Products_model extends CI_Model
         return $query->result();
     }
 
+    public function getProducts_vendor()
+    {
+        $this->db->join('vendors', 'vendors.id = products.vendor_id', 'inner');
+        $this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
+        $this->db->where('products_translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);
+      //  $this->db->where('products.visibility', 1);
+        $query = $this->db->select('products_translations.for_id, products_translations.title')->get('products');
+        return $query->result();
+    }
+
     public function numShopProducts()
     {
         return $this->db->count_all_results('products');
@@ -83,7 +93,14 @@ class Products_model extends CI_Model
         $this->db->where('products_translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);
         $query = $this->db->get('products');
         if ($query->num_rows() > 0) {
-            return $query->row_array();
+          $arr = $query->row_array();
+            $query1 = $this->db->query('SELECT shop_categorie_id FROM product_shop_categorie_mapping WHERE product_id = '.$id);
+            if($query1->num_rows() > 0){
+              foreach( $query1->result() as $k){
+                $arr['shop_categorie_list'][]= $k->shop_categorie_id;
+              }
+            }
+            return $arr;
         } else {
             return false;
         }
@@ -95,7 +112,28 @@ class Products_model extends CI_Model
         $result = $this->db->update('products', array('visibility' => $to_status));
         return $result;
     }
-
+    public function delete_expected_images($img, $folder)
+    {
+      $this->db->where('expectation_folder', $folder);
+      $this->db->where('image', $img);
+      $result = $this->db->delete('products_expectation');
+      return $result;
+    }
+    public function get_expected_images($expectation_folder)
+    {
+    $arr ="";
+        $this->db->where('expectation_folder', $expectation_folder);
+        $query = $this->db->get('products_expectation');
+        if ($query->num_rows() > 0) {
+          $arr = $query->result();
+        }
+        return $arr;
+    }
+    public function set_expected_images($img, $txt, $expectation_folder)
+    {
+        $result = $this->db->insert('products_expectation', array('expectation_folder' => $expectation_folder, 'image' => $img, 'text' => $txt ));
+        return $result;
+    }
     public function setProduct($post, $id = 0)
     {
         if (!isset($post['brand_id'])) {
@@ -108,10 +146,43 @@ class Products_model extends CI_Model
         $is_update = false;
         if ($id > 0) {
             $is_update = true;
+            if(isset($post['shop_categorie'])){
+              $this->db->where('product_id', $id);
+              if (!$this->db->delete('product_shop_categorie_mapping')) {
+                  log_message('error', print_r($this->db->error(), true));
+              }
+              else{
+                foreach ($post['shop_categorie'] as $k) {
+                  if (!$this->db->insert('product_shop_categorie_mapping', array(
+                  'product_id' => $id,
+                  'shop_categorie_id' => $k))){
+                      log_message('error', print_r($this->db->error(), true));
+                   }
+                }
+              }
+            }
+
             if (!$this->db->where('id', $id)->update('products', array(
                         'image' => $post['image'] != null ? $_POST['image'] : $_POST['old_image'],
-                        'shop_categorie' => $post['shop_categorie'],
-                        'quantity' => $post['quantity'],
+              //          'shop_categorie' => $post['shop_categorie'],
+/*                        'quantity' => $post['quantity'],
+                        'minimum_no_of_pax' => $post['minimum_no_of_pax'],
+                        'cancellation_policy' => $post['cancellation_policy'],
+                        'redeem_policy' => $post['redeem_policy'],
+                        'duration' => $post['duration'],
+                        'confirmation' => $post['confirmation'],
+                        'ticket_type' => $post['ticket_type'],
+                        'meeting_place' => $post['meeting_place'],
+                        'experience_type' => $post['experience_type'],
+                        'ticket_collection' => $post['ticket_collection'],
+*/
+                        'discount_percent' => $post['discount_percent'],
+                        'latitude' => $post['latitude'],
+                        'longitude' => $post['longitude'],
+                        'discount_percent' => $post['discount_percent'],
+                        'country' => $post['country'],
+                        'city' => $post['city'],
+                        'metaword' => $post['metaword'],
                         'in_slider' => $post['in_slider'],
                         'position' => $post['position'],
                         'virtual_products' => $post['virtual_products'],
@@ -124,7 +195,7 @@ class Products_model extends CI_Model
             /*
              * Lets get what is default tranlsation number
              * in titles and convert it to url
-             * We want our plaform public ulrs to be in default 
+             * We want our plaform public ulrs to be in default
              * language that we use
              */
             $i = 0;
@@ -136,12 +207,29 @@ class Products_model extends CI_Model
             }
             if (!$this->db->insert('products', array(
                         'image' => $post['image'],
-                        'shop_categorie' => $post['shop_categorie'],
-                        'quantity' => $post['quantity'],
+                //        'shop_categorie' => $post['shop_categorie'],
+/*                        'quantity' => $post['quantity'],
+                        'minimum_no_of_pax' => $post['minimum_no_of_pax'],
+                        'cancellation_policy' => $post['cancellation_policy'],
+                        'redeem_policy' => $post['redeem_policy'],
+                        'duration' => $post['duration'],
+                        'confirmation' => $post['confirmation'],
+                        'ticket_type' => $post['ticket_type'],
+                        'meeting_place' => $post['meeting_place'],
+                        'experience_type' => $post['experience_type'],
+                        'ticket_collection' => $post['ticket_collection'],
+*/
+                        'latitude' => $post['latitude'],
+                        'longitude' => $post['longitude'],
+                        'discount_percent' => $post['discount_percent'],
+                        'country' => $post['country'],
+                        'city' => $post['city'],
+                        'metaword' => $post['metaword'],
                         'in_slider' => $post['in_slider'],
                         'position' => $post['position'],
                         'virtual_products' => $post['virtual_products'],
                         'folder' => $post['folder'],
+                        'expectation_folder' => $post['expectation_folder'],
                         'brand_id' => $post['brand_id'],
                         'time' => time()
                     ))) {
@@ -155,7 +243,17 @@ class Products_model extends CI_Model
                     ))) {
                 log_message('error', print_r($this->db->error(), true));
             }
+            if(isset($post['shop_categorie'])){
+                foreach ($post['shop_categorie'] as $k) {
+                  if (!$this->db->insert('product_shop_categorie_mapping', array(
+                  'product_id' => $id,
+                  'shop_categorie_id' => $k))){
+                      log_message('error', print_r($this->db->error(), true));
+                   }
+                }
+            }
         }
+
         $this->setProductTranslation($post, $id, $is_update);
         if ($this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
@@ -182,10 +280,12 @@ class Products_model extends CI_Model
             $post['old_price'][$i] = str_replace(' ', '', $post['old_price'][$i]);
             $post['old_price'][$i] = str_replace(',', '.', $post['old_price'][$i]);
             $post['old_price'][$i] = preg_replace("/[^0-9,.]/", "", $post['old_price'][$i]);
+
             $arr = array(
                 'title' => $post['title'][$i],
                 'basic_description' => $post['basic_description'][$i],
                 'description' => $post['description'][$i],
+                'expectation' => $post['expectation'][$i],
                 'price' => $post['price'][$i],
                 'old_price' => $post['old_price'][$i],
                 'abbr' => $abbr,
@@ -214,6 +314,7 @@ class Products_model extends CI_Model
         foreach ($query->result() as $row) {
             $arr[$row->abbr]['title'] = $row->title;
             $arr[$row->abbr]['basic_description'] = $row->basic_description;
+            $arr[$row->abbr]['expectation'] = $row->expectation;
             $arr[$row->abbr]['description'] = $row->description;
             $arr[$row->abbr]['price'] = $row->price;
             $arr[$row->abbr]['old_price'] = $row->old_price;

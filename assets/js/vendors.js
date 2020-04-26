@@ -10,6 +10,30 @@ $(document).ready(function () {
     });
 });
 
+// Upload Expectation Images on publish product
+$('.finish-expectation').click(function () {
+    $('.finish-expectation .finish-text').hide();
+    $('.finish-expectation .loadUploadOthers').show();
+    var someFormElement = document.getElementById('ExpectationImagesForm');
+    var formData = new FormData(someFormElement);
+    $.ajax({
+        url: urls.uploadExpectationImages,
+        type: "POST",
+        data: formData,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (data)
+        {
+            $('.finish-upload .finish-text').show();
+            $('.finish-upload .loadUploadOthers').hide();
+            reloadExpectationsImagesContainer();
+            $('#modalExpectationImages').modal('hide');
+            document.getElementById("ExpectationImagesForm").reset();
+        }
+    });
+});
+
 // Upload More Images on publish product
 $('.finish-upload').click(function () {
     $('.finish-upload .finish-text').hide();
@@ -59,6 +83,10 @@ $('.change-ord-status').change(function () {
     });
 });
 
+$(".change-package-type-form").change(function () {
+    $('#searchPackagesForm').submit();
+});
+
 $('.locale-change').click(function () {
     var toLocale = $(this).data('locale-change');
     $('.locale-container').hide();
@@ -72,6 +100,11 @@ function reloadOthersImagesContainer() {
     $('.others-images-container').load(urls.loadOthersImages, {"folder": $('[name="folder"]').val()});
 }
 
+function reloadExpectationsImagesContainer() {
+    $('.expectation-images-container').empty();
+    $('.expectation-images-container').load(urls.loadExpectationsImages, {"expectation_folder": $('[name="expectation_folder"]').val()});
+}
+
 //products publish
 function removeSecondaryProductImage(image, folder, container) {
     $.ajax({
@@ -80,5 +113,23 @@ function removeSecondaryProductImage(image, folder, container) {
         data: {image: image, folder: folder}
     }).done(function (data) {
         $('#image-container-' + container).remove();
+        reloadExpectationsImagesContainer();
     });
-} 
+}
+
+function removeSecondaryExpectationsImage(image, folder, container) {
+    $.ajax({
+        type: "POST",
+        url: urls.removeSecondaryExpectationsImage,
+        dataType : "json",
+        data: {image: image, folder: folder}
+    }).done(function (data) {
+        $('#image-container-' + container).remove();
+        reloadExpectationsImagesContainer();
+    });
+}
+
+$(".showSliderDescrption").click(function () {
+    var desc_id = $(this).data('descr');
+    $("#theSliderDescrption-" + desc_id).slideToggle("slow", function () {});
+});

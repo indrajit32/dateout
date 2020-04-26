@@ -34,6 +34,7 @@ class AddProduct extends VENDOR_Controller
             $_POST['image'] = $this->uploadImage();
             $_POST['vendor_id'] = $this->vendor_id;
             $result = $this->Products_model->setProduct($_POST, $id);
+
             if ($result === true) {
                 $result_msg = lang('vendor_product_published');
             } else {
@@ -42,6 +43,7 @@ class AddProduct extends VENDOR_Controller
             $this->session->set_flashdata('result_publish', $result_msg);
             redirect(LANG_URL . '/vendor/products');
         }
+
         $data = array();
         $head = array();
         $head['title'] = lang('vendor_add_product');
@@ -49,6 +51,7 @@ class AddProduct extends VENDOR_Controller
         $head['keywords'] = '';
         $data['languages'] = $this->Languages_model->getLanguages();
         $data['shop_categories'] = $this->Categories_model->getShopCategories();
+        $data['expectationImgs'] = $this->loadExpectationsImages();
         $data['otherImgs'] = $this->loadOthersImages();
         $data['showBrands'] = $this->Home_admin_model->getValueStore('showBrands');
         if($data['showBrands'] == 1) {
@@ -106,6 +109,37 @@ class AddProduct extends VENDOR_Controller
         }
     }
 
+    public function do_upload_expectations_images()
+    {
+        if ($this->input->is_ajax_request()) {
+            $upath = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $_POST['expectation_folder'] . DIRECTORY_SEPARATOR;
+            if (!file_exists($upath)) {
+                mkdir($upath, 0777);
+            }
+
+            $this->load->library('upload');
+
+            $files = $_FILES;
+            $cpt = count($_FILES['expectations_image']['name']);
+            for ($i = 0; $i < $cpt; $i++) {
+                unset($_FILES);
+                $text = $_POST['expectations_subtitle'][$i];
+                $_FILES['expectations_image']['name'] = $files['expectations_image']['name'][$i];
+                $_FILES['expectations_image']['type'] = $files['expectations_image']['type'][$i];
+                $_FILES['expectations_image']['tmp_name'] = $files['expectations_image']['tmp_name'][$i];
+                $_FILES['expectations_image']['error'] = $files['expectations_image']['error'][$i];
+                $_FILES['expectations_image']['size'] = $files['expectations_image']['size'][$i];
+
+                $this->upload->initialize(array(
+                    'upload_path' => $upath,
+                    'allowed_types' => $this->allowed_img_types
+                ));
+                $image = $this->upload->do_upload('expectations_image');
+                $this->Products_model->set_expected_images($image, $text, $_POST['expectation_folder']);
+            }
+        }
+    }
+
     public function loadOthersImages()
     {
         $output = '';
@@ -137,7 +171,49 @@ class AddProduct extends VENDOR_Controller
             return $output;
         }
     }
+    public function loadExpectationsImages()
+    {
+        $output = '';
 
+        if (isset($_POST['expectation_folder']) && $_POST['expectation_folder'] != null) {
+            $image_data = $this->Products_model->get_expected_images($_POST['expectation_folder']);
+            //echo '<pre>';
+            //print_r($image_data);die;
+            $dir = 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $_POST['expectation_folder'] . DIRECTORY_SEPARATOR;
+            if (is_dir($dir)) {
+                if ($dh = opendir($dir)) {
+                    $i = 0;
+                    while (($file = readdir($dh)) !== false) {
+                        if (is_file($dir . $file)) {
+                          if(!empty($image_data)){
+                          foreach ($image_data as $value) {
+                            if($value->image==$file){
+                              $output .= '
+                                <div class="other-img" id="image-container-' . $i . '">
+                                    <img src="' . base_url('attachments/shop_images/' . $_POST['expectation_folder'] . '/' . $file) . '" style="width:100px; height: 100px;">
+
+                                    <a href="javascript:void(0);" onclick="removeSecondaryExpectationsImage(\'' . $file . '\', \'' . $_POST['expectation_folder'] . '\', ' . $i . ')">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </a><br>
+                                    <input type="text" name="exp[]" style="background-color: #e6e6e6;" value="'.$value->text.'" readonly><br />
+                                </div>
+                               ';
+                             }
+                           }
+                         }
+                        }
+                        $i++;
+                    }
+                    closedir($dh);
+                }
+            }
+        }
+        if ($this->input->is_ajax_request()) {
+            echo $output;
+        } else {
+            return $output;
+        }
+    }
     /*
      * called from ajax
      */
@@ -148,6 +224,17 @@ class AddProduct extends VENDOR_Controller
             $img = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . '' . $_POST['folder'] . DIRECTORY_SEPARATOR . $_POST['image'];
             unlink($img);
         }
+        return 1;
+    }
+    public function removeSecondaryExpectationsImage()
+    {
+      if ($this->input->is_ajax_request()) {
+          $img = '.' . DIRECTORY_SEPARATOR . 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . '' . $_POST['folder'] . DIRECTORY_SEPARATOR . $_POST['image'];
+          unlink($img);
+          $this->Products_model->delete_expected_images( $_POST['image'], $_POST['folder']);
+
+      }
+      return 1;
     }
 
 }

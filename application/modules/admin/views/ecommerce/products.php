@@ -13,13 +13,13 @@
         <div class="alert alert-success"><?= $this->session->flashdata('result_publish') ?></div>
         <hr>
         <?php
-    } 
+    }
     ?>
-    <h1><img src="<?= base_url('assets/imgs/products-img.png') ?>" class="header-img" style="margin-top:-2px;"> Products</h1>
+    <h1><img src="<?= base_url('assets/imgs/products-img.png') ?>" class="header-img" style="margin-top:-2px;"> Experiences</h1>
     <hr>
     <div class="row">
         <div class="col-xs-12">
-            <div class="well hidden-xs"> 
+            <div class="well hidden-xs">
                 <div class="row">
                     <form method="GET" id="searchProductsForm" action="">
                         <div class="col-sm-4">
@@ -73,9 +73,10 @@
                                 <th>Image</th>
                                 <th>Title</th>
                                 <th>Price</th>
-                                <th>Quantity</th>
+                                <th>Country</th>
                                 <th>Vendor</th>
                                 <th>Position</th>
+                                <th>Status</th>
                                 <th class="text-right">Action</th>
                             </tr>
                         </thead>
@@ -102,7 +103,8 @@
                                     </td>
                                     <td>
                                         <?php
-                                        if ($row->quantity > 5) {
+                                        echo 'Singapore';
+                                      /*  if ($row->quantity > 5) {
                                             $color = 'label-success';
                                         }
                                         if ($row->quantity <= 5) {
@@ -110,14 +112,27 @@
                                         }
                                         if ($row->quantity == 0) {
                                             $color = 'label-danger';
-                                        }
+                                        } */
                                         ?>
-                                        <span style="font-size:12px;" class="label <?= $color ?>">
-                                            <?= $row->quantity ?>
+                                    <!--    <span style="font-size:12px;" class="label <?php // $color ?>">
+                                            <?php // $row->country ?>
                                         </span>
+                                      -->
                                     </td>
                                     <td><?= $row->vendor_id > 0 ? '<a href="?show_vendor=' . $row->vendor_id . '">' . $row->vendor_name . '</a>' : 'No vendor' ?></td>
                                     <td><?= $row->position ?></td>
+                                    <td>
+
+                                      <?php if($row->visibility==1){ ?>
+                                       <h5>Active</h5><br>
+                                      <a href="javascript:changeProductStatus(<?= $row->id ?>)" class="btn btn-danger">In-Active</a>
+                                      <input type="hidden" name="to_status[]" id="to_status_<?= $row->id ?>" value="0">
+                                  <?php  }
+                                    else{ ?>
+                                      <h5>In-Active</h5><br>
+                                        <a href="javascript:changeProductStatus(<?= $row->id ?>)" class="btn btn-info">Active</a>
+                                          <input type="hidden" name="to_status[]" id="to_status_<?= $row->id ?>" value="1">
+                                <?php    } ?></td>
                                     <td>
                                         <div class="pull-right">
                                             <a href="<?= base_url('admin/publish/' . $row->id) ?>" class="btn btn-info">Edit</a>
