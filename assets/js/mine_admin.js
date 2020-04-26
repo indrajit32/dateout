@@ -28,7 +28,7 @@ $("#dev-zone").click(function () {
 });
 
 $('.btn-publish').click(function (e) {
-    var shop_category = $('[name="shop_categorie"]').val();
+    var shop_category = $('[name="shop_categorie[]"]').val();
     if (shop_category == null) {
         e.preventDefault();
         alert('There is no create and selected shop category!');
@@ -341,6 +341,20 @@ function removeSecondaryProductImage(image, folder, container) {
         data: {image: image, folder: folder}
     }).done(function (data) {
         $('#image-container-' + container).remove();
+        reloadOthersImagesContainer();
+    });
+}
+
+function removeSecondaryExpectationsImage(image, folder, container) {
+    $.ajax({
+        type: "POST",
+        url: urls.removeSecondaryExpectationsImage,
+      //  dataType : "json",
+        data: {image: image, folder: folder}
+    }).done(function (data) {
+
+        $('#image-container-' + container).remove();
+        reloadExpectationsImagesContainer();
     });
 }
 
@@ -357,6 +371,11 @@ $(".showSliderDescrption").click(function () {
 // Products
 $(".change-products-form").change(function () {
     $('#searchProductsForm').submit();
+});
+
+//Package Type
+$(".change-package-type-form").change(function () {
+    $('#searchPackagesForm').submit();
 });
 
 $(".changeOrder").change(function () {
@@ -384,6 +403,29 @@ $('button[type="submit"]').click(function (e) {
     }
 });
 
+// Upload Expectation Images on publish product
+$('.finish-expectation').click(function () {
+    $('.finish-expectation .finish-text').hide();
+    $('.finish-expectation .loadUploadOthers').show();
+    var someFormElement = document.getElementById('ExpectationImagesForm');
+    var formData = new FormData(someFormElement);
+    $.ajax({
+        url: urls.uploadExpectationImages,
+        type: "POST",
+        data: formData,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (data)
+        {
+            $('.finish-upload .finish-text').show();
+            $('.finish-upload .loadUploadOthers').hide();
+            reloadExpectationsImagesContainer();
+            $('#modalExpectationImages').modal('hide');
+            document.getElementById("ExpectationImagesForm").reset();
+        }
+    });
+});
 // Upload More Images on publish product
 $('.finish-upload').click(function () {
     $('.finish-upload .finish-text').hide();
@@ -483,6 +525,10 @@ function reloadOthersImagesContainer() {
     $('.others-images-container').load(urls.loadOthersImages, {"folder": $('[name="folder"]').val()});
 }
 
+function reloadExpectationsImagesContainer() {
+    $('.expectation-images-container').empty();
+    $('.expectation-images-container').load(urls.loadExpectationsImages, {"expectation_folder": $('[name="expectation_folder"]').val()});
+}
 // Orders
 function changeOrdersOrderStatus(id, to_status, products, userEmail) {
     $.post(urls.changeOrdersOrderStatus, {the_id: id, to_status: to_status, products: products, userEmail: userEmail}, function (data) {
@@ -507,13 +553,17 @@ function changeOrdersOrderStatus(id, to_status, products, userEmail) {
 }
 
 function changeProductStatus(id) {
-    var to_status = $("#to-status").val();
+
+    var to_status = $("#to_status_"+id).val();
+    console.log('$("#to_status_'+id+'").val()');
+    console.log(to_status);
     $.ajax({
         type: "POST",
         url: urls.productStatusChange,
         data: {id: id, to_status: to_status}
     }).done(function (data) {
-        if (data == '1') {
+      location.reload();
+      /*  if (data == '1') {
             if (to_status == 1) {
                 $('[data-article-id="' + id + '"] .staus-is').text('Visible');
                 $('[data-article-id="' + id + '"] .status-is-icon').html('<i class="fa fa-unlock"></i>');
@@ -528,6 +578,7 @@ function changeProductStatus(id) {
         } else {
             alert('Error change status!');
         }
+        */
     });
 }
 
@@ -548,5 +599,4 @@ function changePass() {
     } else {
         alert('Too short pass!');
     }
-    
 }
