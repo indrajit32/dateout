@@ -15,7 +15,6 @@ class ReviewPublish extends ADMIN_Controller
     {
         parent::__construct();
         $this->load->model(array('Review_model', 'Languages_model'));
-        $this->load->helper('common');
     }
 
     public function index($id = 0)
@@ -79,6 +78,5 @@ class ReviewPublish extends ADMIN_Controller
 
         return $config;
     }
-
 
 }

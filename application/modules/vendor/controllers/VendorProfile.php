@@ -19,7 +19,6 @@ class VendorProfile extends VENDOR_Controller
 
     public function index()
     {
-
         $data = array();
         $head = array();
         $head['title'] = lang('vendor_dashboard');

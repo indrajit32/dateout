@@ -1,12 +1,12 @@
 <?php
 if ($this->session->flashdata('result_delete')) {
-    ?> 
-    <div class="alert alert-success"><?= $this->session->flashdata('result_delete') ?></div> 
+    ?>
+    <div class="alert alert-success"><?= $this->session->flashdata('result_delete') ?></div>
     <?php
 }
 ?>
 <div class="content">
-    <div class="row"> 
+    <div class="row">
         <?php
         foreach ($products as $row) {
             $u_path = 'attachments/shop_images/';
@@ -17,20 +17,21 @@ if ($this->session->flashdata('result_delete')) {
             }
             ?>
             <div class="col-md-4 col-lg-3">
-                <div class="product-list"> 
+                <div class="product-list">
                     <div class="img-container">
                         <img src="<?= $image ?>" class="img-fluid" alt="No image">
                         <a>
                             <div class="mask"></div>
                         </a>
-                    </div> 
+                    </div>
                     <div class="product-body">
-                        <h4><strong><a href=""><?= $row->title ?></a></strong></h4> 
+                        <h4><strong><a href=""><?= $row->title ?></a></strong></h4>
                         <p class="product-text">
                             <?= word_limiter(strip_tags($row->description), 120) ?>
-                        </p> 
+                        </p>
                         <div class="product-footer">
                             <div class="text-center price"><?= $row->price ?></div>
+                            <p class="text-center visibility">Status: <?php if($row->visibility==1) echo "Active"; else echo "In-Active"; ?></p>
                             <div class="buttons">
                                 <a href="<?= LANG_URL . '/vendor/edit/product/' . $row->id ?>" class="btn btn-green btn-sm">
                                     <?= lang('edit') ?>
@@ -40,10 +41,10 @@ if ($this->session->flashdata('result_delete')) {
                                 </a>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
-        <?php } ?> 
+        <?php } ?>
     </div>
     <?= $links_pagination ?>
 </div>

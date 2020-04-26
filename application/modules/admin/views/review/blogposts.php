@@ -1,4 +1,4 @@
-<h1><img src="<?= base_url('assets/imgs/blogger.png') ?>" class="header-img" style="margin-top:-2px;"> Review Posts</h1>
+<h1><img src="<?= base_url('assets/imgs/blogger.png') ?>" class="header-img" style="margin-top:-2px;"> Blog Posts</h1>
 <hr>
 <?php if ($this->session->flashdata('result_publish')) { ?>
     <hr>
@@ -22,69 +22,27 @@
     </div>
 </div>
 <hr>
-            <?php
-            if ($posts) {
-                ?>
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Title</th>
-                                <th>Comments</th>
-                                <th>Rating</th>
-                                <th>Customer</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            foreach ($posts as $row) {
-
-                                /*
-                                $u_path = 'attachments/shop_images/';
-                                if ($row->image != null && file_exists($u_path . $row->image)) {
-                                    $image = base_url($u_path . $row->image);
-                                } else {
-                                    $image = base_url('attachments/no-image.png');
-                                }
-                                */
-                                ?>
-
-                                <tr>
-
-                                    <td>
-                                        <?= get_deal_by_id($row['product_id'])[0]['title']; ?>
-                                    </td>
-                                    <td>
-                                        <?= $row['title'] ?>
-                                    </td>
-                                    <td>
-                                        <?= $row['comment'] ?>
-                                    </td>
-                                    <td>
-                                        <?= $row['rating'] ?>
-                                    </td>
-                                    <td>
-                                        <?= get_user_by_id($row['customer_id'])[0]['username']; ?>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <a href="<?= base_url('admin/review/review/view_all_review_by_product/' . $row['product_id']) ?>" class="btn btn-info">View Details</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <?php
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-                <?= $links_pagination ?>
-            </div>
-            <?php
-        } else {
+<?php
+if (!empty($posts)) {
+    ?>
+    <h1><?= !isset($_GET['search']) ? $page == 0 ? '' : 'Page: ' . floor($page / 20 + 1) : '' ?></h1>
+    <div class="row">
+        <?php
+        foreach ($posts as $row) {
             ?>
-            <div class ="alert alert-info">No Review found!</div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="<?= base_url('attachments/blog_images/' . $row['image']) ?>" class="view_all_img" alt="image">
+                    <div class="caption">
+                        <h3 style="height:113px; overflow: hiddrten;"><a href="<?= base_url($row['url']) ?>" target="_blank"><?= character_limiter($row['title'], 90) ?></a></h3>
+                        <a href="<?= base_url('admin/blogpublish/' . $row['id']) ?>" class="btn btn-primary" role="button">Edit</a>
+                        <a href="<?= base_url('admin/blog/?delete=' . $row['id']) ?>" class="btn btn-danger confirm-delete" role="button">Delete</a>
+                    </div>
+                </div>
+            </div> 
         <?php } ?>
+    </div>
+<?php } else { ?>
+    <div class="alert alert-danger" role="alert">No Posts</div>
+<?php } ?>
 <?= $links_pagination ?>

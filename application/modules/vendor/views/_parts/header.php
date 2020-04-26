@@ -51,6 +51,18 @@
                                     </a>
                                 </li>
                                 <li>
+                                    <a href="<?= LANG_URL . '/vendor/add/package' ?>" aria-expanded="false">
+                                        <i class="mdi mdi-plus"></i>
+                                        <span class="hide-menu"><?= lang('vendor_packages') ?></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?= LANG_URL . '/vendor/package_list' ?>" aria-expanded="false">
+                                        <i class="mdi mdi-format-list-bulleted"></i>
+                                        <span class="hide-menu"><?= lang('vendor_pakage_list') ?></span>
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="<?= LANG_URL . '/vendor/add/product' ?>" aria-expanded="false">
                                         <i class="mdi mdi-plus"></i>
                                         <span class="hide-menu"><?= lang('vendor_add_product') ?></span>

@@ -11,6 +11,9 @@
         uploadOthersImages: '<?= base_url('vendor/uploadOthersImages') ?>',
         loadOthersImages: '<?= base_url('vendor/loadOthersImages') ?>',
         removeSecondaryImage: '<?= base_url('vendor/removeSecondaryImage') ?>',
+        uploadExpectationImages: '<?= base_url('vendor/uploadExpectationImages') ?>',
+        loadExpectationsImages: '<?= base_url('vendor/loadExpectationsImages') ?>',
+        removeSecondaryExpectationsImage: '<?= base_url('vendor/removeSecondaryExpectationsImage') ?>',
         changeVendorOrdersOrderStatus: '<?= base_url('vendor/changeOrderStatus') ?>'
     };
 </script>

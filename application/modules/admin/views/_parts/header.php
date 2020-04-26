@@ -38,7 +38,7 @@
                                             <div class="panel panel-primary" >
                                                 <div class="panel-heading">
                                                     <div class="panel-title">Security</div>
-                                                </div>     
+                                                </div>
                                                 <div class="panel-body">
                                                     <label>Change my password</label> <span class="bg-success" id="pass_result">Changed!</span>
                                                     <form class="form-inline" role="form">
@@ -52,7 +52,7 @@
                                                             <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0;">
                                                             </div>
                                                         </div>
-                                                        <button type="button" class="btn btn-default generate-pwd">Generate Password</button> 
+                                                        <button type="button" class="btn btn-default generate-pwd">Generate Password</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -99,15 +99,17 @@
                                         </div>
                                     </li>
                                     <li class="header">ECOMMERCE</li>
-                                    <li><a href="<?= base_url('admin/publish') ?>" <?= urldecode(uri_string()) == 'admin/publish' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i> Publish product</a></li>
-                                    <li><a href="<?= base_url('admin/products') ?>" <?= urldecode(uri_string()) == 'admin/products' ? 'class="active"' : '' ?>><i class="fa fa-files-o" aria-hidden="true"></i> Products</a></li>
+                                    <li><a href="<?= base_url('admin/package') ?>" <?= urldecode(uri_string()) == 'admin/package' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i>Create Package</a></li>
+                                    <li><a href="<?= base_url('admin/package_list') ?>" <?= urldecode(uri_string()) == 'admin/package_list' ? 'class="active"' : '' ?>><i class="fa fa-files-o" aria-hidden="true"></i> Package List</a></li>
+                                    <li><a href="<?= base_url('admin/publish') ?>" <?= urldecode(uri_string()) == 'admin/publish' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i> Publish Experience</a></li>
+                                    <li><a href="<?= base_url('admin/products') ?>" <?= urldecode(uri_string()) == 'admin/products' ? 'class="active"' : '' ?>><i class="fa fa-files-o" aria-hidden="true"></i> Experiences</a></li>
                                     <?php if ($showBrands == 1) { ?>
                                         <li><a href="<?= base_url('admin/brands') ?>" <?= urldecode(uri_string()) == 'admin/brands' ? 'class="active"' : '' ?>><i class="fa fa-registered" aria-hidden="true"></i> Brands</a></li>
                                     <?php } ?>
                                     <li><a href="<?= base_url('admin/shopcategories') ?>" <?= urldecode(uri_string()) == 'admin/shopcategories' ? 'class="active"' : '' ?>><i class="fa fa-list-alt" aria-hidden="true"></i> Shop Categories</a></li>
                                     <li>
                                         <a href="<?= base_url('admin/orders') ?>" <?= urldecode(uri_string()) == 'admin/orders' ? 'class="active"' : '' ?>>
-                                            <i class="fa fa-money" aria-hidden="true"></i> Orders 
+                                            <i class="fa fa-money" aria-hidden="true"></i> Orders
                                             <?php if ($numNotPreviewOrders > 0) { ?>
                                                 <img src="<?= base_url('assets/imgs/exlamation-hi.png') ?>" style="position: absolute; right:10px; top:7px;" alt="">
                                             <?php } ?>
@@ -134,9 +136,6 @@
                                         }
                                     }
                                     ?>
-                                    <li class="header">REVIEW</li>
-                                    <li><a href="<?= base_url('admin/reviewpublish') ?>" <?= urldecode(uri_string()) == 'admin/reviewpublish' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i>Publish Review</a></li>
-                                    <li><a href="<?= base_url('admin/reviews') ?>" <?= urldecode(uri_string()) == 'admin/reviews' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i>Reviews</a></li>
                                     <li class="header">SETTINGS</li>
                                     <li><a href="<?= base_url('admin/settings') ?>" <?= urldecode(uri_string()) == 'admin/settings' ? 'class="active"' : '' ?>><i class="fa fa-wrench" aria-hidden="true"></i> Settings</a></li>
                                     <li><a href="<?= base_url('admin/styling') ?>" <?= urldecode(uri_string()) == 'admin/styling' ? 'class="active"' : '' ?>><i class="fa fa-laptop" aria-hidden="true"></i> Styling</a></li>
@@ -168,4 +167,3 @@
                                 ?>
                                 <div>
                                 <?php } ?>
-

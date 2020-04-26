@@ -32,7 +32,7 @@ class Home_admin_model extends CI_Model
 
     public function countLowQuantityProducts()
     {
-        $this->db->where('quantity <=', 5);
+      //  $this->db->where('quantity <=', 5);
         return $this->db->count_all_results('products');
     }
 

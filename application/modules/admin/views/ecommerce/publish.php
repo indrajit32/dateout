@@ -1,5 +1,5 @@
 <script src="<?= base_url('assets/ckeditor/ckeditor.js') ?>"></script>
-<h1><img src="<?= base_url('assets/imgs/shop-cart-add-icon.png') ?>" class="header-img" style="margin-top:-3px;"> Publish product</h1>
+<h1><img src="<?= base_url('assets/imgs/shop-cart-add-icon.png') ?>" class="header-img" style="margin-top:-3px;"> Publish Experience</h1>
 <hr>
 <?php
 $timeNow = time();
@@ -20,6 +20,7 @@ if ($this->session->flashdata('result_publish')) {
 ?>
 <form method="POST" action="" enctype="multipart/form-data">
     <input type="hidden" value="<?= isset($_POST['folder']) ? $_POST['folder'] : $timeNow ?>" name="folder">
+    <input type="hidden" value="<?= isset($_POST['expectation_folder']) ? $_POST['expectation_folder'] : $timeNow.'_s' ?>" name="expectation_folder">
     <div class="form-group available-translations">
         <b>Languages</b>
         <?php foreach ($languages as $language) { ?>
@@ -35,7 +36,7 @@ if ($this->session->flashdata('result_publish')) {
         ?>
         <div class="locale-container locale-container-<?= $language->abbr ?>" <?= $language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'style="display:block;"' : '' ?>>
             <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
-            <div class="form-group"> 
+            <div class="form-group">
                 <label>Title (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
                 <input type="text" name="title[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['title']) ? $trans_load[$language->abbr]['title'] : '' ?>" class="form-control">
             </div>
@@ -60,6 +61,21 @@ if ($this->session->flashdata('result_publish')) {
                     CKEDITOR.replace('description<?= $i ?>');
                     CKEDITOR.config.entities = false;
                 </script>
+            </div>
+            <div class="form-group">
+                <label for="expectation<?= $i ?>">Expectation (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                <textarea name="expectation[]" id="expectation<?= $i ?>" rows="50" class="form-control"><?= $trans_load != null && isset($trans_load[$language->abbr]['expectation']) ? $trans_load[$language->abbr]['expectation'] : '' ?></textarea>
+                <script>
+                    CKEDITOR.replace('expectation<?= $i ?>');
+                    CKEDITOR.config.entities = false;
+                </script>
+            </div>
+            <div class="form-group bordered-group">
+                <div class="expectation-images-container">
+
+                    <?= $expectationImgs ?>
+                </div>
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#modalExpectationImages" class="btn btn-default">Upload Expectation images</a>
             </div>
             <div class="form-group for-shop">
                 <label>Price (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
@@ -104,9 +120,10 @@ if ($this->session->flashdata('result_publish')) {
     </div>
     <div class="form-group for-shop">
         <label>Shop Categories</label>
-        <select class="selectpicker form-control show-tick show-menu-arrow" name="shop_categorie">
+        <select multiple data-style="bg-white rounded-pill px-4 py-3 shadow-sm "  name="shop_categorie[]" class="selectpicker w-100 form-control show-tick show-menu-arrow">
+
             <?php foreach ($shop_categories as $key_cat => $shop_categorie) { ?>
-                <option <?= isset($_POST['shop_categorie']) && $_POST['shop_categorie'] == $key_cat ? 'selected=""' : '' ?> value="<?= $key_cat ?>">
+                <option <?= isset($_POST['shop_categorie_list']) && in_array($key_cat, $_POST['shop_categorie_list']) ? 'selected=""' : '' ?> value="<?= $key_cat ?>">
                     <?php
                     foreach ($shop_categorie['info'] as $nameAbbr) {
                         if ($nameAbbr['abbr'] == $this->config->item('language_abbr')) {
@@ -119,8 +136,34 @@ if ($this->session->flashdata('result_publish')) {
         </select>
     </div>
     <div class="form-group for-shop">
-        <label>Quantity</label>
-        <input type="text" placeholder="number" name="quantity" value="<?= @$_POST['quantity'] ?>" class="form-control" id="quantity">
+        <label>Discount On Deal in %</label>
+        <input type="text" placeholder="number" name="discount_percent" value="<?= @$_POST['discount_percent'] ?>" class="form-control" id="discount_percent">
+    </div>
+    <div class="form-group for-shop">
+        <label>Latitude</label>
+        <input type="text" placeholder="number" name="latitude" value="<?= @$_POST['latitude'] ?>" class="form-control" id="latitude">
+    </div>
+    <div class="form-group for-shop">
+        <label>Longitude</label>
+        <input type="text" placeholder="number" name="longitude" value="<?= @$_POST['longitude'] ?>" class="form-control" id="longitude">
+    </div>
+    <div class="form-group for-shop">
+        <label>Country</label>
+        <select class="selectpicker" name="country">
+          <option value="1">Singapore</option>
+        </select>
+    </div>
+    <div class="form-group for-shop">
+        <label>City</label>
+        <select class="selectpicker" name="city">
+          <option value="1">Pulau Ujong</option>
+        </select>
+    </div>
+    <div class="form-group for-shop">
+        <label>MetaWord</label>
+        <select class="selectpicker" name="metaword">
+          <option value="1">Welcome Singapore</option>
+        </select>
     </div>
     <?php if ($showBrands == 1) { ?>
         <div class="form-group for-shop">
@@ -153,6 +196,32 @@ if ($this->session->flashdata('result_publish')) {
         <a href="<?= base_url('admin/products') ?>" class="btn btn-lg btn-default">Cancel</a>
     <?php } ?>
 </form>
+<!-- Modal Upload Expectation Images -->
+<div class="modal fade" id="modalExpectationImages" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Upload more images</h4>
+            </div>
+            <div class="modal-body">
+                <form id="ExpectationImagesForm">
+                    <input type="hidden" value="<?= isset($_POST['expectation_folder']) ? $_POST['expectation_folder'] : $timeNow.'_s' ?>" name="expectation_folder">
+                    <label for="others">Select images</label>
+                    <input type="file" name="expectations_image[]" id="expectations_image" multiple /><br />
+                    <label for="others">Select Text</label><br />
+                    <input type="text" name="expectations_subtitle[]" class="form-control" placeholder="Subtitle text" id="expectations_subtitle"  />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default finish-expectation">
+                    <span class="finish-text">Upload</span>
+                    <img src="<?= base_url('assets/imgs/load.gif') ?>" class="loadUploadOthers" alt="">
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Modal Upload More Images -->
 <div class="modal fade" id="modalMoreImages" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
