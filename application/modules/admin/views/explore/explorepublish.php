@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="explore">Upload explore image:</label>
+                    <label for="explore">Upload image:(1500 x 1008)</label>
                     <input type="file" id="explore" name="explore[]" multiple>
                 </div>
 
@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="credit">Upload credit image:</label>
+                    <label for="credit">Upload a single image:(1500 x 498)</label>
                     <input type="file" id="credit" name="credit" >
                 </div>
 

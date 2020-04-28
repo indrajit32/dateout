@@ -34,11 +34,6 @@
                     </textarea>
                 </div>
 
-                <div class="form-group"> 
-                    <label for="url">Credit Url</label>
-                    <input type="credit_url" value="<?php echo $explore[0]['credit_url'] ?>" name="credit_url" placeholder= "Credit Url" class="form-control">
-                </div>
-
 
                 <?php
                 $images = get_explore_images_by_id($explore[0]['id']);
@@ -76,9 +71,19 @@
                 </div>
             <?php } ?>
 
+            <div class="form-group">
+                <label for="credit">Upload image:(1500 x 1008)</label>
+                <input type="file" id="credit" name="explore[]" multiple>
+            </div>
+
+            <div class="form-group"> 
+                <label for="url">Credit Url</label>
+                <input type="credit_url" value="<?php echo $explore[0]['credit_url'] ?>" name="credit_url" placeholder= "Credit Url" class="form-control">
+            </div>
+
 
             <div class="form-group">
-                <label for="credit">Upload image:</label>
+                <label for="credit">Upload a single image:(1500 x 498)</label>
                 <input type="file" id="credit" name="explore[]" multiple>
             </div>
 
