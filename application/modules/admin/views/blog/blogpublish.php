@@ -16,10 +16,26 @@
         <?php }
         ?>
         <form method="POST" enctype="multipart/form-data">
+            <div class="form-group available-translations">
+                <b>Languages</b>
+                <?php foreach ($languages as $language) { ?>
+                    <button 
+                        type="button" 
+                        onclick="myFunction('<?= $language->abbr ?>')" 
+                        data-locale-change="<?= $language->abbr ?>" 
+                        class="btn btn-default locale-change text-uppercase <?= $language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'active' : '' ?>"
+                        
+                    >
+                        <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">
+                        <?= $language->abbr ?>
+                    </button>
+                <?php } ?>
+            </div>
+
             <?php foreach ($languages as $language) { ?>
                 <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
             <?php } foreach ($languages as $language) { ?>
-                <div class="form-group"> 
+                <div class="form-group <?= $language->abbr ?>"> 
                     <label>Title (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
                     <input type="text" name="title[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['title']) ? $trans_load[$language->abbr]['title'] : '' ?>" class="form-control">
                 </div>
@@ -27,7 +43,7 @@
             } $i = 0;
             foreach ($languages as $language) {
                 ?>
-                <div class="form-group">
+                <div class="form-group <?= $language->abbr ?>">
                     <label for="description<?= $i ?>">Description (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
                     <textarea name="description[]" id="description<?= $i ?>" rows="50" class="form-control"><?= $trans_load != null && isset($trans_load[$language->abbr]['description']) ? $trans_load[$language->abbr]['description'] : '' ?></textarea>
                     <script>
@@ -39,7 +55,7 @@
                 $i++;
             }
             ?>
-            <div class="form-group"> 
+            <div class="form-group "> 
                 <label for="priority">Priority</label>
                 <?php if (isset($_POST['image'])) { ?>
                     <input type="text" name="priority" value="<?= $_POST['priority'] ?>" placeholder= "Enter Priority" class="form-control">
@@ -65,3 +81,33 @@
         </form>
     </div>
 </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        $('.available-translations button').each(function(i,v){
+
+            if($(this).hasClass('active') == false)
+            {
+                $('.'+$(this).attr('data-locale-change')).hide();
+            }
+            else
+            {
+                $('.'+$(this).attr('data-locale-change')).show();
+            }
+
+        });
+    });
+
+    function myFunction(cl){
+        $('.available-translations button').each(function(i,v){
+
+            $('.'+$(this).attr('data-locale-change')).hide();
+
+        });
+
+        $('.'+cl).show();
+    }
+
+</script>
