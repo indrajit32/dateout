@@ -72,7 +72,7 @@
                             <tr>
                                 <th>Image</th>
                                 <th>Title</th>
-                                <th>Price</th>
+                                <th>packages</th>
                                 <th>Country</th>
                                 <th>Vendor</th>
                                 <th>Position</th>
@@ -84,8 +84,8 @@
                             <?php
                             foreach ($products as $row) {
                                 $u_path = 'attachments/shop_images/';
-                                if ($row->image != null && file_exists($u_path . $row->image)) {
-                                    $image = base_url($u_path . $row->image);
+                                if ($row['image'] != null && file_exists($u_path . $row['image'])) {
+                                    $image = base_url($u_path . $row['image']);
                                 } else {
                                     $image = base_url('attachments/no-image.png');
                                 }
@@ -93,13 +93,18 @@
 
                                 <tr>
                                     <td>
-                                        <img src="<?= $image ?>" alt="No Image" class="img-thumbnail" style="height:100px;">
+                                        <img src="<?= $image ?>" alt="No Image" class="img-thumbnail" style="width: 150px; height:100px;">
                                     </td>
                                     <td>
-                                        <?= $row->title ?>
+                                        <?= $row['title'] ?>
                                     </td>
                                     <td>
-                                        <?= $row->price ?>
+                                        <?php if(!empty($row['package'])){
+                                          foreach($row['package'] as $package){ ?>
+                                            <a href="<?= 'package/'.$package['package_id']?> "><?= $package['name'] ?></a>
+                                        <?php  }
+                                        }
+                                      //  print_r($row['package']); ?>
                                     </td>
                                     <td>
                                         <?php
@@ -119,24 +124,24 @@
                                         </span>
                                       -->
                                     </td>
-                                    <td><?= $row->vendor_id > 0 ? '<a href="?show_vendor=' . $row->vendor_id . '">' . $row->vendor_name . '</a>' : 'No vendor' ?></td>
-                                    <td><?= $row->position ?></td>
+                                    <td><?= $row['vendor_id'] > 0 ? '<a href="?show_vendor=' . $row['vendor_id'] . '">' . $row['vendor_name'] . '</a>' : 'No vendor' ?></td>
+                                    <td><?= $row['position'] ?></td>
                                     <td>
 
-                                      <?php if($row->visibility==1){ ?>
+                                      <?php if($row['visibility']==1){ ?>
                                        <h5>Active</h5><br>
-                                      <a href="javascript:changeProductStatus(<?= $row->id ?>)" class="btn btn-danger">In-Active</a>
-                                      <input type="hidden" name="to_status[]" id="to_status_<?= $row->id ?>" value="0">
+                                      <a href="javascript:changeProductStatus(<?= $row['id'] ?>)" class="btn btn-danger">In-Active</a>
+                                      <input type="hidden" name="to_status[]" id="to_status_<?= $row['id'] ?>" value="0">
                                   <?php  }
                                     else{ ?>
                                       <h5>In-Active</h5><br>
-                                        <a href="javascript:changeProductStatus(<?= $row->id ?>)" class="btn btn-info">Active</a>
-                                          <input type="hidden" name="to_status[]" id="to_status_<?= $row->id ?>" value="1">
+                                        <a href="javascript:changeProductStatus(<?= $row['id'] ?>)" class="btn btn-info">Active</a>
+                                          <input type="hidden" name="to_status[]" id="to_status_<?= $row['id'] ?>" value="1">
                                 <?php    } ?></td>
                                     <td>
                                         <div class="pull-right">
-                                            <a href="<?= base_url('admin/publish/' . $row->id) ?>" class="btn btn-info">Edit</a>
-                                            <a href="<?= base_url('admin/products?delete=' . $row->id) ?>"  class="btn btn-danger confirm-delete">Delete</a>
+                                            <a href="<?= base_url('admin/publish/' . $row['id']) ?>" class="btn btn-info">Edit</a>
+                                            <a href="<?= base_url('admin/products?delete=' . $row['id']) ?>"  class="btn btn-danger confirm-delete">Delete</a>
                                         </div>
                                     </td>
                                 </tr>

@@ -8,7 +8,7 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-class Package_list extends ADMIN_Controller
+class PackageList extends ADMIN_Controller
 {
 
     private $num_rows = 10;

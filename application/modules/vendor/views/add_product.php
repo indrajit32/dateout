@@ -73,14 +73,15 @@ $timeNow = time();
                             </div>
                             <a href="javascript:void(0);" data-toggle="modal" data-target="#modalExpectationImages" class="btn btn-default">Upload Expectation images</a>
                         </div>
-                        <div class="form-group">
-                            <label for="expectation<?= $i ?>">Price <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?= $language->name ?>"></label>
-                            <input type="text" name="price[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['price']) ? $trans_load[$language->abbr]['price'] : '' ?>" placeholder="<?= lang('vendor_price') ?>" class="form-control">
+                  <!--      <div class="form-group">
+                            <label for="expectation<?php// $i ?>">Price <img src="<?php// base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?php// $language->name ?>"></label>
+                            <input type="text" name="price[]" value="<?php// $trans_load != null && isset($trans_load[$language->abbr]['price']) ? $trans_load[$language->abbr]['price'] : '' ?>" placeholder="<?php// lang('vendor_price') ?>" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="expectation<?= $i ?>">Old Price <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?= $language->name ?>"></label>
-                            <input type="text" name="old_price[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['old_price']) ? $trans_load[$language->abbr]['old_price'] : '' ?>" placeholder="<?= lang('vendor_old_price') ?>" class="form-control">
+                            <label for="expectation<?php// $i ?>">Old Price <img src="<?php// base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?php// $language->name ?>"></label>
+                            <input type="text" name="old_price[]" value="<?php// $trans_load != null && isset($trans_load[$language->abbr]['old_price']) ? $trans_load[$language->abbr]['old_price'] : '' ?>" placeholder="<?php// lang('vendor_old_price') ?>" class="form-control">
                         </div>
+                      -->
                     </div>
                     <?php
                     $i++;
@@ -142,6 +143,13 @@ $timeNow = time();
                         </select>
                     </div>
                 <?php } ?>
+                <div class="form-group for-shop">
+                    <label>Is Display On Top Experience</label>
+                    <select class="selectpicker" name="display_top_experience">
+                      <option value="No" <?= isset($_POST['display_top_experience']) && $_POST['display_top_experience'] == 'No' ? 'selected' : '' ?>>No</option>
+                      <option value="Yes" <?= isset($_POST['display_top_experience']) && $_POST['display_top_experience'] == 'Yes' ? 'selected' : '' ?>>Yes</option>
+                    </select>
+                </div>
                 <div class="form-group for-shop">
                     <label>Discount On Deal in %</label>
                     <input type="text" placeholder="number" name="discount_percent" value="<?= @$_POST['discount_percent'] ?>" class="form-control" id="discount_percent">

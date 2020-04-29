@@ -60,6 +60,8 @@ class Package extends ADMIN_Controller
         $head['description'] = '!';
         $head['keywords'] = '';
         $data['id'] = $id;
+        $data['multislot']= $this->loadMultiSlot($id);
+        $_POST['slot_id_count']= $this->Package_model->getMultiSlotCount($id);
         $data['trans_load'] = $trans_load;
         $data['languages'] = $this->Languages_model->getLanguages();
         $data['product_list'] = $this->Products_model->getProducts_vendor();
@@ -176,31 +178,18 @@ class Package extends ADMIN_Controller
         }
     }
 
-    public function loadExpectationsImages()
+    public function loadMultiSlot($id)
     {
         $output = '';
-        if (isset($_POST['expectation_folder']) && $_POST['expectation_folder'] != null) {
-            $dir = 'attachments' . DIRECTORY_SEPARATOR . 'shop_images' . DIRECTORY_SEPARATOR . $_POST['expectation_folder'] . DIRECTORY_SEPARATOR;
-            if (is_dir($dir)) {
-                if ($dh = opendir($dir)) {
-                    $i = 0;
-                    while (($file = readdir($dh)) !== false) {
-                        if (is_file($dir . $file)) {
-                            $output .= '
-                                <div class="other-img" id="image-container-' . $i . '">
-                                    <img src="' . base_url('attachments/shop_images/' . $_POST['expectation_folder'] . '/' . $file) . '" style="width:100px; height: 100px;">
-                                    <a href="javascript:void(0);" onclick="removeSecondaryExpectationsImage(\'' . $file . '\', \'' . $_POST['expectation_folder'] . '\', ' . $i . ')">
-                                        <span class="glyphicon glyphicon-remove"></span>
-                                    </a>
-                                </div>
-                               ';
-                        }
-                        $i++;
-                    }
-                    closedir($dh);
-                }
-            }
+        $multislot = $this->Package_model->getMultiSlot($id);
+        if (!empty($multislot)) {
+          $count = 0;
+        foreach($multislot as $slot){
+          $count++;
+          $output .= "
+              <table id='table_".$count."' class='slot_class bordered-group'><tr><td>Time:</td><td><input type='text' class='form-control' name='slot_time[]' readonly value='".$slot->slot_time."'></td><td>Total Slot:</td><td><input type='text' class='form-control' name='total_slot[]' readonly value='".$slot->total_slot."'></td><td>Person per Slot:</td><td><input type='text' class='form-control' name='person_per_slot[]' readonly value='".$slot->person_per_slot."'></td><td><button onclick='removeslot(".$count.")'>X</button></td></tr></table>";
         }
+       }
         if ($this->input->is_ajax_request()) {
             echo $output;
         } else {

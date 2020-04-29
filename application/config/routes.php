@@ -138,10 +138,10 @@ $route['(\w{2})/vendor/me'] = "vendor/VendorProfile";
 $route['vendor/logout'] = "vendor/VendorProfile/logout";
 $route['(\w{2})/vendor/logout'] = "vendor/VendorProfile/logout";
 
-$route['vendor/package_list'] = "vendor/Package_list";
-$route['(\w{2})/vendor/package_list'] = "vendor/Package_list";
-$route['vendor/package_list/(:num)'] = "vendor/Package_list/index/$1";
-$route['(\w{2})/vendor/package_list/(:num)'] = "vendor/Package_list/index/$2";
+$route['vendor/package_list'] = "vendor/PackageList";
+$route['(\w{2})/vendor/package_list'] = "vendor/PackageList";
+$route['vendor/package_list/(:num)'] = "vendor/PackageList/index/$1";
+$route['(\w{2})/vendor/package_list/(:num)'] = "vendor/PackageList/index/$2";
 $route['vendor/add/package'] = "vendor/AddPackage";
 $route['(\w{2})/vendor/add/package'] = "vendor/AddPackage";
 $route['vendor/edit/package/(:num)'] = "vendor/AddPackage/index/$1";
@@ -184,8 +184,8 @@ $route['admin'] = "admin/home/login";
 // ECOMMERCE GROUP
 $route['admin/package'] = "admin/ecommerce/package";
 $route['admin/package/(:num)'] = "admin/ecommerce/package/index/$1";
-$route['admin/package_list'] = "admin/ecommerce/package_list";
-$route['admin/package_list/(:num)'] = "admin/ecommerce/package_list/index/$1";
+$route['admin/package_list'] = "admin/ecommerce/PackageList";
+$route['admin/package_list/(:num)'] = "admin/ecommerce/PackageList/index/$1";
 
 $route['admin/publish'] = "admin/ecommerce/publish";
 $route['admin/publish/(:num)'] = "admin/ecommerce/publish/index/$1";

@@ -87,6 +87,7 @@ class Products_model extends CI_Model
             }
             if (!$this->db->where('id', $id)->where('vendor_id', $post['vendor_id'])->update('products', array(
                       'image' => $post['image'] != null ? $_POST['image'] : $_POST['old_image'],
+                      'display_top_experience' => $post['display_top_experience'],
                       'discount_percent' => $post['discount_percent'],
                       'latitude' => $post['latitude'],
                       'longitude' => $post['longitude'],
@@ -116,6 +117,7 @@ class Products_model extends CI_Model
                     'latitude' => $post['latitude'],
                     'longitude' => $post['longitude'],
                     'discount_percent' => $post['discount_percent'],
+                    'display_top_experience' => $post['display_top_experience'],
                     'country' => $post['country'],
                     'city' => $post['city'],
                     'metaword' => $post['metaword'],
@@ -170,15 +172,15 @@ class Products_model extends CI_Model
                 $emergency_insert = true;
             }
             $post['title'][$i] = str_replace('"', "'", $post['title'][$i]);
-            $post['price'][$i] = str_replace(' ', '', $post['price'][$i]);
-            $post['price'][$i] = str_replace(',', '', $post['price'][$i]);
+        //    $post['price'][$i] = str_replace(' ', '', $post['price'][$i]);
+        //    $post['price'][$i] = str_replace(',', '', $post['price'][$i]);
             $arr = array(
                 'title' => $post['title'][$i],
                 'description' => $post['description'][$i],
                 'basic_description' => $post['basic_description'][$i],
                 'expectation' => $post['expectation'][$i],
-                'price' => $post['price'][$i],
-                'old_price' => $post['old_price'][$i],
+          //      'price' => $post['price'][$i],
+          //      'old_price' => $post['old_price'][$i],
                 'abbr' => $abbr,
                 'for_id' => $id
             );
@@ -207,8 +209,8 @@ class Products_model extends CI_Model
             $arr[$row->abbr]['description'] = $row->description;
             $arr[$row->abbr]['basic_description'] = $row->basic_description;
             $arr[$row->abbr]['expectation'] = $row->expectation;
-            $arr[$row->abbr]['price'] = $row->price;
-            $arr[$row->abbr]['old_price'] = $row->old_price;
+        //    $arr[$row->abbr]['price'] = $row->price;
+        //    $arr[$row->abbr]['old_price'] = $row->old_price;
         }
         return $arr;
     }

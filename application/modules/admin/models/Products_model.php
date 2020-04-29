@@ -66,7 +66,17 @@ class Products_model extends CI_Model
         $this->db->join('products_translations', 'products_translations.for_id = products.id', 'left');
         $this->db->where('products_translations.abbr', MY_DEFAULT_LANGUAGE_ABBR);
         $query = $this->db->select('vendors.name as vendor_name, vendors.id as vendor_id, products.*, products_translations.title, products_translations.description, products_translations.price, products_translations.old_price, products_translations.abbr, products.url, products_translations.for_id, products_translations.basic_description')->get('products', $limit, $page);
-        return $query->result();
+        $arr = array();
+        if($query->num_rows() > 0){
+          foreach ($query->result_array() as $value) {
+            $this->db->join('packages_translations', 'for_id = packages.id', 'left');
+            $this->db->where('packages.experience_id', $value['id']);
+            $query1 = $this->db->select('packages.id as package_id, name')->get('packages');
+            $value['package']= $query1->result_array();
+            $arr[]=$value;
+          }
+        }
+        return $arr;
     }
 
     public function getProducts_vendor()
@@ -176,6 +186,7 @@ class Products_model extends CI_Model
                         'experience_type' => $post['experience_type'],
                         'ticket_collection' => $post['ticket_collection'],
 */
+                        'display_top_experience' => $post['display_top_experience'],
                         'discount_percent' => $post['discount_percent'],
                         'latitude' => $post['latitude'],
                         'longitude' => $post['longitude'],
@@ -219,6 +230,7 @@ class Products_model extends CI_Model
                         'experience_type' => $post['experience_type'],
                         'ticket_collection' => $post['ticket_collection'],
 */
+                        'display_top_experience' => $post['display_top_experience'],
                         'latitude' => $post['latitude'],
                         'longitude' => $post['longitude'],
                         'discount_percent' => $post['discount_percent'],
@@ -274,20 +286,20 @@ class Products_model extends CI_Model
                 $emergency_insert = true;
             }
             $post['title'][$i] = str_replace('"', "'", $post['title'][$i]);
-            $post['price'][$i] = str_replace(' ', '', $post['price'][$i]);
-            $post['price'][$i] = str_replace(',', '.', $post['price'][$i]);
-            $post['price'][$i] = preg_replace("/[^0-9,.]/", "", $post['price'][$i]);
-            $post['old_price'][$i] = str_replace(' ', '', $post['old_price'][$i]);
-            $post['old_price'][$i] = str_replace(',', '.', $post['old_price'][$i]);
-            $post['old_price'][$i] = preg_replace("/[^0-9,.]/", "", $post['old_price'][$i]);
+        //    $post['price'][$i] = str_replace(' ', '', $post['price'][$i]);
+        //    $post['price'][$i] = str_replace(',', '.', $post['price'][$i]);
+        //    $post['price'][$i] = preg_replace("/[^0-9,.]/", "", $post['price'][$i]);
+      //      $post['old_price'][$i] = str_replace(' ', '', $post['old_price'][$i]);
+      //      $post['old_price'][$i] = str_replace(',', '.', $post['old_price'][$i]);
+      //      $post['old_price'][$i] = preg_replace("/[^0-9,.]/", "", $post['old_price'][$i]);
 
             $arr = array(
                 'title' => $post['title'][$i],
                 'basic_description' => $post['basic_description'][$i],
                 'description' => $post['description'][$i],
                 'expectation' => $post['expectation'][$i],
-                'price' => $post['price'][$i],
-                'old_price' => $post['old_price'][$i],
+        //        'price' => $post['price'][$i],
+        //        'old_price' => $post['old_price'][$i],
                 'abbr' => $abbr,
                 'for_id' => $id
             );
@@ -316,8 +328,8 @@ class Products_model extends CI_Model
             $arr[$row->abbr]['basic_description'] = $row->basic_description;
             $arr[$row->abbr]['expectation'] = $row->expectation;
             $arr[$row->abbr]['description'] = $row->description;
-            $arr[$row->abbr]['price'] = $row->price;
-            $arr[$row->abbr]['old_price'] = $row->old_price;
+      //      $arr[$row->abbr]['price'] = $row->price;
+      //      $arr[$row->abbr]['old_price'] = $row->old_price;
         }
         return $arr;
     }

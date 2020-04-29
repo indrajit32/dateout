@@ -250,24 +250,20 @@ if ($this->session->flashdata('result_publish')) {
           <div id="time" class="form-group for-shop" <?= $style ?>>
             <div class="form-group for-shop">
               <label>Available on same date</label>
-            <div class="input-group date" data-provide="datepicker">
-              <input type="text" name="available_date" placeholder="Available on date" value="<?= @$_POST['available_date'] ?>" class="form-control">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
+              <div class="input-group date" data-provide="datepicker">
+                <input type="text" name="available_date" placeholder="Available on date" value="<?= @$_POST['available_date'] ?>" class="form-control">
+                  <div class="input-group-addon">
+                      <span class="glyphicon glyphicon-th"></span>
+                  </div>
+              </div>
+            </div>
+            <div class="form-group bordered-group for-shop" >
+                <div class="multislot-container">
+
+                    <?= $multislot ?>
                 </div>
-            </div>
-          </div>
-            <div class="form-group for-shop">
-                <label>Slot Time (Multi)</label>
-                <input type="text" name="slot_time" placeholder="HH:MM" value="<?= @$_POST['slot_time'] ?>" class="form-control">
-            </div>
-            <div class="form-group for-shop">
-                <label>Total Slots </label>
-                <input type="text" name="total_slot" placeholder="Number" value="<?= @$_POST['total_slot'] ?>" class="form-control">
-            </div>
-            <div class="form-group for-shop">
-                <label>Person Required per Slot</label>
-                <input type="text" placeholder="number" name="person_per_slot" value="<?= @$_POST['person_per_slot'] ?>" class="form-control">
+                <input type="hidden" name="slot_id_count" id="slot_id_count" value="<?= @$_POST['slot_id_count'] ?>">
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#modalmultislot" class="btn btn-default">Add Slot</a>
             </div>
           </div>
 
@@ -276,6 +272,40 @@ if ($this->session->flashdata('result_publish')) {
         <a href="<?= base_url('admin/package') ?>" class="btn btn-lg btn-default">Cancel</a>
     <?php } ?>
 </form>
+<div class="modal fade" id="modalmultislot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Upload more images</h4>
+            </div>
+            <div class="modal-body">
+                <form id="ExpectationImagesForm">
+                  <div class="form-group for-shop">
+                    <p class="error_msg" style="color: red; display:none;">Please enter correct value</p>
+                  </div><div class="form-group for-shop">
+                        <label>Slot Time (Multi)</label>
+                        <input type="text" name="slot_time" id="slot_time" placeholder="HH:MM" value="<?= @$_POST['slot_time'] ?>" class="form-control">
+                    </div>
+                    <div class="form-group for-shop">
+                        <label>Total Slots </label>
+                        <input type="text" name="total_slot" id="total_slot" placeholder="Number" value="<?= @$_POST['total_slot'] ?>" class="form-control">
+                    </div>
+                    <div class="form-group for-shop">
+                        <label>Person Required per Slot</label>
+                        <input type="text" placeholder="number" id="person_per_slot" name="person_per_slot" value="<?= @$_POST['person_per_slot'] ?>" class="form-control">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default finish-slot">
+                    <span class="finish-text">Upload</span>
+                    <img src="<?= base_url('assets/imgs/load.gif') ?>" class="loadUploadOthers" alt="">
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
@@ -293,3 +323,14 @@ $('.date').datepicker({
     startDate: new Date()
 });
 </script>
+<style>
+.slot_class td{
+  padding: 15px;
+}
+.slot_class button{
+  color: red;
+}
+.slot_class input{
+      background-color: #F2F4F4;
+}
+</style>

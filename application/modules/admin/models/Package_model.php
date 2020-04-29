@@ -111,16 +111,19 @@ class Package_model extends CI_Model
         $is_update = false;
         if ($id > 0) {
             $is_update = true;
-            if(isset($post['shop_categorie'])){
-              $this->db->where('product_id', $id);
-              if (!$this->db->delete('product_shop_categorie_mapping')) {
+            if(isset($post['slot_time'])){
+              $this->db->where('package_id', $id);
+              if (!$this->db->delete('package_slot')) {
                   log_message('error', print_r($this->db->error(), true));
               }
               else{
-                foreach ($post['shop_categorie'] as $k) {
-                  if (!$this->db->insert('product_shop_categorie_mapping', array(
-                  'product_id' => $id,
-                  'shop_categorie_id' => $k))){
+                for($i=0; $i < $post['slot_id_count']; $i++){
+                  if (!$this->db->insert('package_slot', array(
+                  'package_id' => $id,
+                  'slot_time' => $post['slot_time'][$i],
+                  'total_slot' => $post['total_slot'][$i],
+                  'person_per_slot'=> $post['person_per_slot'][$i]
+                ))){
                       log_message('error', print_r($this->db->error(), true));
                    }
                 }
@@ -146,20 +149,14 @@ class Package_model extends CI_Model
                         'package_available_type' => $post['package_available_type'],
                         'specific_day' => $post['specific_day'],
                         'available_date' => $post['available_date'],
-                        'slot_time' => $post['slot_time'],
-                        'total_slot' => $post['total_slot'],
-                        'person_per_slot' => $post['person_per_slot'],
+                    //    'slot_time' => $post['slot_time'],
+                    //    'total_slot' => $post['total_slot'],
+                    //    'person_per_slot' => $post['person_per_slot'],
                         'time_update' => time()
                     ))) {
                 log_message('error', print_r($this->db->error(), true));
             }
         } else {
-            /*
-             * Lets get what is default tranlsation number
-             * in titles and convert it to url
-             * We want our plaform public ulrs to be in default
-             * language that we use
-             */
             $i = 0;
             foreach ($_POST['translations'] as $translation) {
                 if ($translation == MY_DEFAULT_LANGUAGE_ABBR) {
@@ -187,15 +184,27 @@ class Package_model extends CI_Model
                         'package_available_type' => $post['package_available_type'],
                         'specific_day' => $post['specific_day'],
                         'available_date' => $post['available_date'],
-                        'slot_time' => $post['slot_time'],
-                        'total_slot' => $post['total_slot'],
-                        'person_per_slot' => $post['person_per_slot'],
+                //        'slot_time' => $post['slot_time'],
+                //        'total_slot' => $post['total_slot'],
+                //        'person_per_slot' => $post['person_per_slot'],
                         'time' => time()
                     ))) {
                 log_message('error', print_r($this->db->error(), true));
             }
 
             $id = $this->db->insert_id();
+            if(isset($post['slot_id_count'])){
+              for($i=0; $i < $post['slot_id_count']; $i++){
+                if (!$this->db->insert('package_slot', array(
+                'package_id' => $id,
+                'slot_time' => $post['slot_time'][$i],
+                'total_slot' => $post['total_slot'][$i],
+                'person_per_slot'=> $post['person_per_slot'][$i]
+              ))){
+                    log_message('error', print_r($this->db->error(), true));
+                 }
+              }
+            }
         }
 
         $this->setPackageTranslation($post, $id, $is_update);
@@ -266,6 +275,27 @@ class Package_model extends CI_Model
             $arr[$row->abbr]['price_child'] = $row->price_child;
         }
         return $arr;
+    }
+
+    public function getMultiSlot($id)
+    {
+        $this->db->where('package_id', $id);
+        $query = $this->db->get('package_slot');
+        $arr = array();
+        if($query->num_rows()){
+          $arr = $query->result();
+        }
+        return $arr;
+    }
+    public function getMultiSlotCount($id)
+    {
+        $this->db->where('package_id', $id);
+        $query = $this->db->get('package_slot');
+        $count = 0;
+        if($query->num_rows()){
+          $count = $query->num_rows();
+        }
+        return $count;
     }
 
 }

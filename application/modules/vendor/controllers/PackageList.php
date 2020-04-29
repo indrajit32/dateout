@@ -8,7 +8,7 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-class Package_list extends ADMIN_Controller
+class PackageList extends VENDOR_Controller
 {
 
     private $num_rows = 10;
@@ -16,22 +16,22 @@ class Package_list extends ADMIN_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('Products_model', 'Languages_model', 'Package_model'));
+        $this->load->model(array('Products_model','Package_model'));
     }
 
     public function index($page = 0)
     {
-        $this->login_check();
+        $this->loginCheck();
         $data = array();
         $head = array();
-        $head['title'] = 'Administration - View Packages';
+        $head['title'] = 'Vedor - View Packages';
         $head['description'] = '!';
         $head['keywords'] = '';
 
         if (isset($_GET['delete'])) {
             $this->Package_model->deletePackage($_GET['delete']);
             $this->session->set_flashdata('result_delete', 'product is deleted!');
-            $this->saveHistory('Delete package id - ' . $_GET['delete']);
+          //  $this->saveHistory('Delete package id - ' . $_GET['delete']);
             redirect('admin/package_list');
         }
 
@@ -40,7 +40,7 @@ class Package_list extends ADMIN_Controller
         if ($this->input->get('search_title') !== NULL) {
             $search_title = $this->input->get('search_title');
             $_SESSION['filter']['search_title'] = $search_title;
-            $this->saveHistory('Search for product title - ' . $search_title);
+      //      $this->saveHistory('Search for product title - ' . $search_title);
         }
         $orderby = null;
         if ($this->input->get('order_by') !== NULL) {
@@ -51,21 +51,21 @@ class Package_list extends ADMIN_Controller
         if ($this->input->get('package_type') !== NULL) {
             $package_type = $this->input->get('package_type');
             $_SESSION['filter']['package_type '] = $package_type;
-            $this->saveHistory('Search for package code - ' . $package_type);
+//            $this->saveHistory('Search for package code - ' . $package_type);
         }
         $vendor = null;
-        if ($this->input->get('show_vendor') !== NULL) {
-            $vendor = $this->input->get('show_vendor');
+        if ($this->vendor_id !== NULL) {
+            $vendor = $this->vendor_id;
         }
-        $data['products_lang'] = $products_lang = $this->session->userdata('admin_lang_products');
+        $data['products_lang'] = $products_lang = $this->session->userdata('vendor_lang_products');
         $rowscount = $this->Package_model->packagesCount($search_title, $package_type);
         $data['packages'] = $this->Package_model->getPackages($this->num_rows, $page, $search_title, $orderby, $package_type, $vendor);
-        $data['links_pagination'] = pagination('admin/package_list', $rowscount, $this->num_rows, 3);
+        $data['links_pagination'] = pagination('vendor/package_list', $rowscount, $this->num_rows, 3);
         $data['num_pack_art'] = $this->Package_model->numShopPackages();
-        $data['languages'] = $this->Languages_model->getLanguages();
-        $this->saveHistory('Go to products');
+    //    $data['languages'] = $this->Languages_model->getLanguages();
+  //      $this->saveHistory('Go to products');
         $this->load->view('_parts/header', $head);
-        $this->load->view('ecommerce/package_list', $data);
+        $this->load->view('package_list', $data);
         $this->load->view('_parts/footer');
     }
 
@@ -93,6 +93,7 @@ class Package_list extends ADMIN_Controller
         } else {
             echo 0;
         }
-        $this->saveHistory('Change product id ' . $_POST['id'] . ' to status ' . $_POST['to_status']);
+      //  $this->saveHistory('Change product id ' . $_POST['id'] . ' to status ' . $_POST['to_status']);
     }
+
 }

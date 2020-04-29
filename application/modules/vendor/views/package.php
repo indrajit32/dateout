@@ -254,18 +254,14 @@ $timeNow = time();
                     </div>
                 </div>
               </div>
-                <div class="form-group for-shop">
-                    <label>Slot Time (Multi)</label>
-                    <input type="text" name="slot_time" placeholder="HH:MM" value="<?= @$_POST['slot_time'] ?>" class="form-control">
-                </div>
-                <div class="form-group for-shop">
-                    <label>Total Slots </label>
-                    <input type="text" name="total_slot" placeholder="Number" value="<?= @$_POST['total_slot'] ?>" class="form-control">
-                </div>
-                <div class="form-group for-shop">
-                    <label>Person Required per Slot</label>
-                    <input type="text" placeholder="Number" name="person_per_slot" value="<?= @$_POST['person_per_slot'] ?>" class="form-control">
-                </div>
+              <div class="form-group bordered-group for-shop" >
+                  <div class="multislot-container">
+
+                      <?= $multislot ?>
+                  </div>
+                  <input type="hidden" name="slot_id_count" id="slot_id_count" value="<?= @$_POST['slot_id_count'] ?>">
+                  <a href="javascript:void(0);" data-toggle="modal" data-target="#modalmultislot" class="btn btn-default">Add Slot</a>
+              </div>
               </div>
                 <button type="submit" name="setPackage" class="btn btn-green"><?= lang('vendor_submit_package') ?></button>
             </form>
@@ -273,7 +269,7 @@ $timeNow = time();
     </div>
 </div>
 
-<div class="modal fade" id="modalExpectationImages" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="modalmultislot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -282,38 +278,26 @@ $timeNow = time();
             </div>
             <div class="modal-body">
                 <form id="ExpectationImagesForm">
-                    <input type="hidden" value="<?= isset($_POST['expectation_folder']) ? $_POST['expectation_folder'] : $timeNow.'_s' ?>" name="expectation_folder">
-                    <label for="others">Select images</label>
-                    <input type="file" name="expectations_image[]" id="expectations_image" multiple />
+                    <div class="form-group for-shop">
+                      <p class="error_msg" style="color: red; display:none;">Please enter correct value</p>
+                    </div>
+                    <div class="form-group for-shop">
+                        <label>Slot Time (Multi)</label>
+                        <input type="text" name="slot_time" id="slot_time" placeholder="HH:MM" value="<?= @$_POST['slot_time'] ?>" class="form-control">
+                    </div>
+                    <div class="form-group for-shop">
+                        <label>Total Slots </label>
+                        <input type="text" name="total_slot" id="total_slot" placeholder="Number" value="<?= @$_POST['total_slot'] ?>" class="form-control">
+                    </div>
+                    <div class="form-group for-shop">
+                        <label>Person Required per Slot</label>
+                        <input type="text" placeholder="number" id="person_per_slot" name="person_per_slot" value="<?= @$_POST['person_per_slot'] ?>" class="form-control">
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default finish-expectation">
+                <button type="button" class="btn btn-default finish-slot">
                     <span class="finish-text">Upload</span>
-                    <img src="<?= base_url('assets/imgs/load.gif') ?>" class="loadUploadOthers" alt="">
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal Upload More Images -->
-<div class="modal fade" id="modalMoreImages" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel"><?= lang('vendor_up_more_imgs') ?></h4>
-            </div>
-            <div class="modal-body">
-                <form id="uploadImagesForm">
-                    <input type="hidden" value="<?= isset($_POST['folder']) ? $_POST['folder'] : $timeNow ?>" name="folder">
-                    <label for="others"><?= lang('vendor_select_images') ?></label>
-                    <input type="file" name="others[]" id="others" multiple />
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default finish-upload">
-                    <span class="finish-text"><?= lang('finish') ?></span>
                     <img src="<?= base_url('assets/imgs/load.gif') ?>" class="loadUploadOthers" alt="">
                 </button>
             </div>
@@ -338,3 +322,14 @@ $('.date').datepicker({
     startDate: new Date()
 });
 </script>
+<style>
+.slot_class td{
+  padding: 15px;
+}
+.slot_class button{
+  color: red;
+}
+.slot_class input{
+      background-color: #F2F4F4;
+}
+</style>

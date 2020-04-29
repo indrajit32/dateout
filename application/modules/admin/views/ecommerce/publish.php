@@ -77,14 +77,15 @@ if ($this->session->flashdata('result_publish')) {
                 </div>
                 <a href="javascript:void(0);" data-toggle="modal" data-target="#modalExpectationImages" class="btn btn-default">Upload Expectation images</a>
             </div>
-            <div class="form-group for-shop">
-                <label>Price (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
-                <input type="text" name="price[]" placeholder="without currency at the end" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['price']) ? $trans_load[$language->abbr]['price'] : '' ?>" class="form-control">
+          <!--  <div class="form-group for-shop">
+                <label>Price (<?php// $language->name ?><img src="<?php// base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                <input type="text" name="price[]" placeholder="without currency at the end" value="<?php// $trans_load != null && isset($trans_load[$language->abbr]['price']) ? $trans_load[$language->abbr]['price'] : '' ?>" class="form-control">
             </div>
             <div class="form-group for-shop">
-                <label>Old Price (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
-                <input type="text" name="old_price[]" placeholder="without currency at the end" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['old_price']) ? $trans_load[$language->abbr]['old_price'] : '' ?>" class="form-control">
+                <label>Old Price (<?php// $language->name ?><img src="<?php// base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                <input type="text" name="old_price[]" placeholder="without currency at the end" value="<?php// $trans_load != null && isset($trans_load[$language->abbr]['old_price']) ? $trans_load[$language->abbr]['old_price'] : '' ?>" class="form-control">
             </div>
+          -->
         </div>
         <?php
         $i++;
@@ -133,6 +134,13 @@ if ($this->session->flashdata('result_publish')) {
                     ?>
                 </option>
             <?php } ?>
+        </select>
+    </div>
+    <div class="form-group for-shop">
+        <label>Is Display On Top Experience</label>
+        <select class="selectpicker" name="display_top_experience">
+          <option value="No" <?= isset($_POST['display_top_experience']) && $_POST['display_top_experience'] == 'No' ? 'selected' : '' ?>>No</option>
+          <option value="Yes" <?= isset($_POST['display_top_experience']) && $_POST['display_top_experience'] == 'Yes' ? 'selected' : '' ?>>Yes</option>
         </select>
     </div>
     <div class="form-group for-shop">

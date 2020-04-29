@@ -133,3 +133,32 @@ $(".showSliderDescrption").click(function () {
     var desc_id = $(this).data('descr');
     $("#theSliderDescrption-" + desc_id).slideToggle("slow", function () {});
 });
+
+$('.finish-slot').click(function () {
+  var slot_time = $('#slot_time').val();
+  var total_slot = $('#total_slot').val();
+  var person_per_slot = $('#person_per_slot').val();
+  if(slot_time=='' || total_slot=='' || person_per_slot==''){
+    $('.error_msg').css('display', 'block');
+  }
+  else{
+    $('.finish-slot .finish-text').hide();
+    $('.finish-slot .loadUploadOthers').show();
+    var count = parseInt($('#slot_id_count').val());
+    count = count+1;
+
+    var str = "<table id='table_"+count+"' class='slot_class bordered-group'><tr><td>Time:</td><td><input type='text' class='form-control' name='slot_time[]' readonly value='"+slot_time+"'></td><td>Total Slot:</td><td><input type='text' class='form-control' name='total_slot[]' readonly value='"+total_slot+"'></td><td>Person per Slot:</td><td><input type='text' class='form-control' name='person_per_slot[]' readonly value='"+person_per_slot+"'></td><td><button onclick='removeslot("+count+")'>X</button></td></tr></table>";
+    $('.multislot-container').append(str);
+    $('#slot_id_count').val(count);
+    $('#ExpectationImagesForm')[0].reset();
+    $('.finish-slot .loadUploadOthers').hide();
+    $('#modalmultislot').modal('hide');
+  }
+});
+
+function removeslot(id){
+  $('#table_'+id).remove();
+  var count = parseInt($('#slot_id_count').val());
+  count = count-1;
+  $('#slot_id_count').val(count);
+}
