@@ -1,4 +1,4 @@
-<h1><img src="<?= base_url('assets/imgs/blogger.png') ?>" class="header-img" style="margin-top:-2px;"> Review Posts</h1>
+<h1><img src="<?= base_url('assets/imgs/blogger.png') ?>" class="header-img" style="margin-top:-2px;"> Review Posts By Product</h1>
 <hr>
 <?php if ($this->session->flashdata('result_publish')) { ?>
     <hr>
@@ -6,40 +6,24 @@
     <?php
 }
 ?>
-<div class="row">
-    <div class="col-sm-6">
-        <form method="GET">
-            <div class="input-group">
-                <input type="text" class="form-control" name="search" value="<?= @$_GET['search'] ?>" placeholder="Find here">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="submit">Search</button>
-                </span>
-            </div>
-            <?php if (isset($_GET['search'])) { ?>
-                <a href="<?= base_url('admin/blog') ?>">Clear search</a>
-            <?php } ?>
-        </form>
-    </div>
-</div>
-<hr>
             <?php
-            if ($posts) {
+            if ($reviews) {
                 ?>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Product</th>
+                                <th>Deal</th>
                                 <th>Title</th>
                                 <th>Comments</th>
                                 <th>Rating</th>
-                                <th>Customer</th>
+                                <th>Customer Id</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            foreach ($posts as $row) {
+                            foreach ($reviews as $row) {
 
                                 /*
                                 $u_path = 'attachments/shop_images/';
@@ -52,7 +36,9 @@
                                 ?>
 
                                 <tr>
-
+                                    <!--<td>
+                                        <img src="<?= $image ?>" alt="No Image" class="img-thumbnail" style="height:100px;">
+                                    </td> -->
                                     <td>
                                         <?= get_deal_by_id($row['product_id'])[0]['title']; ?>
                                     </td>
@@ -63,14 +49,15 @@
                                         <?= $row['comment'] ?>
                                     </td>
                                     <td>
-                                        <?= $row['rating'] ?>
+                                        <?= $row['rating'] ?> 
                                     </td>
                                     <td>
                                         <?= get_user_by_id($row['customer_id'])[0]['username']; ?>
                                     </td>
                                     <td>
                                         <div>
-                                            <a href="<?= base_url('admin/review/review/view_all_review_by_product/' . $row['product_id']) ?>" class="btn btn-info">View Details</a>
+                                            <a href="<?= base_url('admin/review/review/edit/' . $row['id']) ?>" class="btn btn-info">Edit</a>
+                                            <a href="<?= base_url('admin/review/review/delete/' . $row['id']) ?>"  class="btn btn-danger confirm-delete">Delete</a>
                                         </div>
                                     </td>
                                 </tr>
