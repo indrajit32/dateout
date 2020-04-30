@@ -40,7 +40,13 @@
 
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea name="message" placeholder= "message"  rows="5" class="form-control">
+                    <textarea 
+                        name="message" 
+                        placeholder= "message"  
+                        rows="5" 
+                        class="form-control"
+                        style="align-content:left; overflow:auto;"
+                    >
 
                     </textarea>
                 </div>

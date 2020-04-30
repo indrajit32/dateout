@@ -59,6 +59,7 @@
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="edit" value="<?= isset($_GET['edit']) ? $_GET['edit'] : '0' ?>">
+                        <?php  /*  ?>
                         <div class="form-group">
                             <label for="type">Type</label>
                             <input type="text" name="type" value="" class="form-control" id="type_<?= $_GET['edit'] ?>">
@@ -67,6 +68,7 @@
                             <label for="key_name">Key Name</label>
                             <input type="key_name" name="key_name" class="form-control" value="" id="key_name_<?= $_GET['edit'] ?>">
                         </div>
+                        <?php  */ ?>
                         <div class="form-group">
                             <label for="value">Value</label>
                             <input type="text" name="value" class="form-control" value="" id="value_<?= $_GET['edit'] ?>">

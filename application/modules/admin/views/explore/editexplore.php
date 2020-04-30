@@ -3,7 +3,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 
-<h1><img src="<?= base_url('assets/imgs/blogger.png') ?>" class="header-img" style="margin-top:-2px;"> Publish review</h1>
+<h1><img src="<?= base_url('assets/imgs/blogger.png') ?>" class="header-img" style="margin-top:-2px;"> Publish Explore</h1>
 <hr>
 <div class="row">
     <div class="col-sm-8 col-md-7">
@@ -29,7 +29,13 @@
 
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea name="message" placeholder= "message"  rows="5" class="form-control">
+                    <textarea 
+                        name="message" 
+                        placeholder= "message"  
+                        rows="5"
+                        class="form-control"
+                        style="align-content:left; overflow:auto;"
+                    >
                         <?php echo $explore[0]['message'] ?>
                     </textarea>
                 </div>
@@ -81,12 +87,6 @@
                 <input type="credit_url" value="<?php echo $explore[0]['credit_url'] ?>" name="credit_url" placeholder= "Credit Url" class="form-control">
             </div>
 
-
-            <div class="form-group">
-                <label for="credit">Upload a single image:(1500 x 498)</label>
-                <input type="file" id="credit" name="explore[]" multiple>
-            </div>
-
             <?php  if( $explore[0]['credit_image'] != null ){ ?>
                 <div class="form-group"> 
                     <label for="rating">Credit Images</label>
@@ -108,10 +108,10 @@
 
 
             <div class="form-group">
-                <label for="credit">Upload image:</label>
+                <label for="credit">Upload a single image:(1500 x 498)</label>
                 <input type="file" id="credit" name="credit[]">
             </div>
-            <button type="submit" name="submit" class="btn btn-default">Edit</button>
+            <button type="submit" name="submit" class="btn btn-default">Update</button>
 
         </form>
     </div>
