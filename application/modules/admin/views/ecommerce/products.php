@@ -101,7 +101,7 @@
                                     <td>
                                         <?php if(!empty($row['package'])){
                                           foreach($row['package'] as $package){ ?>
-                                            <a href="<?= 'package/'.$package['package_id']?> "><?= $package['name'] ?></a>
+                                            <a href="<?= 'package/'.$package['package_id']?> "><?= $package['name'] ?></a><br /><br />
                                         <?php  }
                                         }
                                       //  print_r($row['package']); ?>

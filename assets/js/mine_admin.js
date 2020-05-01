@@ -621,6 +621,7 @@ $('.finish-slot').click(function () {
     $('.multislot-container').append(str);
     $('#slot_id_count').val(count);
     $('#ExpectationImagesForm')[0].reset();
+    $('.finish-slot .finish-text').show();
     $('.finish-slot .loadUploadOthers').hide();
     $('#modalmultislot').modal('hide');
   }
