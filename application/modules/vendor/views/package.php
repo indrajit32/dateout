@@ -245,15 +245,7 @@ $timeNow = time();
                     }
                 ?>
               <div id="time" class="form-group for-shop" <?= $style ?>>
-                <div class="form-group for-shop">
-                  <label>Available on same date</label>
-                <div class="input-group date" data-provide="datepicker">
-                  <input type="text" name="available_date" placeholder="Available on date" value="<?= @$_POST['available_date'] ?>" class="form-control">
-                    <div class="input-group-addon">
-                        <span class="glyphicon glyphicon-th"></span>
-                    </div>
-                </div>
-              </div>
+
               <div class="form-group bordered-group for-shop" >
                   <div class="multislot-container">
 
@@ -274,13 +266,22 @@ $timeNow = time();
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Upload more images</h4>
+                <h4 class="modal-title" id="myModalLabel">Add Slot</h4>
             </div>
             <div class="modal-body">
                 <form id="ExpectationImagesForm">
                     <div class="form-group for-shop">
                       <p class="error_msg" style="color: red; display:none;">Please enter correct value</p>
                     </div>
+                    <div class="form-group for-shop">
+                      <label>Available on same date</label>
+                    <div class="input-group date" data-provide="datepicker">
+                      <input type="text" name="available_date" id="available_date" placeholder="Available on date" value="<?= @$_POST['available_date'] ?>" class="form-control">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+                  </div>
                     <div class="form-group for-shop">
                         <label>Slot Time (Multi)</label>
                         <input type="text" name="slot_time" id="slot_time" placeholder="HH:MM" value="<?= @$_POST['slot_time'] ?>" class="form-control">
@@ -297,7 +298,7 @@ $timeNow = time();
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default finish-slot">
-                    <span class="finish-text">Upload</span>
+                    <span class="finish-text">Save</span>
                     <img src="<?= base_url('assets/imgs/load.gif') ?>" class="loadUploadOthers" alt="">
                 </button>
             </div>

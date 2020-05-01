@@ -87,7 +87,7 @@ class Products_model extends CI_Model
             }
             if (!$this->db->where('id', $id)->where('vendor_id', $post['vendor_id'])->update('products', array(
                       'image' => $post['image'] != null ? $_POST['image'] : $_POST['old_image'],
-                      'display_top_experience' => $post['display_top_experience'],
+                  //    'display_top_experience' => $post['display_top_experience'],
                       'discount_percent' => $post['discount_percent'],
                       'latitude' => $post['latitude'],
                       'longitude' => $post['longitude'],
@@ -117,7 +117,7 @@ class Products_model extends CI_Model
                     'latitude' => $post['latitude'],
                     'longitude' => $post['longitude'],
                     'discount_percent' => $post['discount_percent'],
-                    'display_top_experience' => $post['display_top_experience'],
+                //    'display_top_experience' => $post['display_top_experience'],
                     'country' => $post['country'],
                     'city' => $post['city'],
                     'metaword' => $post['metaword'],

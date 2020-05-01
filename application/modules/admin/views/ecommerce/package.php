@@ -95,15 +95,15 @@ if ($this->session->flashdata('result_publish')) {
                 </select>
             </div>
             <div class="form-group for-shop">
-                <label>Credit Point For Review </label>
+                <label>Credit Point For Review <span style="color:red">(Only For Super Admin)</span></label>
                 <input type="text" name="credit_point_for_review" placeholder="Credit Point For Review" value="<?= @$_POST['credit_point_for_review'] ?>" class="form-control">
             </div>
             <div class="form-group for-shop">
-                <label>Credit Point For Booking </label>
+                <label>Credit Point For Booking <span style="color:red">(Only For Super Admin)</span></label>
                 <input type="text" name="credit_point_for_booking" placeholder="number" value="<?= @$_POST['credit_point_for_booking'] ?>" class="form-control">
             </div>
             <div class="form-group for-shop">
-                <label>Deduct Max Points on Booking </label>
+                <label>Deduct Max Points on Booking <span style="color:red">(Only For Super Admin)</span></label>
                 <input type="text" name="deduct_max_points_on_booking" placeholder="without currency at the end" value="<?= @$_POST['deduct_max_points_on_booking'] ?>" class="form-control">
             </div>
             <div class="form-group for-shop">
@@ -111,7 +111,7 @@ if ($this->session->flashdata('result_publish')) {
                 <input type="text" class="form-control" name="number_of_booking_available" placeholder="0 means not applicable" value="<?= @$_POST['number_of_booking_available'] ?>">
             </div>
             <div class="form-group for-shop">
-                <label>Is Point On Booking </label>
+                <label>Is Point On Booking <span style="color:red">(Only For Super Admin)</span></label>
                 <select class="selectpicker" name="is_point_on_booking">
                     <option <?= isset($_POST['is_point_on_booking']) && $_POST['is_point_on_booking'] == 'Not Applicable' ? 'selected' : '' ?> value="Not Applicable">Not Applicable</option>
                     <option <?= isset($_POST['is_point_on_booking']) && $_POST['is_point_on_booking'] == 'Applicable' ? 'selected' : '' ?> value="Applicable">Applicable</option>
@@ -248,15 +248,7 @@ if ($this->session->flashdata('result_publish')) {
                 }
             ?>
           <div id="time" class="form-group for-shop" <?= $style ?>>
-            <div class="form-group for-shop">
-              <label>Available on same date</label>
-              <div class="input-group date" data-provide="datepicker">
-                <input type="text" name="available_date" placeholder="Available on date" value="<?= @$_POST['available_date'] ?>" class="form-control">
-                  <div class="input-group-addon">
-                      <span class="glyphicon glyphicon-th"></span>
-                  </div>
-              </div>
-            </div>
+
             <div class="form-group bordered-group for-shop" >
                 <div class="multislot-container">
 
@@ -277,13 +269,23 @@ if ($this->session->flashdata('result_publish')) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Upload more images</h4>
+                <h4 class="modal-title" id="myModalLabel">Add Slot</h4>
             </div>
             <div class="modal-body">
                 <form id="ExpectationImagesForm">
                   <div class="form-group for-shop">
                     <p class="error_msg" style="color: red; display:none;">Please enter correct value</p>
-                  </div><div class="form-group for-shop">
+                  </div>
+                  <div class="form-group for-shop">
+                    <label>Available on same date</label>
+                    <div class="input-group date" data-provide="datepicker">
+                      <input type="text" name="available_date" id="available_date" placeholder="Available on date" value="<?= @$_POST['available_date'] ?>" class="form-control">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="form-group for-shop">
                         <label>Slot Time (Multi)</label>
                         <input type="text" name="slot_time" id="slot_time" placeholder="HH:MM" value="<?= @$_POST['slot_time'] ?>" class="form-control">
                     </div>
@@ -299,7 +301,7 @@ if ($this->session->flashdata('result_publish')) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default finish-slot">
-                    <span class="finish-text">Upload</span>
+                    <span class="finish-text">Save</span>
                     <img src="<?= base_url('assets/imgs/load.gif') ?>" class="loadUploadOthers" alt="">
                 </button>
             </div>

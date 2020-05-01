@@ -102,7 +102,7 @@
                                     <li><a href="<?= base_url('admin/package') ?>" <?= urldecode(uri_string()) == 'admin/package' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i>Create Package</a></li>
                                     <li><a href="<?= base_url('admin/package_list') ?>" <?= urldecode(uri_string()) == 'admin/package_list' ? 'class="active"' : '' ?>><i class="fa fa-files-o" aria-hidden="true"></i> Package List</a></li>
                                     <li><a href="<?= base_url('admin/publish') ?>" <?= urldecode(uri_string()) == 'admin/publish' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i> Publish Experience</a></li>
-                                    <li><a href="<?= base_url('admin/products') ?>" <?= urldecode(uri_string()) == 'admin/products' ? 'class="active"' : '' ?>><i class="fa fa-files-o" aria-hidden="true"></i> Experiences</a></li>
+                                    <li><a href="<?= base_url('admin/products') ?>" <?= urldecode(uri_string()) == 'admin/products' ? 'class="active"' : '' ?>><i class="fa fa-files-o" aria-hidden="true"></i> Experience List</a></li>
                                     <?php if ($showBrands == 1) { ?>
                                         <li><a href="<?= base_url('admin/brands') ?>" <?= urldecode(uri_string()) == 'admin/brands' ? 'class="active"' : '' ?>><i class="fa fa-registered" aria-hidden="true"></i> Brands</a></li>
                                     <?php } ?>

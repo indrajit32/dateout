@@ -32,7 +32,7 @@ $timeNow = time();
                     <div class="locale-container locale-container-<?= $language->abbr ?>" <?= $language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'style="display:block;"' : '' ?>>
                         <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
                         <div class="form-group">
-                            <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?= $language->name ?>" class="language">
+                            
                             <label for="title<?= $i ?>">Title <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?= $language->name ?>"></label>
                             <input type="text" name="title[]" placeholder="<?= lang('vendor_product_name') ?>" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['title']) ? $trans_load[$language->abbr]['title'] : '' ?>" class="form-control">
                         </div>
@@ -143,13 +143,14 @@ $timeNow = time();
                         </select>
                     </div>
                 <?php } ?>
-                <div class="form-group for-shop">
+            <!--    <div class="form-group for-shop">
                     <label>Is Display On Top Experience</label>
                     <select class="selectpicker" name="display_top_experience">
-                      <option value="No" <?= isset($_POST['display_top_experience']) && $_POST['display_top_experience'] == 'No' ? 'selected' : '' ?>>No</option>
-                      <option value="Yes" <?= isset($_POST['display_top_experience']) && $_POST['display_top_experience'] == 'Yes' ? 'selected' : '' ?>>Yes</option>
+                      <option value="No" <?php// isset($_POST['display_top_experience']) && $_POST['display_top_experience'] == 'No' ? 'selected' : '' ?>>No</option>
+                      <option value="Yes" <?php// isset($_POST['display_top_experience']) && $_POST['display_top_experience'] == 'Yes' ? 'selected' : '' ?>>Yes</option>
                     </select>
                 </div>
+              -->
                 <div class="form-group for-shop">
                     <label>Discount On Deal in %</label>
                     <input type="text" placeholder="number" name="discount_percent" value="<?= @$_POST['discount_percent'] ?>" class="form-control" id="discount_percent">
@@ -202,7 +203,7 @@ $timeNow = time();
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Upload more images</h4>
+                <h4 class="modal-title" id="myModalLabel">Upload Expectation images</h4>
             </div>
             <div class="modal-body">
                 <form id="ExpectationImagesForm">

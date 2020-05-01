@@ -187,7 +187,7 @@ class Package extends ADMIN_Controller
         foreach($multislot as $slot){
           $count++;
           $output .= "
-              <table id='table_".$count."' class='slot_class bordered-group'><tr><td>Time:</td><td><input type='text' class='form-control' name='slot_time[]' readonly value='".$slot->slot_time."'></td><td>Total Slot:</td><td><input type='text' class='form-control' name='total_slot[]' readonly value='".$slot->total_slot."'></td><td>Person per Slot:</td><td><input type='text' class='form-control' name='person_per_slot[]' readonly value='".$slot->person_per_slot."'></td><td><button onclick='removeslot(".$count.")'>X</button></td></tr></table>";
+              <table id='table_".$count."' class='slot_class bordered-group'><tr><td>Available Date:</td><td><input type='text' class='form-control' name='available_date[]' readonly value='".$slot->available_date."'></td><td>Time:</td><td><input type='text' class='form-control' name='slot_time[]' readonly value='".$slot->slot_time."'></td><td>Total Slot:</td><td><input type='text' class='form-control' name='total_slot[]' readonly value='".$slot->total_slot."'></td><td>Person per Slot:</td><td><input type='text' class='form-control' name='person_per_slot[]' readonly value='".$slot->person_per_slot."'></td><td><button onclick='removeslot(".$count.")'>X</button></td></tr></table>";
         }
        }
         if ($this->input->is_ajax_request()) {

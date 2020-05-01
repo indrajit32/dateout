@@ -135,6 +135,7 @@ $(".showSliderDescrption").click(function () {
 });
 
 $('.finish-slot').click(function () {
+  var available_date = $('#available_date').val();
   var slot_time = $('#slot_time').val();
   var total_slot = $('#total_slot').val();
   var person_per_slot = $('#person_per_slot').val();
@@ -147,11 +148,12 @@ $('.finish-slot').click(function () {
     var count = parseInt($('#slot_id_count').val());
     count = count+1;
 
-    var str = "<table id='table_"+count+"' class='slot_class bordered-group'><tr><td>Time:</td><td><input type='text' class='form-control' name='slot_time[]' readonly value='"+slot_time+"'></td><td>Total Slot:</td><td><input type='text' class='form-control' name='total_slot[]' readonly value='"+total_slot+"'></td><td>Person per Slot:</td><td><input type='text' class='form-control' name='person_per_slot[]' readonly value='"+person_per_slot+"'></td><td><button onclick='removeslot("+count+")'>X</button></td></tr></table>";
+    var str = "<table id='table_"+count+"' class='slot_class bordered-group'><tr><td>Available Date:</td><td><input type='text' class='form-control' name='available_date[]' readonly value='"+available_date+"'></td><td>Time:</td><td><input type='text' class='form-control' name='slot_time[]' readonly value='"+slot_time+"'></td><td>Total Slot:</td><td><input type='text' class='form-control' name='total_slot[]' readonly value='"+total_slot+"'></td><td>Person per Slot:</td><td><input type='text' class='form-control' name='person_per_slot[]' readonly value='"+person_per_slot+"'></td><td><button onclick='removeslot("+count+")'>X</button></td></tr></table>";
     $('.multislot-container').append(str);
     $('#slot_id_count').val(count);
     $('#ExpectationImagesForm')[0].reset();
     $('.finish-slot .loadUploadOthers').hide();
+    $('.finish-slot .finish-text').show();
     $('#modalmultislot').modal('hide');
   }
 });

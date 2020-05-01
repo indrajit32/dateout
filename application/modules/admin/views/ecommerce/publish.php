@@ -110,7 +110,7 @@ if ($this->session->flashdata('result_publish')) {
             }
         }
         ?>
-        <label for="userfile">Cover Image</label>
+        <label for="userfile">Cover Image <span style="color:red">(Upload image with size 1500x1132)</span></label>
         <input type="file" id="userfile" name="userfile">
     </div>
     <div class="form-group bordered-group">
@@ -137,7 +137,7 @@ if ($this->session->flashdata('result_publish')) {
         </select>
     </div>
     <div class="form-group for-shop">
-        <label>Is Display On Top Experience</label>
+        <label>Is Display On Top Experience <span style="color:red">(Only For Super Admin)</span></label>
         <select class="selectpicker" name="display_top_experience">
           <option value="No" <?= isset($_POST['display_top_experience']) && $_POST['display_top_experience'] == 'No' ? 'selected' : '' ?>>No</option>
           <option value="Yes" <?= isset($_POST['display_top_experience']) && $_POST['display_top_experience'] == 'Yes' ? 'selected' : '' ?>>Yes</option>
@@ -210,7 +210,7 @@ if ($this->session->flashdata('result_publish')) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Upload more images</h4>
+                <h4 class="modal-title" id="myModalLabel">Upload Expectation images</h4>
             </div>
             <div class="modal-body">
                 <form id="ExpectationImagesForm">
