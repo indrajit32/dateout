@@ -255,3 +255,7 @@ $route['api/productbycategory/(\w{2})/(:num)/get'] = 'Api/Products/categorywisep
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+//Review
+$route['admin/reviewpublish'] = "admin/review/ReviewPublish";
+$route['admin/reviews'] = "admin/review/Review";
