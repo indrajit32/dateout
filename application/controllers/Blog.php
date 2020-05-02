@@ -10,9 +10,6 @@ class Blog extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        if (!in_array('blog', $this->nonDynPages)) {
-            show_404();
-        }
         $this->load->helper(array('pagination'));
         $this->load->Model('admin/Blog_model');
         $this->arhives = $this->Public_model->getArchives();
