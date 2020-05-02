@@ -13,7 +13,7 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Deal</th>
+                                <th>Experience</th>
                                 <th>Title</th>
                                 <th>Comments</th>
                                 <th>Rating</th>

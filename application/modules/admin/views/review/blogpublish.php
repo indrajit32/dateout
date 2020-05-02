@@ -22,7 +22,7 @@
         <form method="POST" enctype="multipart/form-data">
 
                 <div class="form-group"> 
-                    <label for="user_id">Deal</label>
+                    <label for="user_id">Experience</label>
 
                       <select class="form-control" name="product_id">
 
