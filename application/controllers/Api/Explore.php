@@ -36,7 +36,7 @@ class Explore extends REST_Controller
         //==============================Article==============================
             $dataA = $this->Blog_model->getAllPosts($lang);
 
-            foreach ($data['articles'] as $key => $value) 
+            foreach ($dataA as $key => $value) 
             {
                 $dataA[$key]["article_url"] = base_url().'blog/showArticle/'.$value['id'];
             }
