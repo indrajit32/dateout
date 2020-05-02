@@ -42,7 +42,7 @@ class Explore extends REST_Controller
             }
         //====================================================================
 
-        //===================================================================
+        //=====================================================================
         
         $config_data = $this->Config_model->getSiteConfigData($lang,'explore');
         foreach($config_data as $key => $c)
