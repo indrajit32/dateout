@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Blog extends MY_Controller
 {
-
     private $num_rows = 20;
 
     public function __construct()
