@@ -33,7 +33,16 @@ class Explore extends REST_Controller
         $data['explor_header'] = $header_data[0];
         $data['explor_header']['images'] = $this->Explore_model->getAllImages($data['explor_header']['id']);
 
-        //============================================================
+        //==============================Article==============================
+            $dataA = $this->Blog_model->getAllPosts($lang);
+
+            foreach ($data['articles'] as $key => $value) 
+            {
+                $dataA[$key]["article_url"] = base_url().'blog/showArticle/'.$value['id'];
+            }
+        //====================================================================
+
+        //===================================================================
         
         $config_data = $this->Config_model->getSiteConfigData($lang,'explore');
         foreach($config_data as $key => $c)
@@ -41,6 +50,10 @@ class Explore extends REST_Controller
             if($c['key_name'] == 'credit')
             {
                 $config_data[$key]['group_list_data'] = ['credit_url'=> $data['explor_header']['credit_url'], 'credit_image' => $data['explor_header']['credit_image']];
+            }
+            else if($c['key_name'] == 'article')
+            {
+                $config_data[$key]['group_list_data'] = $dataA;
             }
             else
             {
@@ -52,14 +65,6 @@ class Explore extends REST_Controller
 
         $data['explor_list'] = $config_data;
 
-        //==============================Article==============================
-            $data['articles'] = $this->Blog_model->getAllPosts($lang);
-
-            foreach ($data['articles'] as $key => $value) 
-            {
-                $data['articles'][$key]["article_url"] = base_url().'blog/showArticle/'.$value['id'];
-            }
-        //====================================================================
         $this->response($data, REST_Controller::HTTP_OK);
     }
 
