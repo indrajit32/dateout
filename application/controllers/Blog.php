@@ -59,6 +59,7 @@ class Blog extends MY_Controller
         $head['title'] = $data['article']['title'];
         $head['description'] = url_title(character_limiter(strip_tags($data['article']['description']), 130));
         $head['keywords'] = str_replace(" ", ",", $data['article']['title']);
+
         $this->render('view_blog_post', $head, $data);
     }
 
@@ -85,6 +86,22 @@ class Blog extends MY_Controller
             $html = '<div class="alert alert-info">' . lang('no_archives') . '</div>';
         }
         return $html;
+    }
+
+    public function showArticle($id)
+    {
+        if (!is_numeric($id) || $id <= 0) {
+            show_404();
+        }
+        $data = array();
+        $head = array();
+        $data['article'] = $this->Public_model->getOnePost($id);
+        if ($data['article'] == null) {
+            show_404();
+        }
+
+        echo $data['article']['description'];
+        die;
     }
 
 }

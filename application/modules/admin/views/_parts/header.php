@@ -119,7 +119,7 @@
                                     <?php //if (in_array('blog', $activePages)) { ?>
                                         <li class="header">Article</li>
                                         <li><a href="<?= base_url('admin/blogpublish') ?>" <?= urldecode(uri_string()) == 'admin/blogpublish' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i> Publish article</a></li>
-                                        <li><a href="<?= base_url('admin/blog') ?>" <?= urldecode(uri_string()) == 'admin/blog' ? 'class="active"' : '' ?>><i class="fa fa-th" aria-hidden="true"></i> Articles</a></li>
+                                        <li><a href="<?= base_url('admin/blog') ?>" <?= urldecode(uri_string()) == 'admin/blog' ? 'class="active"' : '' ?>><i class="fa fa-th" aria-hidden="true"></i> Articles List</a></li>
                                     <?php// } ?>
                                     <?php
                                     if (!empty($textualPages)) {

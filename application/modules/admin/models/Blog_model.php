@@ -48,7 +48,7 @@ class Blog_model extends CI_Model
         } else {
             $this->db->where('blog_translations.abbr', $lang);
         }
-        $query = $this->db->select('blog_posts.id, blog_translations.title, blog_translations.description, blog_posts.url, blog_posts.time, blog_posts.image')->get('blog_posts', $limit, $page);
+        $query = $this->db->select('blog_posts.id, blog_translations.title, blog_translations.description, blog_posts.url, blog_posts.time, blog_posts.image, blog_posts.priority')->get('blog_posts', $limit, $page);
         return $query->result_array();
     }
 
@@ -155,6 +155,12 @@ class Blog_model extends CI_Model
             $arr[$row->abbr]['description'] = $row->description;
         }
         return $arr;
+    }
+
+    public function getAllPosts($abbr = MY_DEFAULT_LANGUAGE_ABBR)
+    {
+        $query = $this->db->query('SELECT bp.id,bt.title,bp.time,bp.priority,bp.image FROM `blog_posts` as bp INNER JOIN blog_translations as bt ON bp.id = bt.for_id WHERE bt.abbr ='.'"'.$abbr.'"');
+        return $query->result_array();
     }
 
 }

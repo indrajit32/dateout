@@ -16,7 +16,14 @@ class Explore extends REST_Controller
 
         parent::__construct();
         $this->methods['get_details']['limit'] = 500; // 500 requests per hour per user/key
-        $this->load->model(array('Api_model', 'admin/Explore_model', 'admin/Config_model'));
+        $this->load->model(
+            array(
+                'Api_model', 
+                'admin/Explore_model', 
+                'admin/Config_model',
+                'admin/Blog_model'
+            )
+        );
         $this->allowed_img_types = $this->config->item('allowed_img_types');
     }
 
@@ -44,6 +51,15 @@ class Explore extends REST_Controller
         //================================================================
 
         $data['explor_list'] = $config_data;
+
+        //==============================Article==============================
+            $data['articles'] = $this->Blog_model->getAllPosts($lang);
+
+            foreach ($data['articles'] as $key => $value) 
+            {
+                $data['articles'][$key]["article_url"] = base_url().'blog/showArticle/'.$value['id'];
+            }
+        //====================================================================
         $this->response($data, REST_Controller::HTTP_OK);
     }
 

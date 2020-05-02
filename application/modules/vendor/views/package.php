@@ -283,7 +283,7 @@ $timeNow = time();
                     </div>
                   </div>
                     <div class="form-group for-shop">
-                        <label>Slot Time (Multi)</label>
+                        <label>Slot Time</label>
                         <input type="text" name="slot_time" id="slot_time" placeholder="HH:MM" value="<?= @$_POST['slot_time'] ?>" class="form-control">
                     </div>
                     <div class="form-group for-shop">

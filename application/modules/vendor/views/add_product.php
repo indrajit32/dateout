@@ -106,7 +106,7 @@ $timeNow = time();
                         }
                     }
                     ?>
-                    <label><?= lang('vendor_cover_image') ?></label>
+                    <label><?= lang('vendor_cover_image') ?><span style="color:red">(Upload image with size 1500x1132)</span></label>
                     <input type="file" name="userfile">
                 </div>
                 <div class="form-group bordered-group">
