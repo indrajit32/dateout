@@ -735,6 +735,9 @@ class ExperiencePackage_model extends CI_Model
         if($query->num_rows()> 0){        
           foreach($query->result_array() as $val){
             $val['review'] = [];
+			if($val['image']){
+              $val['image']=base_url().'attachments/shop_images/'.$val['image'];
+            }
             $this->db->select('packages.id, packages_translations.name, packages_translations.price_adult, packages_translations.price_child');
             $this->db->join('packages_translations', 'packages_translations.for_id = packages.id', 'inner');
             $this->db->where('packages.is_package_set_default', 'Yes');
