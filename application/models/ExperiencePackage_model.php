@@ -731,8 +731,8 @@ class ExperiencePackage_model extends CI_Model
         $this->db->where('visibility', 1);
         $this->db->order_by('position', 'asc');
         $query = $this->db->get('products');
-        if($query->num_rows()> 0){
-          $arr = array();
+		$arr = array();
+        if($query->num_rows()> 0){        
           foreach($query->result_array() as $val){
             $val['review'] = [];
             $this->db->select('packages.id, packages_translations.name, packages_translations.price_adult, packages_translations.price_child');
