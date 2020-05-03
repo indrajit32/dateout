@@ -16,7 +16,7 @@ class Explore extends REST_Controller
 
         parent::__construct();
         $this->methods['get_details']['limit'] = 500; // 500 requests per hour per user/key
-        $this->load->model(array('Api_model', 'admin/Explore_model', 'admin/Config_model', 'ExperiencePackage_model'));
+        $this->load->model(array('Api_model', 'admin/Explore_model', 'admin/Config_model', 'ExperiencePackage_model','admin/Blog_model'));
         $this->allowed_img_types = $this->config->item('allowed_img_types');
     }
 
