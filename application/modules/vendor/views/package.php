@@ -91,6 +91,13 @@ $timeNow = time();
                       <?php } ?>
                     </select>
                 </div>
+                <div class="form-group for-shop">
+                    <label>Is Package Set Default</label>
+                    <select class="selectpicker" name="is_package_set_default">
+                        <option <?= isset($_POST['is_package_set_default']) && $_POST['is_package_set_default'] == 'No' ? 'selected' : '' ?> value="No">No</option>
+                        <option <?= isset($_POST['is_package_set_default']) && $_POST['is_package_set_default'] == 'Yes' ? 'selected' : '' ?> value="Yes">Yes</option>
+                    </select>
+                </div>
         <!--        <div class="form-group for-shop">
                     <label>Credit Point For Review </label>
                     <input type="text" name="credit_point_for_review" placeholder="Credit Point For Review" value="<?php // @$_POST['credit_point_for_review'] ?>" class="form-control">

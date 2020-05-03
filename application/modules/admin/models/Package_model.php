@@ -133,6 +133,7 @@ class Package_model extends CI_Model
 
             if (!$this->db->where('id', $id)->update('packages', array(
                         'experience_id' => $post['experience_id'],
+                        'is_package_set_default' => $post['is_package_set_default'],
                         'credit_point_for_review' => $post['credit_point_for_review'],
                         'credit_point_for_booking' => $post['credit_point_for_booking'],
                         'deduct_max_points_on_booking' => $post['deduct_max_points_on_booking'],
@@ -167,6 +168,7 @@ class Package_model extends CI_Model
 
             if (!$this->db->insert('packages', array(
                         'experience_id' => $post['experience_id'],
+                        'is_package_set_default' => $post['is_package_set_default'],
                         'credit_point_for_review' => $post['credit_point_for_review'],
                         'credit_point_for_booking' => $post['credit_point_for_booking'],
                         'deduct_max_points_on_booking' => $post['deduct_max_points_on_booking'],
