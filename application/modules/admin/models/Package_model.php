@@ -111,12 +111,14 @@ class Package_model extends CI_Model
         $is_update = false;
         if ($id > 0) {
             $is_update = true;
-            if(isset($post['slot_time'])){
+            if(isset($post['slot_time']) || $post['package_available_type']=='Specific Day'){
+
               $this->db->where('package_id', $id);
               if (!$this->db->delete('package_slot')) {
                   log_message('error', print_r($this->db->error(), true));
               }
-              else{
+
+              else if($post['package_available_type']!='Specific Day'){
                 for($i=0; $i < $post['slot_id_count']; $i++){
                   if (!$this->db->insert('package_slot', array(
                   'package_id' => $id,
@@ -130,7 +132,10 @@ class Package_model extends CI_Model
                 }
               }
             }
-
+            $specific_day="";
+            if($post['package_available_type']!='Time'){
+              $specific_day = $post['specific_day'];
+            }
             if (!$this->db->where('id', $id)->update('packages', array(
                         'experience_id' => $post['experience_id'],
                         'is_package_set_default' => $post['is_package_set_default'],
@@ -149,7 +154,7 @@ class Package_model extends CI_Model
                         'ticket_collection' => $post['ticket_collection'],
                         'discount_available' => $post['discount_available'],
                         'package_available_type' => $post['package_available_type'],
-                        'specific_day' => $post['specific_day'],
+                        'specific_day' => $specific_day,
                     //    'slot_time' => $post['slot_time'],
                     //    'total_slot' => $post['total_slot'],
                     //    'person_per_slot' => $post['person_per_slot'],
@@ -194,7 +199,7 @@ class Package_model extends CI_Model
             }
 
             $id = $this->db->insert_id();
-            if(isset($post['slot_id_count'])){
+            if(isset($post['slot_id_count']) && $post['package_available_type']!='Specific Day'){
               for($i=0; $i < $post['slot_id_count']; $i++){
                 if (!$this->db->insert('package_slot', array(
                 'package_id' => $id,
@@ -214,6 +219,7 @@ class Package_model extends CI_Model
             $this->db->trans_rollback();
             show_error(lang('database_error'));
         } else {
+
             $this->db->trans_commit();
         }
     }

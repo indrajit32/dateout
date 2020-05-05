@@ -231,6 +231,7 @@ $timeNow = time();
               <div id="specific_day" class="form-group for-shop"  <?= $style ?>>
                     <label>Available On Same Day</label>
                     <select class="selectpicker" name="specific_day" >
+                        <option value="">Not Applicable</option>
                         <option <?= isset($_POST['specific_day']) && $_POST['specific_day'] == 'Sunday' ? 'selected' : '' ?> value="Sunday">Sunday</option>
                         <option <?= isset($_POST['specific_day']) && $_POST['specific_day'] == 'Monday' ? 'selected' : '' ?> value="Monday">Monday</option>
                         <option <?= isset($_POST['specific_day']) && $_POST['specific_day'] == 'Tuesday' ? 'selected' : '' ?> value="Tuesday">Tuesday</option>
