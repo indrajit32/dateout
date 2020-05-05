@@ -73,8 +73,6 @@ class Products extends REST_Controller
     public function one_get($lang, $id)
     {
         $product = $this->Api_model->getProduct($lang, $id);
-        echo '<pre>';
-print_r($product);die;
         // Check if the products data store contains products (in case the database result returns NULL)
         if ($product) {
             // Set the response and exit
