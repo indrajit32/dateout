@@ -89,3 +89,4 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
  */
 defined('TEMPLATES_DIR')       OR define('TEMPLATES_DIR', APPPATH.'views/templates/'); // directory of templates
 defined('VIEWS_DIR')           OR define('VIEWS_DIR', APPPATH.'views/'); // directory of views
+define('EXPECTATION_DIR', 'attachments/shop_images/');

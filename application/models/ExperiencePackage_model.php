@@ -731,11 +731,12 @@ class ExperiencePackage_model extends CI_Model
         $this->db->where('visibility', 1);
         $this->db->order_by('position', 'asc');
         $query = $this->db->get('products');
-		$arr = array();
-        if($query->num_rows()> 0){        
+        $arr = array();
+        if($query->num_rows()> 0){
+
           foreach($query->result_array() as $val){
             $val['review'] = [];
-			if($val['image']){
+            if($val['image']){
               $val['image']=base_url().'attachments/shop_images/'.$val['image'];
             }
             $this->db->select('packages.id, packages_translations.name, packages_translations.price_adult, packages_translations.price_child');
@@ -751,6 +752,7 @@ class ExperiencePackage_model extends CI_Model
               $val['packages'] = $query1->row_array();
               $arr[] = $val;
             }
+
           }
         }
         return $arr;
