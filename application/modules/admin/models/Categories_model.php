@@ -144,12 +144,13 @@ class Categories_model extends CI_Model
 
     public function getProductCountByCategory($category_id)
     {
-        $this->db->select('count(*)');
+        $this->db->select('count(*) AS ct');
         $this->db->from('product_shop_categorie_mapping');
         $this->db->where('shop_categorie_id',$category_id);
         $query = $this->db->get();
 
-        return $query->num_rows();
+        $res = $query->result_array();
+        return $res[0]['ct'];
     }
 
 }
