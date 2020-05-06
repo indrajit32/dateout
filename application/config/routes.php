@@ -249,6 +249,8 @@ $route['api/product/(\w{2})/delete'] = 'Api/Products/productDel/$1';
 
 $route['api/explore/(\w{2})/get'] = 'Api/Explore/all/$1';
 
+$route['api/category/(\w{2})/get'] = 'Api/Category/all/$1';
+
 $route['api/productbycategory/(\w{2})/(:num)/get'] = 'Api/Products/categorywiseproduct/$1/$2';
 
 //$route['abc'] = 'Api/Products/categorywiseproduct';
