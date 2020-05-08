@@ -37,7 +37,7 @@ class Api_model extends CI_Model
     public function getProduct($lang, $id)
     {
 
-      $this->db->select('products.folder, products.expectation_folder, products.id, products.image, products.display_top_experience, products.discount_percent,
+      $this->db->select('products.folder, products.expectation_folder, products.id, products_translations.description, products.image, products.display_top_experience, products.discount_percent,
         products.latitude, products.longitude, products.country as country_id, "Singapur" as country_name, products.city as city_id,
         "Pulau Ujong" as city_name, products.metaword as metword_id, "Welcome Singapore" as metaword, products.position,
         products.country, products.vendor_id, products_translations.title, products_translations.expectation');
