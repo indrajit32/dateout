@@ -107,6 +107,7 @@
                                         <li><a href="<?= base_url('admin/brands') ?>" <?= urldecode(uri_string()) == 'admin/brands' ? 'class="active"' : '' ?>><i class="fa fa-registered" aria-hidden="true"></i> Brands</a></li>
                                     <?php } ?>
                                     <li><a href="<?= base_url('admin/shopcategories') ?>" <?= urldecode(uri_string()) == 'admin/shopcategories' ? 'class="active"' : '' ?>><i class="fa fa-list-alt" aria-hidden="true"></i> Shop Categories</a></li>
+                                    <?php /* ?>
                                     <li>
                                         <a href="<?= base_url('admin/orders') ?>" <?= urldecode(uri_string()) == 'admin/orders' ? 'class="active"' : '' ?>>
                                             <i class="fa fa-money" aria-hidden="true"></i> Orders
@@ -116,7 +117,8 @@
                                         </a>
                                     </li>
                                     <li><a href="<?= base_url('admin/discounts') ?>" <?= urldecode(uri_string()) == 'admin/discounts' ? 'class="active"' : '' ?>><i class="fa fa-percent" aria-hidden="true"></i> Discount Codes</a></li>
-                                    <?php //if (in_array('blog', $activePages)) { ?>
+
+                                    <?php */ //if (in_array('blog', $activePages)) { ?>
                                         <li class="header">Article</li>
                                         <li><a href="<?= base_url('admin/blogpublish') ?>" <?= urldecode(uri_string()) == 'admin/blogpublish' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i> Publish article</a></li>
                                         <li><a href="<?= base_url('admin/blog') ?>" <?= urldecode(uri_string()) == 'admin/blog' ? 'class="active"' : '' ?>><i class="fa fa-th" aria-hidden="true"></i> Articles List</a></li>
@@ -136,18 +138,18 @@
                                         }
                                     }
                                     ?>
-
+                                    <?php /* ?>
                                     <li class="header">REVIEW</li>
                                     <li><a href="<?= base_url('admin/reviewpublish') ?>" <?= urldecode(uri_string()) == 'admin/reviewpublish' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i>Publish Review</a></li>
                                     <li><a href="<?= base_url('admin/reviews') ?>" <?= urldecode(uri_string()) == 'admin/reviews' ? 'class="active"' : '' ?>><i class="fa fa-th" aria-hidden="true"></i>Reviews</a></li>
 
-
+                                    <?php  */ ?>
                                     <li class="header">EXPLORE</li>
                                     <li><a href="<?= base_url('admin/explore/ExplorePublish') ?>" <?= urldecode(uri_string()) == 'admin/explore/ExplorePublish' ? 'class="active"' : '' ?>><i class="fa fa-edit" aria-hidden="true"></i>Publish Explore</a></li>
                                     <li><a href="<?= base_url('admin/explore/explore') ?>" <?= urldecode(uri_string()) == 'admin/reviews' ? 'class="active"' : '' ?>><i class="fa fa-th" aria-hidden="true"></i>Explore List</a></li>
 
 
-
+                                    <?php /* ?>
                                     <li class="header">SETTINGS</li>
                                     <li><a href="<?= base_url('admin/settings') ?>" <?= urldecode(uri_string()) == 'admin/settings' ? 'class="active"' : '' ?>><i class="fa fa-wrench" aria-hidden="true"></i> Settings</a></li>
                                     <li><a href="<?= base_url('admin/styling') ?>" <?= urldecode(uri_string()) == 'admin/styling' ? 'class="active"' : '' ?>><i class="fa fa-laptop" aria-hidden="true"></i> Styling</a></li>
@@ -156,6 +158,8 @@
                                     <li><a href="<?= base_url('admin/pages') ?>" <?= urldecode(uri_string()) == 'admin/pages' ? 'class="active"' : '' ?>><i class="fa fa-file" aria-hidden="true"></i> Active Pages</a></li>
                                     <li><a href="<?= base_url('admin/emails') ?>" <?= urldecode(uri_string()) == 'admin/emails' ? 'class="active"' : '' ?>><i class="fa fa-envelope-o" aria-hidden="true"></i> Subscribed Emails</a></li>
                                     <li><a href="<?= base_url('admin/history') ?>" <?= urldecode(uri_string()) == 'admin/history' ? 'class="active"' : '' ?>><i class="fa fa-history" aria-hidden="true"></i> Activity History</a></li>
+
+                                    <?php */ ?>
                                     <li class="header">ADVANCED SETTINGS</li>
                                     <li><a href="<?= base_url('admin/languages') ?>" <?= urldecode(uri_string()) == 'admin/languages' ? 'class="active"' : '' ?>><i class="fa fa-globe" aria-hidden="true"></i> Languages</a></li>
                                     <li><a href="<?= base_url('admin/filemanager') ?>" <?= urldecode(uri_string()) == 'admin/filemanager' ? 'class="active"' : '' ?>><i class="fa fa-file-code-o" aria-hidden="true"></i> File Manager</a></li>
