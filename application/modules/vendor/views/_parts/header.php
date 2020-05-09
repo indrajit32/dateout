@@ -74,12 +74,15 @@
                                         <span class="hide-menu"><?= lang('vendor_products') ?></span>
                                     </a>
                                 </li>
+                                <?php /* ?>
                                 <li>
                                     <a href="<?= LANG_URL . '/vendor/orders' ?>" aria-expanded="false">
                                         <i class="mdi mdi-cart-plus"></i>
                                         <span class="hide-menu"><?= lang('vendor_orders') ?></span>
                                     </a>
                                 </li>
+                                <?php */ ?>
+
                             </ul>
                         </div>
                         <div class="col-sm-9 col-md-9 col-lg-10 col-sm-offset-3 col-md-offset-3 col-lg-offset-2 right-side">
