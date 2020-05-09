@@ -136,4 +136,21 @@ class Categories_model extends CI_Model
         }
     }
 
+    public function getAllCategory($lang = 'en')
+    {
+        $query = $this->db->query("SELECT sct.name AS category_name, sct.for_id AS category_id,sc.categorie_image,sct.abbr FROM `shop_categories_translations` as sct INNER JOIN shop_categories as sc ON sc.id = sct.for_id  WHERE sct.abbr = '".$lang."'");
+        return $query->result_array();
+    }
+
+    public function getProductCountByCategory($category_id)
+    {
+        $this->db->select('count(*) AS ct');
+        $this->db->from('product_shop_categorie_mapping');
+        $this->db->where('shop_categorie_id',$category_id);
+        $query = $this->db->get();
+
+        $res = $query->result_array();
+        return $res[0]['ct'];
+    }
+
 }

@@ -120,6 +120,7 @@ class Package_model extends CI_Model
                 for($i=0; $i < $post['slot_id_count']; $i++){
                   if (!$this->db->insert('package_slot', array(
                   'package_id' => $id,
+                  'available_date' => $post['available_date'][$i],
                   'slot_time' => $post['slot_time'][$i],
                   'total_slot' => $post['total_slot'][$i],
                   'person_per_slot'=> $post['person_per_slot'][$i]
@@ -209,6 +210,7 @@ class Package_model extends CI_Model
               for($i=0; $i < $post['slot_id_count']; $i++){
                 if (!$this->db->insert('package_slot', array(
                 'package_id' => $id,
+                'available_date' => $post['available_date'][$i],
                 'slot_time' => $post['slot_time'][$i],
                 'total_slot' => $post['total_slot'][$i],
                 'person_per_slot'=> $post['person_per_slot'][$i]

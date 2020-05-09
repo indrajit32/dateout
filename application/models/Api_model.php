@@ -70,7 +70,7 @@ class Api_model extends CI_Model
           $value['more_images']= $this->loadOthersImages($value['folder']);
           $value['categories']= $this->category_maplist($lang, $id);
           $value['packages']= $this->package_list($lang, $id);
-          $arr[] = $value;
+          $arr = $value;
         }
       }
       return $arr;
@@ -197,7 +197,7 @@ class Api_model extends CI_Model
                     $i = 0;
                     while (($file = readdir($dh)) !== false) {
                         if (is_file($dir . $file)) {
-                            $output[]= base_url('attachments/shop_images/' . $folder . '/' . $file);
+                            $output[]= array('image' => base_url('attachments/shop_images/' . $folder . '/' . $file));
                         }
                     }
                     closedir($dh);

@@ -42,7 +42,10 @@ class Explore extends REST_Controller
         {
             if($c['key_name'] == 'credit')
             {
-                $config_data[$key]['group_list_data'] = ['credit_url'=> $data['explor_header']['credit_url'], 'credit_image' => $data['explor_header']['credit_image']];
+                $dataC[0]['credit_url'] = $data['explor_header']['credit_url'];
+                $dataC[0]['credit_image'] = $data['explor_header']['credit_image'];
+
+                $config_data[$key]['group_list_data'] = $dataC;
             }
             elseif($c['key_name']=='top_experience')
             {
