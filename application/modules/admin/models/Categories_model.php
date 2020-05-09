@@ -138,7 +138,7 @@ class Categories_model extends CI_Model
 
     public function getAllCategory($lang = 'en')
     {
-        $query = $this->db->query("SELECT sct.name AS category_name, sct.for_id AS category_id,sc.categorie_image,sct.abbr FROM `shop_categories_translations` as sct INNER JOIN shop_categories as sc ON sc.id = sct.for_id  WHERE sct.abbr = '".$lang."'");
+        $query = $this->db->query("SELECT sct.name AS category_name, sct.for_id AS category_id,sc.categorie_image,sct.abbr, sc.position AS position FROM `shop_categories_translations` as sct INNER JOIN shop_categories as sc ON sc.id = sct.for_id  WHERE sct.abbr = '".$lang."'");
         return $query->result_array();
     }
 
