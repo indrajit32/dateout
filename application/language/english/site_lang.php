@@ -170,7 +170,7 @@ $lang['login_vendor_error'] = 'Wrong email or password';
 $lang['vendor_add_product'] = 'Add Experience';
 $lang['vendor_dashboard'] = 'Dashboard';
 
-$lang['vendor_packages'] = 'Package';
+$lang['vendor_packages'] = 'Add Package';
 $lang['vendor_pakage_list'] = 'Package List';
 
 $lang['vendor_products'] = 'Experience';

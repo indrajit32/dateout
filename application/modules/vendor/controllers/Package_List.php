@@ -24,7 +24,7 @@ class package_list extends VENDOR_Controller
         $this->loginCheck();
         $data = array();
         $head = array();
-        $head['title'] = 'Vedor - View Packages';
+        $head['title'] = 'Packages';
         $head['description'] = '!';
         $head['keywords'] = '';
 

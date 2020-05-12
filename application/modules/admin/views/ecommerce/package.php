@@ -35,12 +35,12 @@ if ($this->session->flashdata('result_publish')) {
         <div class="locale-container locale-container-<?= $language->abbr ?>" <?= $language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'style="display:block;"' : '' ?>>
             <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
             <div class="form-group">
-                <label>Package Name (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                <label>Package Name (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)<span style="color:red"> * </span></label>
                 <input type="text" name="name[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['name']) ? $trans_load[$language->abbr]['name'] : '' ?>" class="form-control">
             </div>
 
             <div class="form-group">
-                <label for="description<?= $i ?>">Description (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                <label for="description<?= $i ?>">Description (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">) <span style="color:red"> * </span></label>
                 <textarea name="description[]" id="description<?= $i ?>" rows="50" class="form-control"><?= $trans_load != null && isset($trans_load[$language->abbr]['description']) ? $trans_load[$language->abbr]['description'] : '' ?></textarea>
                 <script>
                     CKEDITOR.replace('description<?= $i ?>');
@@ -49,7 +49,7 @@ if ($this->session->flashdata('result_publish')) {
             </div>
 
             <div class="form-group">
-                <label for="expectation<?= $i ?>">Before Booking summary (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                <label for="expectation<?= $i ?>">Before Booking summary (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)<span style="color:red"> * </span></label>
                 <textarea name="before_booking[]" id="before_booking<?= $i ?>" rows="50" class="form-control"><?= $trans_load != null && isset($trans_load[$language->abbr]['before_booking']) ? $trans_load[$language->abbr]['before_booking'] : '' ?></textarea>
                 <script>
                     CKEDITOR.replace('before_booking<?= $i ?>');
@@ -57,7 +57,7 @@ if ($this->session->flashdata('result_publish')) {
                 </script>
             </div>
             <div class="form-group">
-                <label for="after_booking<?= $i ?>">After Booking summary (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                <label for="after_booking<?= $i ?>">After Booking summary (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)<span style="color:red"> * </span></label>
                 <textarea name="after_booking[]" id="after_booking<?= $i ?>" rows="50" class="form-control"><?= $trans_load != null && isset($trans_load[$language->abbr]['after_booking']) ? $trans_load[$language->abbr]['after_booking'] : '' ?></textarea>
                 <script>
                     CKEDITOR.replace('after_booking<?= $i ?>');
@@ -65,7 +65,7 @@ if ($this->session->flashdata('result_publish')) {
                 </script>
             </div>
             <div class="form-group">
-                <label for="cancellation_summary<?= $i ?>">Cancellation Policy summary (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                <label for="cancellation_summary<?= $i ?>">Cancellation Policy summary (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)<span style="color:red"> * </span></label>
                 <textarea name="cancellation_summary[]" id="cancellation_summary<?= $i ?>" rows="50" class="form-control"><?= $trans_load != null && isset($trans_load[$language->abbr]['cancellation_summary']) ? $trans_load[$language->abbr]['cancellation_summary'] : '' ?></textarea>
                 <script>
                     CKEDITOR.replace('cancellation_summary<?= $i ?>');
@@ -73,11 +73,11 @@ if ($this->session->flashdata('result_publish')) {
                 </script>
             </div>
             <div class="form-group for-shop">
-                <label>Price (Adult) (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                <label>Price (Adult) (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)<span style="color:red"> * </span></label>
                 <input type="text" name="price_adult[]" placeholder="without currency at the end" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['price_adult']) ? $trans_load[$language->abbr]['price_adult'] : '' ?>" class="form-control">
             </div>
             <div class="form-group for-shop">
-                <label>Price (Child) (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                <label>Price (Child) (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)<span style="color:red"> * </span></label>
                 <input type="text" name="price_child[]" placeholder="without currency at the end" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['price_child']) ? $trans_load[$language->abbr]['price_child'] : '' ?>" class="form-control">
             </div>
           </div>
@@ -86,7 +86,7 @@ if ($this->session->flashdata('result_publish')) {
       }
       ?>
             <div class="form-group for-shop">
-                <label>Experience</label>
+                <label>Experience<span style="color:red"> * </span></label>
                 <select class="selectpicker" name="experience_id">
                   <option> Select</option>
                   <?php foreach ($product_list as $value) { ?>
@@ -95,37 +95,37 @@ if ($this->session->flashdata('result_publish')) {
                 </select>
             </div>
             <div class="form-group for-shop">
-                <label>Is Package Set Default</label>
+                <label>Is Package Set Default<span style="color:red"> * </span></label>
                 <select class="selectpicker" name="is_package_set_default">
                     <option <?= isset($_POST['is_package_set_default']) && $_POST['is_package_set_default'] == 'No' ? 'selected' : '' ?> value="No">No</option>
                     <option <?= isset($_POST['is_package_set_default']) && $_POST['is_package_set_default'] == 'Yes' ? 'selected' : '' ?> value="Yes">Yes</option>
                 </select>
             </div>
             <div class="form-group for-shop">
-                <label>Credit Point For Review <span style="color:red">(Only For Super Admin)</span></label>
+                <label>Credit Point For Review <span style="color:red"> * </span><span style="color:red">(Only For Super Admin)</span></label>
                 <input type="text" name="credit_point_for_review" placeholder="Credit Point For Review" value="<?= @$_POST['credit_point_for_review'] ?>" class="form-control">
             </div>
             <div class="form-group for-shop">
-                <label>Credit Point For Booking <span style="color:red">(Only For Super Admin)</span></label>
+                <label>Credit Point For Booking <span style="color:red"> * </span><span style="color:red">(Only For Super Admin)</span></label>
                 <input type="text" name="credit_point_for_booking" placeholder="number" value="<?= @$_POST['credit_point_for_booking'] ?>" class="form-control">
             </div>
             <div class="form-group for-shop">
-                <label>Deduct Max Points on Booking <span style="color:red">(Only For Super Admin)</span></label>
+                <label>Deduct Max Points on Booking <span style="color:red"> * </span><span style="color:red">(Only For Super Admin)</span></label>
                 <input type="text" name="deduct_max_points_on_booking" placeholder="without currency at the end" value="<?= @$_POST['deduct_max_points_on_booking'] ?>" class="form-control">
             </div>
             <div class="form-group for-shop">
-                <label>Number of Booking Available</label>
+                <label>Number of Booking Available<span style="color:red"> * </span></label>
                 <input type="text" class="form-control" name="number_of_booking_available" placeholder="0 means not applicable" value="<?= @$_POST['number_of_booking_available'] ?>">
             </div>
             <div class="form-group for-shop">
-                <label>Is Point On Booking <span style="color:red">(Only For Super Admin)</span></label>
+                <label>Is Point On Booking <span style="color:red"> * </span><span style="color:red">(Only For Super Admin)</span></label>
                 <select class="selectpicker" name="is_point_on_booking">
                     <option <?= isset($_POST['is_point_on_booking']) && $_POST['is_point_on_booking'] == 'Not Applicable' ? 'selected' : '' ?> value="Not Applicable">Not Applicable</option>
                     <option <?= isset($_POST['is_point_on_booking']) && $_POST['is_point_on_booking'] == 'Applicable' ? 'selected' : '' ?> value="Applicable">Applicable</option>
                 </select>
             </div>
             <div class="form-group for-shop">
-                <label>Cancellation Policy</label>
+                <label>Cancellation Policy<span style="color:red"> * </span></label>
                 <select class="selectpicker" name="cancellation_policy">
                     <option <?= isset($_POST['cancellation_policy']) && $_POST['cancellation_policy'] == 'Not Aplication' ? 'selected' : '' ?> value="Not Aplication">Not Aplication</option>
                     <option <?= isset($_POST['cancellation_policy']) && $_POST['cancellation_policy'] == 'No Cancellation' ? 'selected' : '' ?> value="No Cancellation">No Cancellation</option>
@@ -148,7 +148,7 @@ if ($this->session->flashdata('result_publish')) {
                 </select>
             </div>
             <div class="form-group for-shop">
-                <label>Duration</label>
+                <label>Duration<span style="color:red"> * </span></label>
                 <select class="selectpicker" name="duration">
                     <option <?= isset($_POST['duration']) && $_POST['duration'] == 'Not Aplication' ? 'selected' : '' ?> value="Not Aplication">Not Aplication</option>
                     <option <?= isset($_POST['duration']) && $_POST['duration'] == '30 Minutes' ? 'selected' : '' ?> value="30 Minutes">30 Minutes</option>
@@ -192,7 +192,7 @@ if ($this->session->flashdata('result_publish')) {
                 </select>
             </div>
             <div class="form-group for-shop">
-                <label>Experience Type</label>
+                <label>Experience Type<span style="color:red"> * </span></label>
                 <select class="selectpicker" name="experience_type">
                     <option <?= isset($_POST['experience_type']) && $_POST['experience_type'] == 'Not Aplication' ? 'selected' : '' ?> value="Not Aplication">Not Aplication</option>
                     <option <?= isset($_POST['experience_type']) && $_POST['experience_type'] == 'Private Experience' ? 'selected' : '' ?> value="Private Experience">Private Experience </option>
@@ -201,7 +201,7 @@ if ($this->session->flashdata('result_publish')) {
                 </select>
             </div>
             <div class="form-group for-shop">
-                <label>Ticket Collection</label>
+                <label>Ticket Collection<span style="color:red"> * </span></label>
                 <select class="selectpicker" name="ticket_collection">
                     <option <?= isset($_POST['ticket_collection']) && $_POST['ticket_collection'] == 'Not Aplication' ? 'selected' : '' ?> value="Not Aplication">Not Aplication</option>
                     <option <?= isset($_POST['ticket_collection']) && $_POST['ticket_collection'] == 'Enter Directly With Voucher' ? 'selected' : '' ?> value="Enter Directly With Voucher">Enter Directly With Voucher</option>
@@ -210,14 +210,14 @@ if ($this->session->flashdata('result_publish')) {
                 </select>
             </div>
             <div class="form-group for-shop">
-                <label>Discount Available</label>
+                <label>Discount Available<span style="color:red"> * </span></label>
                 <select class="selectpicker" name="discount_available">
                     <option <?= isset($_POST['discount_available']) && $_POST['discount_available'] == 'Not Applicable' ? 'selected' : '' ?> value="Not Applicable">Not Aplication</option>
                     <option <?= isset($_POST['discount_available']) && $_POST['discount_available'] == 'Applicable' ? 'selected' : '' ?> value="Applicable">Applicable</option>
                 </select>
             </div>
             <div class="form-group for-shop">
-                <label>Package Available</label>
+                <label>Package Available<span style="color:red"> * </span></label>
                 <select id="package_available" class="selectpicker" name="package_available_type">
                     <option <?= isset($_POST['package_available_type']) && $_POST['package_available_type'] == 'Specific Day' ? 'selected' : '' ?> value="Specific Day">specific Day</option>
                     <option <?= isset($_POST['package_available_type']) && $_POST['package_available_type'] == 'Time' ? 'selected' : '' ?> value="Time">Time</option>
@@ -232,7 +232,7 @@ if ($this->session->flashdata('result_publish')) {
                  }
              ?>
           <div id="specific_day" class="form-group for-shop"  <?= $style ?>>
-                <label>Available On Same Day</label>
+                <label>Available On Same Day<span style="color:red"> * </span></label>
                 <select class="selectpicker" name="specific_day" >
                     <option value="">Not Applicable</option>
                     <option <?= isset($_POST['specific_day']) && $_POST['specific_day'] == 'Sunday' ? 'selected' : '' ?> value="Sunday">Sunday</option>
@@ -263,7 +263,7 @@ if ($this->session->flashdata('result_publish')) {
                     <?= $multislot ?>
                 </div>
                 <input type="hidden" name="slot_id_count" id="slot_id_count" value="<?= @$_POST['slot_id_count'] ?>">
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#modalmultislot" class="btn btn-default">Add Slot</a>
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#modalmultislot" class="btn btn-default">Add Slot</a><span style="color:red"> * </span>
             </div>
           </div>
 
@@ -285,7 +285,7 @@ if ($this->session->flashdata('result_publish')) {
                     <p class="error_msg" style="color: red; display:none;">Please enter correct value</p>
                   </div>
                   <div class="form-group for-shop">
-                    <label>Available on same date</label>
+                    <label>Available on same date<span style="color:red"> * </span></label>
                     <div class="input-group date" data-provide="datepicker">
                       <input type="text" name="available_date" id="available_date" placeholder="Available on date" value="<?= @$_POST['available_date'] ?>" class="form-control">
                         <div class="input-group-addon">
@@ -294,15 +294,15 @@ if ($this->session->flashdata('result_publish')) {
                     </div>
                   </div>
                   <div class="form-group for-shop">
-                        <label>Slot Time</label>
+                        <label>Slot Time<span style="color:red"> * </span></label>
                         <input type="text" name="slot_time" id="slot_time" placeholder="HH:MM" value="<?= @$_POST['slot_time'] ?>" class="form-control">
                     </div>
                     <div class="form-group for-shop">
-                        <label>Total Slots </label>
+                        <label>Total Slots <span style="color:red"> * </span></label>
                         <input type="text" name="total_slot" id="total_slot" placeholder="Number" value="<?= @$_POST['total_slot'] ?>" class="form-control">
                     </div>
                     <div class="form-group for-shop">
-                        <label>Person Required per Slot</label>
+                        <label>Person Required per Slot <span style="color:red"> * </span></label>
                         <input type="text" placeholder="number" id="person_per_slot" name="person_per_slot" value="<?= @$_POST['person_per_slot'] ?>" class="form-control">
                     </div>
                 </form>

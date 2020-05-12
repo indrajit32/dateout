@@ -32,8 +32,8 @@ $timeNow = time();
                     <div class="locale-container locale-container-<?= $language->abbr ?>" <?= $language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'style="display:block;"' : '' ?>>
                         <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
                         <div class="form-group">
-                            
-                            <label for="title<?= $i ?>">Title <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?= $language->name ?>"></label>
+
+                            <label for="title<?= $i ?>">Title <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?= $language->name ?>"><span style="color:red"> * </span></label>
                             <input type="text" name="title[]" placeholder="<?= lang('vendor_product_name') ?>" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['title']) ? $trans_load[$language->abbr]['title'] : '' ?>" class="form-control">
                         </div>
                         <div class="form-group">
@@ -50,7 +50,7 @@ $timeNow = time();
                             </div>
                         </div>
 
-                        <label><?= lang('vendor_product_description') ?> <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?= $language->name ?>"></label>
+                        <label><?= lang('vendor_product_description') ?> <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?= $language->name ?>"><span style="color:red"> * </span></label>
                         <div class="form-group">
                             <textarea class="form-control" name="description[]" id="description<?= $i ?>"><?= $trans_load != null && isset($trans_load[$language->abbr]['description']) ? $trans_load[$language->abbr]['description'] : '' ?></textarea>
                         </div>
@@ -59,7 +59,7 @@ $timeNow = time();
                             CKEDITOR.config.entities = false;
                         </script>
                         <div class="form-group">
-                            <label for="expectation<?= $i ?>">Expectation <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?= $language->name ?>"></label>
+                            <label for="expectation<?= $i ?>">Expectation <img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?= $language->name ?>"><span style="color:red"> * </span></label>
                             <textarea name="expectation[]" id="expectation<?= $i ?>" rows="50" class="form-control"><?= $trans_load != null && isset($trans_load[$language->abbr]['expectation']) ? $trans_load[$language->abbr]['expectation'] : '' ?></textarea>
                             <script>
                                 CKEDITOR.replace('expectation<?= $i ?>');
@@ -71,7 +71,7 @@ $timeNow = time();
 
                                 <?= $expectationImgs ?>
                             </div>
-                            <a href="javascript:void(0);" data-toggle="modal" data-target="#modalExpectationImages" class="btn btn-default">Upload Expectation images</a>
+                            <a href="javascript:void(0);" data-toggle="modal" data-target="#modalExpectationImages" class="btn btn-default">Upload Expectation images</a><span style="color:red"> * </span>
                         </div>
                   <!--      <div class="form-group">
                             <label for="expectation<?php// $i ?>">Price <img src="<?php// base_url('attachments/lang_flags/' . $language->flag) ?>" alt="<?php// $language->name ?>"></label>
@@ -106,7 +106,7 @@ $timeNow = time();
                         }
                     }
                     ?>
-                    <label><?= lang('vendor_cover_image') ?><span style="color:red">(Upload image with size 1500x1132)</span></label>
+                    <label><?= lang('vendor_cover_image') ?><span style="color:red"> * </span> <span style="color:red"> (Upload image with size 1500x1132) </span></label>
                     <input type="file" name="userfile">
                 </div>
                 <div class="form-group bordered-group">
@@ -116,7 +116,7 @@ $timeNow = time();
                     <a href="javascript:void(0);" data-toggle="modal" data-target="#modalMoreImages" class="btn btn-default"><?= lang('vendor_up_more_imgs') ?></a>
                 </div>
                 <div class="form-group for-shop">
-                    <label><?= lang('vendor_select_category') ?></label>
+                    <label><?= lang('vendor_select_category') ?><span style="color:red"> * </span></label>
                     <select multiple data-style="bg-white rounded-pill px-4 py-3 shadow-sm "  name="shop_categorie[]" class="selectpicker w-100 form-control show-tick show-menu-arrow">
 
                         <?php foreach ($shop_categories as $key_cat => $shop_categorie) { ?>
@@ -152,25 +152,25 @@ $timeNow = time();
                 </div>
               -->
                 <div class="form-group for-shop">
-                    <label>Discount On Deal in %</label>
+                    <label>Discount On Deal in % <span style="color:red"> * </span></label>
                     <input type="text" placeholder="number" name="discount_percent" value="<?= @$_POST['discount_percent'] ?>" class="form-control" id="discount_percent">
                 </div>
                 <div class="form-group for-shop">
-                    <label>Latitude</label>
+                    <label>Latitude <span style="color:red"> * </span></label>
                     <input type="text" placeholder="number" name="latitude" value="<?= @$_POST['latitude'] ?>" class="form-control" id="latitude">
                 </div>
                 <div class="form-group for-shop">
-                    <label>Longitude</label>
+                    <label>Longitude <span style="color:red"> * </span></label>
                     <input type="text" placeholder="number" name="longitude" value="<?= @$_POST['longitude'] ?>" class="form-control" id="longitude">
                 </div>
                 <div class="form-group for-shop">
-                    <label>Country</label>
+                    <label>Country <span style="color:red"> * </span></label>
                     <select class="selectpicker" name="country">
                       <option value="1">Singapore</option>
                     </select>
                 </div>
                 <div class="form-group for-shop">
-                    <label>City</label>
+                    <label>City <span style="color:red"> * </span></label>
                     <select class="selectpicker" name="city">
                       <option value="1">Pulau Ujong</option>
                     </select>
@@ -189,7 +189,7 @@ $timeNow = time();
                     </select>
                 </div>
                 <div class="form-group for-shop">
-                    <label>Position</label>
+                    <label>Position <span style="color:red"> * </span></label>
                     <input type="text" placeholder="Position number" name="position" value="<?= @$_POST['position'] ?>" class="form-control">
                 </div>
                 <button type="submit" name="setProduct" class="btn btn-green"><?= lang('vendor_submit_product') ?></button>
@@ -208,9 +208,9 @@ $timeNow = time();
             <div class="modal-body">
                 <form id="ExpectationImagesForm">
                     <input type="hidden" value="<?= isset($_POST['expectation_folder']) ? $_POST['expectation_folder'] : $timeNow.'_s' ?>" name="expectation_folder">
-                    <label for="others">Select images</label>
+                    <label for="others">Select images <span style="color:red"> * </span></label>
                     <input type="file" name="expectations_image[]" id="expectations_image" multiple /><br/>
-                    <label for="others">Select Text</label><br />
+                    <label for="others">Select Text <span style="color:red"> * </span></label><br />
                     <input type="text" name="expectations_subtitle[]" class="form-control" placeholder="Subtitle text" id="expectations_subtitle"  />
                 </form>
             </div>
@@ -234,7 +234,7 @@ $timeNow = time();
             <div class="modal-body">
                 <form id="uploadImagesForm">
                     <input type="hidden" value="<?= isset($_POST['folder']) ? $_POST['folder'] : $timeNow ?>" name="folder">
-                    <label for="others"><?= lang('vendor_select_images') ?></label>
+                    <label for="others"><?= lang('vendor_select_images') ?><span style="color:red"> * </span></label>
                     <input type="file" name="others[]" id="others" multiple />
                 </form>
             </div>

@@ -37,7 +37,7 @@ if ($this->session->flashdata('result_publish')) {
         <div class="locale-container locale-container-<?= $language->abbr ?>" <?= $language->abbr == MY_DEFAULT_LANGUAGE_ABBR ? 'style="display:block;"' : '' ?>>
             <input type="hidden" name="translations[]" value="<?= $language->abbr ?>">
             <div class="form-group">
-                <label>Title (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                <label>Title (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">) <span style="color:red"> * </span></label>
                 <input type="text" name="title[]" value="<?= $trans_load != null && isset($trans_load[$language->abbr]['title']) ? $trans_load[$language->abbr]['title'] : '' ?>" class="form-control">
             </div>
 
@@ -55,7 +55,7 @@ if ($this->session->flashdata('result_publish')) {
                 </div>
             </div>
             <div class="form-group">
-                <label for="description<?= $i ?>">Description (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                <label for="description<?= $i ?>">Description (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">) <span style="color:red"> * </span></label>
                 <textarea name="description[]" id="description<?= $i ?>" rows="50" class="form-control"><?= $trans_load != null && isset($trans_load[$language->abbr]['description']) ? $trans_load[$language->abbr]['description'] : '' ?></textarea>
                 <script>
                     CKEDITOR.replace('description<?= $i ?>');
@@ -63,7 +63,7 @@ if ($this->session->flashdata('result_publish')) {
                 </script>
             </div>
             <div class="form-group">
-                <label for="expectation<?= $i ?>">Expectation (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
+                <label for="expectation<?= $i ?>">Expectation (<?= $language->name ?><img src="<?= base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">) <span style="color:red"> * </span></label>
                 <textarea name="expectation[]" id="expectation<?= $i ?>" rows="50" class="form-control"><?= $trans_load != null && isset($trans_load[$language->abbr]['expectation']) ? $trans_load[$language->abbr]['expectation'] : '' ?></textarea>
                 <script>
                     CKEDITOR.replace('expectation<?= $i ?>');
@@ -75,7 +75,7 @@ if ($this->session->flashdata('result_publish')) {
 
                     <?= $expectationImgs ?>
                 </div>
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#modalExpectationImages" class="btn btn-default">Upload Expectation images</a>
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#modalExpectationImages" class="btn btn-default">Upload Expectation images </a><span style="color:red"> * </span>
             </div>
           <!--  <div class="form-group for-shop">
                 <label>Price (<?php// $language->name ?><img src="<?php// base_url('attachments/lang_flags/' . $language->flag) ?>" alt="">)</label>
@@ -110,7 +110,7 @@ if ($this->session->flashdata('result_publish')) {
             }
         }
         ?>
-        <label for="userfile">Cover Image <span style="color:red">(Upload image with size 1500x1132)</span></label>
+        <label for="userfile">Cover Image <span style="color:red"> * </span><span style="color:red">(Upload image with size 1500x1132)</span></label>
         <input type="file" id="userfile" name="userfile">
     </div>
     <div class="form-group bordered-group">
@@ -120,7 +120,7 @@ if ($this->session->flashdata('result_publish')) {
         <a href="javascript:void(0);" data-toggle="modal" data-target="#modalMoreImages" class="btn btn-default">Upload more images</a>
     </div>
     <div class="form-group for-shop">
-        <label>Shop Categories</label>
+        <label>Shop Categories <span style="color:red"> * </span></label>
         <select multiple data-style="bg-white rounded-pill px-4 py-3 shadow-sm "  name="shop_categorie[]" class="selectpicker w-100 form-control show-tick show-menu-arrow">
 
             <?php foreach ($shop_categories as $key_cat => $shop_categorie) { ?>
@@ -137,32 +137,32 @@ if ($this->session->flashdata('result_publish')) {
         </select>
     </div>
     <div class="form-group for-shop">
-        <label>Is Display On Top Experience <span style="color:red">(Only For Super Admin)</span></label>
+        <label>Is Display On Top Experience <span style="color:red"> * </span><span style="color:red">(Only For Super Admin)</span></label>
         <select class="selectpicker" name="display_top_experience">
           <option value="No" <?= isset($_POST['display_top_experience']) && $_POST['display_top_experience'] == 'No' ? 'selected' : '' ?>>No</option>
           <option value="Yes" <?= isset($_POST['display_top_experience']) && $_POST['display_top_experience'] == 'Yes' ? 'selected' : '' ?>>Yes</option>
         </select>
     </div>
     <div class="form-group for-shop">
-        <label>Discount On Deal in %</label>
+        <label>Discount On Deal in %<span style="color:red"> * </span></label>
         <input type="text" placeholder="number" name="discount_percent" value="<?= @$_POST['discount_percent'] ?>" class="form-control" id="discount_percent">
     </div>
     <div class="form-group for-shop">
-        <label>Latitude</label>
+        <label>Latitude<span style="color:red"> * </span></label>
         <input type="text" placeholder="number" name="latitude" value="<?= @$_POST['latitude'] ?>" class="form-control" id="latitude">
     </div>
     <div class="form-group for-shop">
-        <label>Longitude</label>
+        <label>Longitude<span style="color:red"> * </span></label>
         <input type="text" placeholder="number" name="longitude" value="<?= @$_POST['longitude'] ?>" class="form-control" id="longitude">
     </div>
     <div class="form-group for-shop">
-        <label>Country</label>
+        <label>Country<span style="color:red"> * </span></label>
         <select class="selectpicker" name="country">
           <option value="1">Singapore</option>
         </select>
     </div>
     <div class="form-group for-shop">
-        <label>City</label>
+        <label>City<span style="color:red"> * </span></label>
         <select class="selectpicker" name="city">
           <option value="1">Pulau Ujong</option>
         </select>
@@ -196,7 +196,7 @@ if ($this->session->flashdata('result_publish')) {
         </select>
     </div>
     <div class="form-group for-shop">
-        <label>Position</label>
+        <label>Position<span style="color:red"> * </span></label>
         <input type="text" placeholder="Position number" name="position" value="<?= @$_POST['position'] ?>" class="form-control">
     </div>
     <button type="submit" name="submit" class="btn btn-lg btn-default btn-publish">Publish</button>
@@ -215,9 +215,9 @@ if ($this->session->flashdata('result_publish')) {
             <div class="modal-body">
                 <form id="ExpectationImagesForm">
                     <input type="hidden" value="<?= isset($_POST['expectation_folder']) ? $_POST['expectation_folder'] : $timeNow.'_s' ?>" name="expectation_folder">
-                    <label for="others">Select images</label>
+                    <label for="others">Select images<span style="color:red"> * </span></label>
                     <input type="file" name="expectations_image[]" id="expectations_image" multiple /><br />
-                    <label for="others">Select Text</label><br />
+                    <label for="others">Select Text<span style="color:red"> * </span></label><br />
                     <input type="text" name="expectations_subtitle[]" class="form-control" placeholder="Subtitle text" id="expectations_subtitle"  />
                 </form>
             </div>
